@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>FINA4350 Student Blog - Progress Report</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/" rel="alternate"></link><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/progress-report.atom.xml" rel="self"></link><id>https://buehlmaier.github.io/FINA4350-student-blog-2022-01/</id><updated>2022-01-30T09:38:00+08:00</updated><entry><title>Fed Chair Powell Is Giving a Speech</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/fed-chair-powell-is-giving-a-speech.html" rel="alternate"></link><published>2022-01-30T09:38:00+08:00</published><updated>2022-01-30T09:38:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-01-30:/FINA4350-student-blog-2022-01/fed-chair-powell-is-giving-a-speech.html</id><content type="html">&lt;p&gt;By Group "Fintech Disruption"&lt;/p&gt;
+&lt;p&gt;This is another article, describing some update. As we can see, Fed Chair Powell is working hard:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Picture showing Powell" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Fintech-Disruption_Powell.jpeg"&gt;&lt;/p&gt;</content><category term="Progress Report"></category></entry><entry><title>Text Analytics</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/text-analytics.html" rel="alternate"></link><published>2021-12-03T17:20:00+08:00</published><updated>2021-12-03T17:20:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2021-12-03:/FINA4350-student-blog-2022-01/text-analytics.html</id><summary type="html">&lt;p&gt;By Group "Super NLP"&lt;/p&gt;
+&lt;p&gt;In the previous blog, our team shows the progress we made in data
+mining and preprocessing. This blog we will guide you through our
+sentiment analysis toward XRP related tweets.&lt;/p&gt;
+&lt;h1&gt;Financial Data&lt;/h1&gt;
+&lt;p&gt;Before we can start the sentiment analysis, we found that part of the
+financial …&lt;/p&gt;</summary><content type="html">&lt;p&gt;By Group "Super NLP"&lt;/p&gt;
+&lt;p&gt;In the previous blog, our team shows the progress we made in data
+mining and preprocessing. This blog we will guide you through our
+sentiment analysis toward XRP related tweets.&lt;/p&gt;
+&lt;h1&gt;Financial Data&lt;/h1&gt;
+&lt;p&gt;Before we can start the sentiment analysis, we found that part of the
+financial data of XRP we loaded from Yahoo Finance was
+missing. Specifically, the data on October 12, 2020 was missing in the
+Yahoo Finance database. So we chose
+&lt;a href="http://www.investing.com"&gt;Investing.com&lt;/a&gt; to get the whole year data
+of XRP and recalculated the return and 30 days volatility.&lt;/p&gt;
+&lt;p&gt;The code we use is as follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;nltk&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;span class="n"&gt;myvar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;
+&lt;span class="n"&gt;DF&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;XRP-data.csv&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Progress Report"></category></entry></feed>
