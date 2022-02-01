@@ -29,3 +29,6 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
+
+# For "Elegant" theme landing page:
+LANDING_PAGE_TITLE = "HKU Student Blog"
