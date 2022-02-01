@@ -1,22 +1,11 @@
 ---
 authors: Talha Mansoor
-Title: Home Page -- Write About Me
+Title: Demo Blog Post
 Tags: remarkable, unique, home
 Date: 2019-07-01 01:12
 comments: false
 Slug: write-about-me
 Category: Components
-Title: [Demo Blog Post] Text Analytics
-Date: 2021-12-03 17:20
-Category: Progress Report
----
-
-
-
----
-Title: [Demo Blog Post] Text Analytics
-Date: 2021-12-03 17:20
-Category: Progress Report
 ---
 
 By Group "Super NLP"
