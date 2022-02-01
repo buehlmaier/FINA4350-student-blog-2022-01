@@ -1,9 +1,6 @@
 ---
 Title: Demo Blog Post
-Tags: remarkable, unique, home
-Date: 2019-07-01 01:12
-comments: false
-Slug: write-about-me
+Date: 2022-07-01 01:12
 Category: Progress Report
 ---
 
