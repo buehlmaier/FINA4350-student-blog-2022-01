@@ -4,18 +4,13 @@ Category: Progress Report
 
 By Group "Super NLP"
 
-In the previous blog, our team shows the progress we made in data
-mining and preprocessing. This blog we will guide you through our
-sentiment analysis toward XRP related tweets.
+This is a demo blog post. Its purpose is to show how to use the basic
+functionality of Markdown in the context of a blog post.
 
-# Financial Data 
+## How to Include a Link and Python Code
 
-Before we can start the sentiment analysis, we found that part of the
-financial data of XRP we loaded from Yahoo Finance was
-missing. Specifically, the data on October 12, 2020 was missing in the
-Yahoo Finance database. So we chose
-[Investing.com](http://www.investing.com) to get the whole year data
-of XRP and recalculated the return and 30 days volatility.
+We chose [Investing.com](http://www.investing.com) to get the whole
+year data of XRP and recalculated the return and 30 days volatility.
 
 The code we use is as follows:
 ```python
@@ -24,3 +19,18 @@ import pandas as pd
 myvar = 8
 DF = pd.read_csv('XRP-data.csv')
 ```
+
+
+## How to Include a Quote
+
+As a famous hedge fund manager once said:
+>Fed watching is a great tool to make money. I have been making all my
+>gazillions using this technique.
+
+
+
+## How to Include an Image
+
+Fed Chair Powell is working hard:
+
+![Picture showing Powell]({static}/images/group-Fintech-Disruption_Powell.jpeg)
