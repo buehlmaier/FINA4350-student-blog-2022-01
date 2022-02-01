@@ -5,7 +5,7 @@ Tags: remarkable, unique, home
 Date: 2019-07-01 01:12
 comments: false
 Slug: write-about-me
-Category: Components
+Category: Progress Report
 ---
 
 By Group "Super NLP"
