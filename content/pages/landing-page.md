@@ -1,9 +1,23 @@
 ---
+authors: Talha Mansoor
+Title: Home Page -- Write About Me
+Tags: remarkable, unique, home
+Date: 2019-07-01 01:12
+comments: false
+Slug: write-about-me
+Category: Components
+---
+
+!!! Important "Define `LANDING_PAGE_TITLE`"
+
+
+
 Title: Blogging About Text Analytics and NLP in Finance and Fintech
 Date: 2022-02-01 19:30
 Status: hidden
 Slug: landing-page-about-hidden
----
+
+
 
 This blog is written by HKU students. It serves two purposes: First,
 to document students' reflections about their learning
