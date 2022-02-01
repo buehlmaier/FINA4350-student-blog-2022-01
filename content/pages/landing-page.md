@@ -5,7 +5,6 @@ Status: hidden
 Slug: landing-page-about-hidden
 ---
 
-
 This blog is written by HKU students. It serves two purposes: First,
 to document students' reflections about their learning
 progress. Second, to showcase some of the results students have
