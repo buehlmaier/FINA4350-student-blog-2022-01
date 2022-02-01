@@ -1,5 +1,5 @@
 Title: Blogging About Text Analytics and NLP in Finance and Fintech
-Date: 2019-01-14 7:30:47 +0100
+Date: 2022-02-01 19:30
 Status: hidden
 Slug: landing-page-about-hidden
 
