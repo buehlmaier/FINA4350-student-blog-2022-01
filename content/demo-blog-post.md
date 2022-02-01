@@ -1,5 +1,4 @@
 ---
-authors: Talha Mansoor
 Title: Demo Blog Post
 Tags: remarkable, unique, home
 Date: 2019-07-01 01:12
