@@ -1,4 +1,4 @@
-Title: Fed Watching
+Title: [Demo Blog Post] Fed Watching
 Date: 2022-01-25 13:58
 Category: Summary of Findings
 

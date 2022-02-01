@@ -1,4 +1,4 @@
-Title: Text Analytics
+Title: [Demo Blog Post] Text Analytics
 Date: 2021-12-03 17:20
 Category: Progress Report
 
