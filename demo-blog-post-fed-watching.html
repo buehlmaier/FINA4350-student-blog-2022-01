@@ -4,55 +4,59 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="generator" content="Pelican" />
-        <title>Text Analytics</title>
+        <title>[Demo Blog Post] Fed Watching</title>
         <link rel="stylesheet" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/main.css" />
         <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog Atom Feed" />
-        <meta name="description" content="By Group "Super NLP" In the previous blog, our team shows the progress we made in data mining and preprocessing. This blog we will guide you..." />
+        <meta name="description" content="By Group "Fintech Disruption" One of the two main objectives of this project is to find some pattern between the speeches made by FED personnel..." />
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
                 <h1><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/">FINA4350 Student Blog</a></h1>
                 <nav><ul>
-                    <li class="active"><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/category/progress-report.html">Progress Report</a></li>
-                    <li><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/category/summary-of-findings.html">Summary of Findings</a></li>
+                    <li><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/category/progress-report.html">Progress Report</a></li>
+                    <li class="active"><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/category/summary-of-findings.html">Summary of Findings</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/text-analytics.html" rel="bookmark"
-           title="Permalink to Text Analytics">Text Analytics</a></h1>
+        <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/demo-blog-post-fed-watching.html" rel="bookmark"
+           title="Permalink to [Demo Blog Post] Fed Watching">[Demo Blog Post] Fed Watching</a></h1>
     </header>
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2021-12-03T17:20:00+08:00">
-                Published: Fri 03 December 2021
+        <abbr class="published" title="2022-01-25T13:58:00+08:00">
+                Published: Tue 25 January 2022
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/author/fina4350-students.html">FINA4350 Students</a>
         </address>
-<p>In <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/category/progress-report.html">Progress Report</a>.</p>
+<p>In <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/category/summary-of-findings.html">Summary of Findings</a>.</p>
 
-</footer><!-- /.post-info -->      <p>By Group "Super NLP"</p>
-<p>In the previous blog, our team shows the progress we made in data
-mining and preprocessing. This blog we will guide you through our
-sentiment analysis toward XRP related tweets.</p>
-<h1>Financial Data</h1>
-<p>Before we can start the sentiment analysis, we found that part of the
-financial data of XRP we loaded from Yahoo Finance was
-missing. Specifically, the data on October 12, 2020 was missing in the
-Yahoo Finance database. So we chose
-<a href="http://www.investing.com">Investing.com</a> to get the whole year data
-of XRP and recalculated the return and 30 days volatility.</p>
+</footer><!-- /.post-info -->      <p>By Group "Fintech Disruption"</p>
+<p>One of the two main objectives of this project is to find some pattern
+between the speeches made by FED personnel throughout the year and the
+impact, if any, they have on the FED Fund Rate.</p>
+<h1>Background Information on the Fed</h1>
+<p>The <a href="https://www.federalreserve.gov/">Fed</a> has mainly three appointed
+positions&mdash;the Chair, the Vice Chair and the Governor. Out of
+these three positions the Chair holds the highest stature and is often
+viewed as the main answerable authority of the FED. The Vice Chair and
+Governors are other members in the seven board committee appointed by
+the President of the United States.</p>
+<p>As a famous hedge fund manager once said:</p>
+<blockquote>
+<p>Fed watching is a great tool to make money. I have been making all my
+gazillions using this technique.</p>
+</blockquote>
 <p>The code we use is as follows:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">nltk</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">gensim</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">myvar</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="n">DF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;XRP-data.csv&#39;</span><span class="p">)</span>
+<span class="n">DF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;FED-data.csv&#39;</span><span class="p">)</span>
 </code></pre></div>
     </div><!-- /.entry-content -->
 
