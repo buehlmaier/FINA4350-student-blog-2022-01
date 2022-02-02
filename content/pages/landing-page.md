@@ -5,10 +5,10 @@ Status: hidden
 Slug: landing-page-about-hidden
 ---
 
-This blog is written by HKU students. It serves two purposes: First,
-to document students' reflections about their learning
-progress. Second, to showcase some of the results students have
-obtained as part of their projects.
+This blog is written by students at the University of Hong Kong
+(HKU). It serves two purposes: First, to document students'
+reflections about their learning progress. Second, to showcase some of
+the results students have obtained as part of their projects.
 
 The topics of the blog posts are about text analytics and natural
 language processing (NLP) in finance and fintech. At any rate, keep in

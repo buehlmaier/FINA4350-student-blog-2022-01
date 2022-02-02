@@ -33,4 +33,4 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 # For "Elegant" theme landing page:
-LANDING_PAGE_TITLE = "HKU Student Blog"
+LANDING_PAGE_TITLE = "HKU FINA4350 Student Blog"
