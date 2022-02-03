@@ -14,3 +14,9 @@ The topics of the blog posts are about text analytics and natural
 language processing (NLP) in finance and fintech. At any rate, keep in
 mind that this blog is "work in progress." The blog will be updated
 throughout the course as new blog posts become available.
+
+Names of student groups:
+
+  * Simplicity
+  * Eva's group (group name TBD)
+  * &hellip;
