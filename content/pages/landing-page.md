@@ -20,3 +20,6 @@ Names of student groups:
   * Simplicity
   * Eva's group (group name TBD)
   * &hellip;
+
+The source code of this blog is available on
+[GitHub](https://github.com/buehlmaier/FINA4350-student-blog-2022-01).
