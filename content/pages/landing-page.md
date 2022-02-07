@@ -20,6 +20,7 @@ Names of student groups:
   * Simplicity
   * Eva's group (group name TBD)
   * Python at Large
+  * Snapshot
   * &hellip;
 
 The source code of this blog is available on
