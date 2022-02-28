@@ -18,7 +18,7 @@ throughout the course as new blog posts become available.
 Names of student groups:
 
   * Simplicity
-  * Eva's group (group name TBD)
+  * Nebula
   * Python at Large
   * Snapshot
   * &hellip;
