@@ -22,8 +22,7 @@ Names of student groups:
   * Python at Large
   * Snapshot
   * NLPQuartet
-  * &hellip;
-  * &hellip;
+  * Metatext
 
 The source code of this blog is available on
 [GitHub](https://github.com/buehlmaier/FINA4350-student-blog-2022-01).
