@@ -21,7 +21,7 @@ Names of student groups:
   * Nebula
   * Python at Large
   * Snapshot
-  * NLPQuartet
+  * NLPQuintet
   * Metatext
 
 The source code of this blog is available on
