@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="Project Introduction and Step 1: Data Collecting and Storage (Group Simplicity) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/project-introduction-and-step-1-data-collecting-and-storage-group-simplicity.html" />
+<meta property="og:description" content="By Group &#34;Simplicity,&#34; written by Pail HUNG Pui Kit Project Introduction Here at Group Simplicity, we are working together to investigate the correlation between the sentiment expressed on Reddit&#39;s r/wallstreetbets community and stock market performance. Given the enormous scope of the posts, we will restrict ourselves to only look …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-03-29T10:20:00+08:00" />
+<meta name="twitter:title" content="Project Introduction and Step 1: Data Collecting and Storage (Group Simplicity) ">
+<meta name="twitter:description" content="By Group &#34;Simplicity,&#34; written by Pail HUNG Pui Kit Project Introduction Here at Group Simplicity, we are working together to investigate the correlation between the sentiment expressed on Reddit&#39;s r/wallstreetbets community and stock market performance. Given the enormous scope of the posts, we will restrict ourselves to only look …">
+
+        <title>Project Introduction and Step 1: Data Collecting and Storage (Group Simplicity)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/project-introduction-and-step-1-data-collecting-and-storage-group-simplicity.html">
+                Project Introduction and Step 1: Data Collecting and Storage (Group Simplicity)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Simplicity," written by Pail HUNG Pui Kit</p>
+<h2>Project Introduction</h2>
+<p>Here at Group Simplicity, we are working together to investigate the correlation between the sentiment expressed on Reddit's r/wallstreetbets community and stock market performance. Given the enormous scope of the posts, we will restrict ourselves to only look at posts after certain market shocks to evaluate whether market shocks would affect the correlation. We will look at the submission data's title, content, and the most popular comment. Additionally, we will be identifying the stock mentioned in the post, running VADER sentiment analysis on it, and then visualizing the correlation.</p>
+<h3>Project Overview</h3>
+<p>Step 1: Data Sourcing Reddit Posts by Pail</p>
+<p>Step 2: Cleaning Data and Identifying Stock by Hang</p>
+<p>Step 3: Performing Sentiment Analysis by Dev</p>
+<p>Step 4: Visualizing Correlation and Prediction by Sean</p>
+<p>Other colleagues will make an introduction in their respective blogs.</p>
+<h2>Author Introduction</h2>
+<p>Pail, Hung Pui Kit, a second-year Economics and Finance student, in charge of the data collecting and storage portion of our group project.</p>
+<h2>Step 1 : Decide the workflow and search for codes</h2>
+<p>This project begins with scraping Reddit's data, therefore making the first step figuring out how to scrape the raw data, arranging it in a tabular data frame, and exporting it as a .csv file for further processing by other colleagues.</p>
+<p>The first step of scraping data from Reddit's API using the PRAW library is done with the following basic code:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">praw</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<span class="n">reddit</span> <span class="o">=</span> <span class="n">praw</span><span class="o">.</span><span class="n">Reddit</span><span class="p">(</span>
+  <span class="n">client_id</span><span class="o">=</span><span class="s2">&quot;my client id&quot;</span><span class="p">,</span>
+  <span class="n">client_secret</span><span class="o">=</span><span class="s2">&quot;my client secret&quot;</span><span class="p">,</span>
+  <span class="n">user_agent</span><span class="o">=</span><span class="s2">&quot;my user agent&quot;</span>
+<span class="p">)</span>
+
+<span class="n">subreddit</span> <span class="o">=</span> <span class="n">reddit</span><span class="o">.</span><span class="n">subreddit</span><span class="p">(</span><span class="s2">&quot;wallstreetbets&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create an empty list</span>
+<span class="n">posts</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="k">for</span> <span class="n">submission</span> <span class="ow">in</span> <span class="n">subreddit</span><span class="o">.</span><span class="n">hot</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="c1"># Output: the submission&#39;s title</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="c1"># Output: the submission&#39;s score</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">score</span><span class="p">)</span>
+
+    <span class="c1"># Output: the submission&#39;s ID</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="c1"># Output: the submission&#39;s URL</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="c1"># Add the aforementioned attributes into the list</span>
+    <span class="n">posts</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">submission</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">submission</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
+                  <span class="n">submission</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">submission</span><span class="o">.</span><span class="n">url</span><span class="p">])</span>
+
+<span class="n">posts_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">posts</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="err">‘</span><span class="n">title</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">score</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="nb">id</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">url</span><span class="err">’</span><span class="p">])</span>
+</code></pre></div>
+
+<p>With these few lines, I have successfully done the following tasks:</p>
+<ul>
+<li>Gain access to Reddit Post Data via API</li>
+<li>Scrape the relevant attributes of the posts </li>
+</ul>
+<p>However, there are certain limitations, such as the fact that I can only gather the most popular entries, with a limit of roughly 300 submissions, which is insufficient to construct a data pool for further research.</p>
+<h2>Step 2: Find ways to collect posts within a specific time range</h2>
+<p>The next part has the following code:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Assuming you have a praw.Reddit instance bound to the variable `reddit`</span>
+<span class="c1"># &quot;39zje0&quot; is simply the submission ID of a particular post</span>
+<span class="n">submission</span> <span class="o">=</span> <span class="n">reddit</span><span class="o">.</span><span class="n">submission</span><span class="p">(</span><span class="s2">&quot;39zje0&quot;</span><span class="p">)</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="n">submission</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+</code></pre></div>
+
+<p>I can find the required submissions using the submission ID, so looking for a way to scrape the submission ID first in a certain timeframe should be the next step. Because using the PRAW library alone was not enough to acquire data, I spent some hours browsing. I found that the PSAW library, another library which uses the PushShift API, is specifically used for locating IDs within a certain timerange.</p>
+<p>That's exactly what I needed, so I referred to its documentation and obtained the following:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">praw</span>
+<span class="kn">from</span> <span class="nn">psaw</span> <span class="kn">import</span> <span class="n">PushshiftAPI</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+
+<span class="n">reddit</span> <span class="o">=</span> <span class="n">praw</span><span class="o">.</span><span class="n">Reddit</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">PushshiftAPI</span><span class="p">(</span><span class="n">reddit</span><span class="p">)</span>
+
+<span class="c1"># scrape from when</span>
+<span class="n">start_epoch</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">())</span>
+
+<span class="nb">list</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">search_submissions</span><span class="p">(</span><span class="n">after</span><span class="o">=</span><span class="n">start_epoch</span><span class="p">,</span>
+                            <span class="n">subreddit</span><span class="o">=</span><span class="s1">&#39;politics&#39;</span><span class="p">,</span>
+                            <span class="nb">filter</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;subreddit&#39;</span><span class="p">],</span> <span class="c1"># scrape which columns</span>
+                            <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="c1"># scrape how many posts</span>
+</code></pre></div>
+
+<p>From the above reference, we can observe the existence of the timerange variables, which can help specify the required start and end points of scraping. The "filter" variable enables one to specify what attributes of the posts one wants to scrape, but since I only want the submission ID, I can get rid of it. However, there is one minor issue that I came across which is when limit='None'. It tells the code to scrape all the posts without any limits. The code will run slowly and sometimes even fail to generate any results, so I modified the code by adding the "score" variable which allows me to only scrape the submission IDs of posts that have more than 1 upvote. The code is as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">praw</span>
+<span class="kn">from</span> <span class="nn">psaw</span> <span class="kn">import</span> <span class="n">PushshiftAPI</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">dt</span>
+
+<span class="n">reddit</span> <span class="o">=</span> <span class="n">praw</span><span class="o">.</span><span class="n">Reddit</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">PushshiftAPI</span><span class="p">(</span><span class="n">reddit</span><span class="p">)</span>
+
+<span class="c1"># scrape from when until when (2021-11-1 to 2021-11-30 in this case)</span>
+<span class="n">start_epoch</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">())</span> 
+<span class="n">end_epoch</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">())</span>
+
+<span class="n">submissions_generator</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">search_submissions</span><span class="p">(</span><span class="n">after</span><span class="o">=</span><span class="n">start_epoch</span><span class="p">,</span>
+                                               <span class="n">before</span><span class="o">=</span><span class="n">end_epoch</span><span class="p">,</span>
+                                               <span class="n">subreddit</span><span class="o">=</span><span class="s1">&#39;wallstreetbets&#39;</span><span class="p">,</span>
+                                               <span class="n">limit</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                                               <span class="n">score</span> <span class="o">=</span> <span class="s2">&quot;&gt;1&quot;</span>
+                                               <span class="p">)</span> 
+<span class="n">submissions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">submissions_generator</span><span class="p">)</span>
+</code></pre></div>
+
+<p>With these lines, the submission IDs will be gathered into a list, and I will be able to scrape the details later using the PRAW library.</p>
+<p>Progress Done:</p>
+<ul>
+<li>
+<p>Ways to collect required submission IDs: Found</p>
+</li>
+<li>
+<p>Ways to scrape submission details found</p>
+</li>
+</ul>
+<h2>Step 3: To collect more data: the comments</h2>
+<p>Aside from the contents of the post, the comments are also significant since it provides a lot of useful text that can assist my colleagues. When evaluating individual posts, we discovered that the most popular comment can often be in the form of an image.</p>
+<p>Returning to the PRAW documentation, the following code was discovered:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">praw.models</span> <span class="kn">import</span> <span class="n">MoreComments</span>
+
+<span class="k">for</span> <span class="n">top_level_comment</span> <span class="ow">in</span> <span class="n">submission</span><span class="o">.</span><span class="n">comments</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">top_level_comment</span><span class="p">,</span> <span class="n">MoreComments</span><span class="p">):</span>
+        <span class="k">continue</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">top_level_comment</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<p>While running this you will most likely encounter the exception <code>AttributeError: 'MoreComments' object has no attribute 'body'</code>. This submission’s comment forest contains a number of <a href="https://praw.readthedocs.io/en/latest/code_overview/models/more.html#praw.models.MoreComments" title="praw.models.MoreComments"><code>MoreComments</code></a> objects. These objects represent the “load more comments”, and “continue this thread” links encountered on the website. While we could ignore <a href="https://praw.readthedocs.io/en/latest/code_overview/models/more.html#praw.models.MoreComments" title="praw.models.MoreComments"><code>MoreComments</code></a> in our code</p>
+</blockquote>
+<p>It appears that I need to deal with the 'MoreComments' object, which represents sub-comments or comments of a comment, based on this explanation. I am not familiar with it, so based on the example code, I will choose to ignore it if I come across it.</p>
+<p>I started to think about the layers of collecting the posts and comments data:</p>
+<ol>
+<li>
+<p>I have a lot of submission IDs.</p>
+</li>
+<li>
+<p>I have a lot of comments under each submissions.</p>
+</li>
+</ol>
+<p>I divided the collections into two DataFrames, one for post information and the other for comment details, and then merged them based on submission ID.</p>
+<p>Since a post has identical identifiers like the submission ID, submission content, or submission topic (the right dataframe here), but it can also have an unlimited number of comments (the left dataframe), I will need to merge them later by "broadcasting" the post data to merge with the comment data based on the post ID (key column) to keep all the data in the same dataframe. "Broadcasting" is a special type of merging, which ensures that the final DataFrame retains its shape. This is depicted in the figure below.</p>
+<p><img alt="images/mergingjoinkeycolumnspng" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Simplicity-020_merging_join_key_columns.png"></p>
+<p>So I wrote the following lines:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 2. Use the PRAW library to scrape post details</span>
+<span class="n">posts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">comments_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">submission_id</span> <span class="ow">in</span> <span class="n">submissions</span><span class="p">:</span>
+    <span class="n">post</span> <span class="o">=</span> <span class="n">reddit</span><span class="o">.</span><span class="n">submission</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">submission_id</span><span class="p">)</span>
+    <span class="n">post_items</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">comments_details</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+    <span class="c1"># Scrape Comments</span>
+    <span class="k">for</span> <span class="n">top_level_comment</span> <span class="ow">in</span> <span class="n">post</span><span class="o">.</span><span class="n">comments</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">top_level_comment</span><span class="p">,</span> <span class="n">MoreComments</span><span class="p">):</span>
+            <span class="n">comments_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;no id&#39;</span><span class="p">,</span>
+                                  <span class="s1">&#39;no author&#39;</span><span class="p">,</span>
+                                      <span class="o">-</span><span class="mi">100</span><span class="p">,</span>
+                                  <span class="s1">&#39;no comment&#39;</span><span class="p">,</span>
+                                      <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+            <span class="k">continue</span>
+        <span class="n">comments_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;no id&#39;</span><span class="p">,</span>
+                              <span class="s1">&#39;no author&#39;</span><span class="p">,</span>
+                                      <span class="o">-</span><span class="mi">100</span><span class="p">,</span>
+                              <span class="s1">&#39;no comment&#39;</span><span class="p">,</span>
+                                  <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+
+        <span class="n">comments_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">top_level_comment</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                                 <span class="n">top_level_comment</span><span class="o">.</span><span class="n">author</span><span class="p">,</span>
+                                 <span class="n">top_level_comment</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
+                                 <span class="n">top_level_comment</span><span class="o">.</span><span class="n">body</span><span class="p">,</span>
+                                 <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+
+    <span class="c1"># Scrape other post details</span>
+    <span class="n">post_items</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">created_utc</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">author</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
+                       <span class="n">post</span><span class="o">.</span><span class="n">num_crossposts</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">num_comments</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">upvote_ratio</span><span class="p">,</span>
+                       <span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">selftext</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">permalink</span><span class="p">])</span>
+    <span class="n">posts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">post_items</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<span class="c1"># Transform post details to a main DataFrame  </span>
+<span class="n">posts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">posts</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;upvotes&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;num_crossposts&#39;</span><span class="p">,</span> <span class="s1">&#39;num_comments&#39;</span><span class="p">,</span> <span class="s1">&#39;upvote_ratio&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;permalink&#39;</span><span class="p">])</span>
+
+<span class="c1"># Transform comments details to another DataFrame</span>
+<span class="n">comments_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">comments_list</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;comment_id&#39;</span><span class="p">,</span>
+                                                   <span class="s1">&#39;comment_author&#39;</span><span class="p">,</span>
+                                                   <span class="s1">&#39;comment_upvote&#39;</span><span class="p">,</span>
+                                                   <span class="s1">&#39;comment_content&#39;</span><span class="p">,</span>
+                                                   <span class="s1">&#39;id&#39;</span><span class="p">])</span>
+
+<span class="c1"># Transfer Unix Time format to standard datetime format</span>
+<span class="n">posts</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">posts</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">posts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+
+<span class="c1"># A new column to indicate whether the post maybe contains media by comparing URL and permalink</span>
+<span class="n">posts</span><span class="p">[</span><span class="s1">&#39;no_media&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">posts</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;/r/wallstreetbets&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Merge comments and main post details DataFrame</span>
+<span class="n">posts</span> <span class="o">=</span> <span class="n">posts</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">comments_df</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+
+<span class="c1"># Reindex the DataFrame</span>
+<span class="n">posts</span> <span class="o">=</span> <span class="n">posts</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;upvotes&#39;</span><span class="p">,</span> <span class="s1">&#39;no_media&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;num_crossposts&#39;</span><span class="p">,</span> <span class="s1">&#39;num_comments&#39;</span><span class="p">,</span> <span class="s1">&#39;upvote_ratio&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;comment_id&#39;</span><span class="p">,</span><span class="s1">&#39;comment_author&#39;</span><span class="p">,</span><span class="s1">&#39;comment_upvote&#39;</span><span class="p">,</span><span class="s1">&#39;comment_content&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;permalink&#39;</span><span class="p">])</span>
+</code></pre></div>
+
+<p>To avoid errors, I added a 'fake' entry to the comment DataFrame for every post, regardless of whether 'MoreComments' displays or not. The 'fake' entries may be readily removed afterwards due to their identical characteristics.</p>
+<p>Up to here, the data scraping process is nearly done, with the following tasks completed:</p>
+<ul>
+<li>
+<p>Collect the required submission IDs</p>
+</li>
+<li>
+<p>Use the IDs to scrape post details</p>
+</li>
+<li>
+<p>Use the IDs to scrape the comments details</p>
+</li>
+<li>
+<p>Merge the two dataframes</p>
+</li>
+</ul>
+<h2>Step 5: Export and Data Pre-processing</h2>
+<p>Now that I have scraped all of the posts inside a specified timeframe, it is time to export the dataframe to a .csv file and distribute it to my colleagues. There will be two versions available: one with all the data and one with only the posts with more than 5 upvotes and the highest upvoted comments.</p>
+<p>Also, in order to simplify the handling of files, I set the export name to be linked to the timeframe I collected.</p>
+<div class="highlight"><pre><span></span><code><span class="n">base_path</span> <span class="o">=</span> <span class="s1">&#39;*the export folder path*&#39;</span>
+<span class="c1"># Export to CSV File</span>
+<span class="n">export_name</span> <span class="o">=</span> <span class="s1">&#39;Reddit WSB Data with all comments &#39;</span> <span class="o">+</span> <span class="n">from_date</span> <span class="o">+</span> <span class="s1">&#39; to &#39;</span> <span class="o">+</span> <span class="n">to_date</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Export name: &#39;</span><span class="p">,</span> <span class="n">export_name</span><span class="p">)</span>
+<span class="n">posts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">export_name</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;export complete&#39;</span><span class="p">)</span>
+
+<span class="c1"># Modify the file</span>
+<span class="n">export_name</span> <span class="o">=</span> <span class="s1">&#39;Reddit WSB Data with all comments &#39;</span> <span class="o">+</span> <span class="n">from_date</span> <span class="o">+</span> <span class="s1">&#39; to &#39;</span> <span class="o">+</span> <span class="n">to_date</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+<span class="n">posts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">base_path</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">export_name</span><span class="p">)</span>
+
+<span class="n">posts_mod</span><span class="p">[</span><span class="s1">&#39;upvotes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">posts_mod</span><span class="p">[</span><span class="s1">&#39;upvotes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="c1"># Keep comments with highest upvote only</span>
+<span class="n">posts_mod</span><span class="p">[</span><span class="s1">&#39;comment_upvote&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">posts_mod</span><span class="p">[</span><span class="s1">&#39;comment_upvote&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">posts_mod</span> <span class="o">=</span> <span class="n">posts_mod</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;comment_upvote&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">posts_mod</span> <span class="o">=</span> <span class="n">posts_mod</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span><span class="n">keep</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+
+<span class="c1"># Keep posts with upvote &gt;=5</span>
+<span class="n">posts_mod</span> <span class="o">=</span> <span class="n">posts_mod</span><span class="p">[</span><span class="n">posts_mod</span><span class="p">[</span><span class="s1">&#39;upvotes&#39;</span><span class="p">]</span> <span class="o">&gt;=</span><span class="mi">5</span> <span class="p">]</span>
+
+<span class="c1"># Export</span>
+<span class="n">posts_mod</span> <span class="o">=</span> <span class="n">posts_mod</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">mod_name</span> <span class="o">=</span> <span class="s1">&#39;Reddit WSB Data with most upvote comments &#39;</span> <span class="o">+</span> <span class="n">from_date</span> <span class="o">+</span> <span class="s1">&#39; to &#39;</span> <span class="o">+</span> <span class="n">to_date</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+<span class="n">posts_mod</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">mod_name</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Extra Step: Let the code run remotely</h2>
+<p>Because of the extensive time needed to scrape Reddit submissions owing to Reddit's API connection limit, I installed a docker image on another machine so that the program could be executed remotely. Also, I wrote a function 'time report()' to determine how much time has passed. Furthermore, in my scripts, the essential variables that need to be altered when the codes are run locally and remotely are clearly visible and modifiable.</p>
+<div class="highlight"><pre><span></span><code><span class="n">start_time</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> 
+<span class="k">def</span> <span class="nf">time_report</span><span class="p">():</span>
+    <span class="n">current_time</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Time spent now: &#39;</span><span class="p">,</span> <span class="n">current_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+    <span class="k">return</span>
+
+<span class="c1"># Key Variables #</span>
+<span class="n">base_path</span> <span class="o">=</span> <span class="s1">&#39;*the export folder path*&#39;</span>
+<span class="n">start_scrape</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">end_scrape</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>One more thing: metadata on writing a pelican post</h2>
+<div class="highlight"><pre><span></span><code><span class="n">Title</span><span class="o">:</span> <span class="n">Project</span> <span class="n">Introduction</span> <span class="n">and</span> <span class="n">Step</span> <span class="mi">1</span><span class="o">:</span> <span class="n">Data</span> <span class="n">Collecting</span> <span class="n">and</span> <span class="n">Storage</span> 
+<span class="n">Date</span><span class="o">:</span> <span class="mi">2022</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">29</span> <span class="mi">10</span><span class="o">:</span><span class="mi">20</span>
+<span class="n">Category</span><span class="o">:</span> <span class="n">Progress</span> <span class="n">Report</span>
+</code></pre></div>
+
+<p>In order for pelican to recognize this markdown file, the metadata should begin on the first line of the markdown file. I spent quite a lot of time doing a <em>trial and error</em> process to identify this issue.</p>
+<h2>Final: Feelings and Further Improvements</h2>
+<p>The slow API that extracts the post ID was basically my biggest opponent while I was developing my program. It took me around 8.5 hours to gather 83000 submission IDs, and 2 days and 7 hours to collect all of the data in total. As a result, each time I edited the code and evaluated the produced data, I had to wait a long time.</p>
+<p>Returning to the code, it took 90-100 lines to complete the task, which I believe is acceptable. Although my coding style is a little wordy, with transition variables that are only used once, it made it easier for me to understand what I had written after a day, and the nature of scraping data does not emphasize the script's operation speed, which was limited by the API already.</p>
+<h3>Improvements</h3>
+<p>I did not use the APRAW library, which is the async version of the PRAW library that can scrape the Reddit post details much faster. The reason being that I am not familiar with the <em>async</em> and <em>await</em> functions. In addition, the slowest part, collecting post IDs, is handled by the PSAW library which is dependent on the PRAW library, the APRAW library can only be used in collecting the details of each post, which I believe will result in only a slight improvement in efficiency.</p>
+<h4>Finally, thank you for reading :&gt;</h4>
+<p><em>Link to code can be found here:</em> <a href="https://github.com/u3555972/FINA4350-WSB-Sentiment-and-Stock-Returns/blob/main/reddit_data_scraping.py">reddit_data_scraping</a></p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-03-29T10:20:00+08:00">Tue 29 March 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
