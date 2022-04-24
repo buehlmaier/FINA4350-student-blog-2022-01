@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="Model- Explanation and problems (Group Snapshot) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/model-explanation-and-problems-group-snapshot.html" />
+<meta property="og:description" content="By Group &#34;Snapshot&#34;, written by Patrick van Ewijk Dear readers, this is a blog post about our model. Although I&#39;m curious to start immediately with the problems we encountered in python, first I refer to an external document which I wrote (see: model.pdf). It contains the explanation of our …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-04-16T17:28:00+08:00" />
+<meta name="twitter:title" content="Model- Explanation and problems (Group Snapshot) ">
+<meta name="twitter:description" content="By Group &#34;Snapshot&#34;, written by Patrick van Ewijk Dear readers, this is a blog post about our model. Although I&#39;m curious to start immediately with the problems we encountered in python, first I refer to an external document which I wrote (see: model.pdf). It contains the explanation of our …">
+
+        <title>Model- Explanation and problems (Group Snapshot)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/model-explanation-and-problems-group-snapshot.html">
+                Model- Explanation and problems (Group Snapshot)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Snapshot", written by Patrick van Ewijk</p>
+<p>Dear readers, this is a blog post about our model.
+Although I'm curious to start immediately with the problems we encountered in python, first I refer to an external document which I wrote (see: <a href="https://drive.google.com/file/d/156xGsYQ-OBwSTocmmfjXsNGApygQBjA6/view?usp=sharing">model.pdf</a>). It contains the explanation of our model. As it includes a lot of mathematical symbols however, we decided not to publish it here in this blog post.</p>
+<p><strong><em>Very short explanation of model</em></strong></p>
+<p>We impose a form where the difference of the log-prices (which is considered as the return of that period), follows a Normal distribution with a mean <em>mu</em> and standard deviation sigma. Sigma squared contains the same regressors as the <em>GARCH(1,1)</em> model (a constant, the previous period return squared and the previous sigma squared) and some external regressors (captured in X). The idea is to compare "our" model with the <em>GARCH(1,1)</em> model.</p>
+<h1>Initial model in python</h1>
+<p><strong>Structure of dataframe</strong></p>
+<p>For fitting the model, a dataframe is used consisting of gathered information from the tweets. It is chronologically ordered. Whenever ones want to verify the results in this blog post, one needs to download the dataframe (see link: <a href="https://drive.google.com/file/d/1y_RxrRFFSLfnrKNa9i6xmCBaL8_WviD3/view?usp=sharing">btc_info_df.pickle</a>). As an illustration, we present a visualization of the structure of the dataframe. </p>
+<p><img alt="Picture showing dataframe" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-snapshot-visualizationdataframe.jpg"></p>
+<p><strong>Functions specifying negative log-likelihood and sigma</strong></p>
+<p>For the fitting of the model, we need to maximize the log-likelihood function. This is equivalent to minimizing the negative of the log-likelihood function. We use the <em>minimize</em> module from <em>scipy.optimize</em>. Further, we need <em>pandas</em> for a dataframe operation and <em>numpy</em> in our log-likelihood function.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</code></pre></div>
+
+<p>We made the following code for the forms of sigma and the negative likelihood. The <em>mu</em> vector is simply the average of the <em>y_vec</em> terms. Hence, it does not depend upon the parameters in the sigma function and we exclude it from the parameters which we are still estimating in the likelihood function. The function is flexible in the sense that it allows us to estimate <em>GARCH(1,1)</em> easily as well. If we only input a vector of parameters of length 3, the <em>GARCH(1,1)</em> model is estimated.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sigma_sqf</span><span class="p">(</span><span class="n">param</span><span class="p">,</span><span class="n">X</span><span class="p">,</span> <span class="n">y_vec</span><span class="p">,</span><span class="n">mu</span><span class="p">):</span> 
+    <span class="n">omega</span><span class="o">=</span><span class="n">param</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">alpha_1</span><span class="o">=</span><span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">beta_1</span><span class="o">=</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">param</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">4</span><span class="p">:</span>
+        <span class="n">gamma_v</span><span class="o">=</span><span class="n">param</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">gamma_v</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">sigma_sq</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="n">y_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">mu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">y_vec</span><span class="p">))</span> 
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">y_vec</span><span class="p">)):</span>
+        <span class="n">sigma_sq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span>\
+            <span class="n">omega</span><span class="o">+</span><span class="n">alpha_1</span><span class="o">*</span><span class="p">(</span><span class="n">y_vec</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">mu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span>\
+            <span class="n">beta_1</span><span class="o">*</span><span class="n">sigma_sq</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,],</span> <span class="n">gamma_v</span><span class="p">)</span>
+    <span class="n">sigma_sq</span><span class="o">=</span><span class="n">sigma_sq</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">sigma_sq</span>
+
+<span class="k">def</span> <span class="nf">Adj_Neg_Log_likelihood</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y_vec</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+    <span class="n">sigma_sq</span><span class="o">=</span><span class="n">sigma_sqf</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span><span class="n">y_vec</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sigma_sq</span><span class="p">))</span><span class="o">+</span>\
+        <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_vec</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">-</span><span class="n">mu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">sigma_sq</span><span class="p">)</span>
+</code></pre></div>
+
+<p>One might wonder where the <code>(y_vec[0]-mu)**2</code> comes from. Note that the first sigma squared cannot be estimated according to the model. Therefore this is simply set to the squared deviation of the previous day return from the mean of the returns.  </p>
+<p>The goal is to minimize <em>Adj_Neg_Log_likelihood</em>, as a function of <em>param</em>. The other parameters <em>X, y_vec</em> and <em>mu</em> are known before we start minimizing the function. </p>
+<p><strong>Initializing of minimize function</strong></p>
+<p><em>minimize</em> takes several arguments. First of all, we need to come up with an initial guess <code>x0</code>. 
+Further we specify <code>method</code>. As <em>Adj_Neg_Log_likelihood</em> is non-linear, <code>method=SLSQP</code> is chosen.
+Besides, we have some fixed arguments for the function (that is: <em>X, y_vec</em> and <em>mu</em>). We retrieve the desired columns of our dataframe <em>btc_info_df</em> in <em>X</em>, which can be considered as a matrix instead of a dataframe. 
+Finally, we specify <code>options</code>. Here <em>'eps'</em> is a pre-fixed parameter which determines how precise the slope of <em>Adj_Neg_Log_likelihood</em> in <em>param</em> will be estimated.</p>
+<div class="highlight"><pre><span></span><code><span class="n">x0_1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.06</span><span class="p">,</span><span class="mf">0.93</span><span class="p">,</span><span class="mf">0.0000</span><span class="p">,</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span>
+<span class="n">X</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">btc_info_df</span><span class="p">[[</span><span class="s1">&#39;PercSentiment_.95&#39;</span><span class="p">,</span>\
+    <span class="s1">&#39;PercSentiment_.05&#39;</span><span class="p">,</span> <span class="s1">&#39;AverageSentiment&#39;</span><span class="p">,</span>\
+    <span class="s1">&#39;AverageSentimentEmoji&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">arguments</span><span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">btc_info_df</span><span class="o">.</span><span class="n">Y</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">btc_info_df</span><span class="o">.</span><span class="n">Y</span><span class="p">),)</span>
+<span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;eps&#39;</span> <span class="p">:</span> <span class="mf">1e-6</span><span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Minimizing process</strong></p>
+<p>Now, the <em>minimize</em> function is called. </p>
+<div class="highlight"><pre><span></span><code><span class="n">minimize</span><span class="p">(</span><span class="n">Adj_Neg_Log_likelihood</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0_1</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>\
+    <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">nonlinconst</span><span class="p">,</span>\
+    <span class="n">args</span><span class="o">=</span><span class="n">arguments</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Problems in function</h2>
+<p><strong>Problem 1: Different <code>x0</code>, different minima</strong></p>
+<p>When we tried different initial guesses for <code>x0</code>, we found out that different choices of <code>x0</code> lead to different minima of <em>Adj_Neg_Log_likelihood</em>. Our first thought was that <em>minimize</em> found a local minima, instead of a global one.</p>
+<p><strong>Problem 2: Infeasible solutions</strong></p>
+<p>Sigma squared is a variance and needs to be greater or equal to zero. However, during the minimization process sometimes allocations of <em>param</em> were tried for which sigma squared is negative. This led to infeasible solutions. </p>
+<h1>Improving our code</h1>
+<p><strong>Problem 2</strong> was solved by adding a constraint on <code>sigma_sqf</code> such that it cannot be negative. That is, we created <code>nonlinconst</code> and added this as an argument to <em>minimize</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">nonlinconst</span><span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span><span class="n">sigma_sqf</span><span class="p">,</span> <span class="s1">&#39;args&#39;</span><span class="p">:</span><span class="n">arguments</span><span class="p">}</span>
+<span class="n">minimize</span><span class="p">(</span><span class="n">Adj_Neg_Log_likelihood</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">start_guess</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>\
+    <span class="n">options</span><span class="o">=</span> <span class="n">options</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">nonlinconst</span><span class="p">,</span>\
+        <span class="n">args</span><span class="o">=</span><span class="n">arguments</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Problem 1</strong> was more difficult. 
+At some moment I found an answer to the problem (link to solution:  <a href="https://quant.stackexchange.com/questions/16730/correctly-applying-garch-in-python">stackoverflow</a>). It turned out that <em>minimize</em> works better if we work with larger numbers. As long as we are consistent with this, multiplying our <em>y_vec</em> is not a problem. By trial and error a scale factor of 250 worked.</p>
+<div class="highlight"><pre><span></span><code><span class="n">X</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">btc_info_df</span><span class="p">[[</span><span class="s1">&#39;PercSentiment_.95&#39;</span><span class="p">,</span> \
+    <span class="s1">&#39;PercSentiment_.05&#39;</span><span class="p">,</span> <span class="s1">&#39;AverageSentiment&#39;</span><span class="p">,</span> <span class="s1">&#39;AverageSentimentEmoji&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">scale</span><span class="o">=</span><span class="mi">250</span>
+<span class="n">arguments</span><span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">btc_info_df</span><span class="o">.</span><span class="n">Y</span><span class="o">*</span><span class="n">scale</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">btc_info_df</span><span class="o">.</span><span class="n">Y</span><span class="p">)</span><span class="o">*</span><span class="n">scale</span><span class="p">,)</span>
+<span class="n">nonlinconst</span><span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span><span class="n">sigma_sqf</span><span class="p">,</span> <span class="s1">&#39;args&#39;</span><span class="p">:</span><span class="n">arguments</span> <span class="p">}</span>
+
+<span class="n">x0_1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.06</span><span class="p">,</span><span class="mf">0.93</span><span class="p">,</span><span class="mf">0.0000</span><span class="p">,</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">x0_2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.004</span><span class="p">,</span><span class="mf">0.009</span><span class="p">,</span><span class="mf">0.80</span><span class="p">,</span><span class="mf">0.004</span> <span class="p">,</span> <span class="o">-</span> <span class="mf">0.00002</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.000004</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">])</span>
+<span class="n">x0_3</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.044</span> <span class="p">,</span> <span class="mf">0.000005</span><span class="p">,</span> <span class="mf">0.00000099</span><span class="p">,</span> <span class="mf">0.00000022</span><span class="p">])</span>
+<span class="n">x0_4</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.14545724e-04</span><span class="p">,</span>  <span class="mf">6.00103308e-02</span><span class="p">,</span>  <span class="mf">9.30000766e-01</span><span class="p">,</span>\
+    <span class="mf">1.21472916e-04</span><span class="p">,</span> <span class="mf">1.28891903e-04</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.42864190e-05</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.18436185e-05</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Values of our model:&quot;</span><span class="p">)</span>
+<span class="n">startingvalues</span><span class="o">=</span><span class="p">[</span><span class="n">x0_1</span><span class="p">,</span><span class="n">x0_2</span><span class="p">,</span><span class="n">x0_3</span><span class="p">,</span><span class="n">x0_4</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">start_guess</span> <span class="ow">in</span> <span class="n">startingvalues</span><span class="p">:</span>
+    <span class="n">resExo</span><span class="o">=</span>\
+        <span class="n">minimize</span><span class="p">(</span><span class="n">Adj_Neg_Log_likelihood</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">start_guess</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>\
+            <span class="n">options</span><span class="o">=</span> <span class="n">options</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">nonlinconst</span><span class="p">,</span>\
+                <span class="n">args</span><span class="o">=</span><span class="n">arguments</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">resExo</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+</code></pre></div>
+
+<p>For every initial guess, we now obtain the same value of <em>Adj_Neg_Log_likelihood</em> (1596.8731).</p>
+<h1>Comparison with GARCH(1,1)</h1>
+<p>As explained earlier, whenever we input a vector <em>param</em> of length 3 in <em>Adj_Neg_Log_likelihood</em>, automatically <em>Adj_Neg_Log_likelihood</em> sees that we mean the <em>GARCH(1,1)</em> model. Thus, fitting the <em>GARCH(1,1)</em> model is quite easy. We only need to drop parameters 4 up to 7 of the initial guesses <code>x0</code>. This leads to the following code.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Garch values:&quot;</span><span class="p">)</span>
+<span class="n">x0_1g</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.06</span><span class="p">,</span><span class="mf">0.93</span><span class="p">])</span>
+<span class="n">x0_2g</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.004</span><span class="p">,</span><span class="mf">0.009</span><span class="p">,</span><span class="mf">0.80</span><span class="p">])</span>
+<span class="n">x0_3g</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.8</span><span class="p">])</span>
+<span class="n">x0_4g</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.14545724e-04</span><span class="p">,</span>  <span class="mf">6.00103308e-02</span><span class="p">,</span>  <span class="mf">9.30000766e-01</span><span class="p">])</span>
+<span class="n">startingvalues</span><span class="o">=</span><span class="p">[</span><span class="n">x0_1g</span><span class="p">,</span><span class="n">x0_2g</span><span class="p">,</span><span class="n">x0_3g</span><span class="p">,</span><span class="n">x0_4g</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">start_guess</span> <span class="ow">in</span> <span class="n">startingvalues</span><span class="p">:</span>
+    <span class="n">Garch</span><span class="o">=</span>\
+        <span class="n">minimize</span><span class="p">(</span><span class="n">Adj_Neg_Log_likelihood</span><span class="p">,</span><span class="n">x0</span><span class="o">=</span><span class="n">start_guess</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>\
+        <span class="n">options</span><span class="o">=</span> <span class="n">options</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">nonlinconst</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">arguments</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Garch</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We find a value of <em>Adj_Neg_Log_likelihood</em> of 1602.0816. 
+Note that its not weird our model fits better than <em>GARCH(1,1)</em>, as it includes additional parameters. Indeed we see that -1596.8731&gt;-1602.0816.</p>
+<p>However, one could test if it is significantly better by doing a likelihood ratio test.
+Under the null hypothesis that the <em>GARCH(1,1)</em> is not worse than our model, 2 times the difference in log-likelihoods should follow a chi squared distribution with 4 degrees of freedom. </p>
+<p>The test statistic 10.417 and as the critical value is 9.488, we reject the null hypothesis that the data follows <em>GARCH(1,1)</em> over our model. In other words, indeed the sentiment regressors help to estimate the volatility in a better way. </p>
+<h1>Final Possible Steps in model</h1>
+<ul>
+<li>
+<p>Drop the constraint <code>sigma_sqf&gt;0</code>. Instead, we will square the elements in <em>X</em> or replaces the linear function X_{t-1}'gamma by exp(X_{t-1}'gamma) (see external document section 1.4). Note that in the first case, we still need to put a bound on gamma (if the algorithm tries gamma &lt;0, sigma_sqf could still be negative).</p>
+</li>
+<li>
+<p>If time allows, look into a completely different model.</p>
+</li>
+</ul>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-04-16T17:28:00+08:00">Sat 16 April 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
