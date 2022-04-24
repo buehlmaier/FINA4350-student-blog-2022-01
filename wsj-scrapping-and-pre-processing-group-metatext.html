@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="WSJ Scrapping and Pre-processing (Group Metatext) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/wsj-scrapping-and-pre-processing-group-metatext.html" />
+<meta property="og:description" content="By Group &#34;Metatext,&#34; written by Rex Chan Important: This blog post is of academic nature and for educational purpose only. Group Metatext pledges to follow the download regulations of databases such as Factiva. Intro &amp; Objective Our project analyzes whether Federal Reserves&#39; FOMC documents and news articles could possibly predict where …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-04-23T23:00:00+08:00" />
+<meta name="twitter:title" content="WSJ Scrapping and Pre-processing (Group Metatext) ">
+<meta name="twitter:description" content="By Group &#34;Metatext,&#34; written by Rex Chan Important: This blog post is of academic nature and for educational purpose only. Group Metatext pledges to follow the download regulations of databases such as Factiva. Intro &amp; Objective Our project analyzes whether Federal Reserves&#39; FOMC documents and news articles could possibly predict where …">
+
+        <title>WSJ Scrapping and Pre-processing (Group Metatext)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/wsj-scrapping-and-pre-processing-group-metatext.html">
+                WSJ Scrapping and Pre-processing (Group Metatext)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Metatext," written by Rex Chan</p>
+<p>Important: This blog post is of academic nature and for educational
+purpose only. Group Metatext pledges to follow the download
+regulations of databases such as Factiva.</p>
+<h2>Intro &amp; Objective</h2>
+<p>Our project analyzes whether Federal Reserves' FOMC documents and news articles could possibly predict where interest rates are heading. This is a critical question, especially given that Fed has suddenly turned hawkish to curb inflation. Everyone wants to know where interest rates might be in the near future. </p>
+<h2>Why News Article?</h2>
+<p>Naturally, when one is to predict Fed's decision, he delve into Fed's document, namely press conference, minutes, etc. (Stay tuned for my other group-mate detailing how to scrap and preprocess them). Fed's document inclines to plain fact reporting. News articles however, offer more subjective commentary on the cause and the impact of Fed's decision, which might offer more valuable information regarding how Wall Street perceive Fed's action. At the end of the day, Fed only manipulate the the policy rate, it is up to the Wall Street to move the market and propagate the effect of Fed's move to every corner of the financial market.</p>
+<p>From a project perspective, news article can been seen as a benchmark where one could compare Fed's official document against news article. </p>
+<p>We decided to opt for articles on Wall Street Journal. Reports from WSJ offers a delicate balance between depth and breath versus, say Bloomberg which focuses on speed and breath of reports. </p>
+<h2>How To Scrap News Articles?</h2>
+<p><strong><em>Libraries and Modules Used:</em></strong></p>
+<p>We first import the following libraries.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">import</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">math</span>
+</code></pre></div>
+
+<p>'re' (regular expressions) is a package that specialize in manipulating and interact with strings/text objects.</p>
+<p>'selenium webdriver' is a package that enable the code to control the web browser (such as Google Chrome and Firefox) as if we are manually browsing on the browser. Whenever we are working with dynamic websites that are heavily java-scriptted, we can use 'webdriver' to monitor how javascript changes HTML. </p>
+<p>We will be using Dow Jones Factiva to scrap news. Factiva is a paid-service with API access to for institutions. However, we can access Factiva via the link available at HKU Library using HKU credentials without API access. Therefore, we create a 'synthetic API' using the webdriver module to access Factiva shown as follows: </p>
+<div class="highlight"><pre><span></span><code><span class="n">webdriver_dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/chanmingho/Downloads/chromedriver&#39;</span> <span class="c1">#supply local directory of &#39;webdriver&#39;</span>
+<span class="n">download_dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/chanmingho/Downloads/FINA4350_GroupProject&#39;</span>
+<span class="c1">#supply local directory of where output files should be downloaded</span>
+
+<span class="c1">#check if download_dir has alraedy been created, if not create one</span>
+<span class="n">isExist</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">download_dir</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">isExist</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">download_dir</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">download_dir</span><span class="p">)</span>
+
+<span class="c1">#Input URL to login Factiva from HKU Library</span>
+<span class="n">hku_login</span> <span class="o">=</span> <span class="s1">&#39;https://julac-hku-a.alma.exlibrisgroup.com/view/action/uresolver.do;jsessionid=3785A9C82A112175676195A7044CA0A4.app03.ap01.prod.alma.dc05.hosted.exlibrisgroup.com:1801?operation=resolveService&amp;package_service_id=17357882830003414&amp;institutionId=3414&amp;customerId=3405&#39;</span>
+
+<span class="c1">#Input HKU Credentials</span>
+<span class="n">login</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;UID&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;PIN&#39;</span><span class="p">}</span>
+
+<span class="c1">#Input Data Range</span>
+<span class="n">data_range</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Start&#39;</span><span class="p">:</span> <span class="s1">&#39;2017-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;End&#39;</span><span class="p">:</span> <span class="s1">&#39;2022-04-11&#39;</span><span class="p">}</span>
+
+<span class="c1">#Browse Factiva</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">webdriver_dir</span><span class="p">)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">hku_login</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1">#Input UID and password</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;hkulauth&quot;]/p[2]/input&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">login</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">])</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;hkulauth&quot;]/p[3]/input&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">login</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">])</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;hkulauth&quot;]/p[6]/input[1]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We arrive at the following Factiva search page:</p>
+<p><img alt="Factiva search page" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Metatext-020_factiva.png"></p>
+<p>We proceed to input the appropriate filters shown as follows. We only look for news that are in English, the subject of the article is related to interest rates and the company is Fed with the desired date range, which in our case, is anytime after 1 Jan 2017.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#Filter news to desired date range</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;dr&quot;]/option[10]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;frd&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">data_range</span><span class="p">[</span><span class="s1">&#39;Start&#39;</span><span class="p">])[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;frm&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">data_range</span><span class="p">[</span><span class="s1">&#39;Start&#39;</span><span class="p">])[</span><span class="mi">1</span><span class="p">])</span>  
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;fry&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">data_range</span><span class="p">[</span><span class="s1">&#39;Start&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;tod&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">data_range</span><span class="p">[</span><span class="s1">&#39;End&#39;</span><span class="p">])[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;tom&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">data_range</span><span class="p">[</span><span class="s1">&#39;End&#39;</span><span class="p">])[</span><span class="mi">1</span><span class="p">])</span>  
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;toy&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">data_range</span><span class="p">[</span><span class="s1">&#39;End&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;isrd&quot;]/option[3]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+<span class="c1">#Filter news agency to only WSJ</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;scTab&quot;]/div[1]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;scLst&quot;]/div/ul/li/div/div/span&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;scpillscontextmenu&quot;]/div/div[2]/span&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;scTxt&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;The Wall Street Journal - All Sources&#39;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;/html/body/div[13]/table/tbody/tr/td/div&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+<span class="c1">#Filter &#39;company&#39; to Fed</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;coTab&quot;]/div[1]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;coTxt&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;Board of Governors of the Federal Reserve System&#39;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;/html/body/div[14]/table/tbody/tr/td/div&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+<span class="c1">#Filter subject to interest rates</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;nsTab&quot;]/div[1]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;nsTxt&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;Interest Rates&#39;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;/html/body/div[15]/table/tbody/tr/td/div&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+<span class="c1">#Filter country to only US</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;reTab&quot;]/div[1]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;reTxt&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s1">&#39;United States&#39;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;/html/body/div[16]/table/tbody/tr[1]/td/div&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+<span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;btnSearchBottom&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We arrive at the following search result page:</p>
+<p><img alt="Factiva search page" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Metatext-020_factiva_search_result.png"></p>
+<p>We proceed to download search results page by page as PDFs into local directories. </p>
+<div class="highlight"><pre><span></span><code><span class="n">news_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;headlineHeader33&quot;]/table/tbody/tr/td/span[2]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s1">&#39;data-hits&#39;</span><span class="p">))</span>
+<span class="n">page_count</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">news_count</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">page_count</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;selectAll&quot;]/input&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;listMenuRoot&quot;]/li[6]/a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;listMenu-id-4&quot;]/li[2]/a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;clearAll&quot;]/input&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s1">&#39;//*[@id=&quot;headlineHeader33&quot;]/table/tbody/tr/td/a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>How To Preprocess News Articles?</h2>
+<p>A typical news article scrapped from Factiva is shown as follows:</p>
+<p><img alt="A sample of WSJ news scrapped from Factiva" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Metatext-020_sample_of_news.jpeg"></p>
+<p>All we need from news articles is author, date, title and the main text.</p>
+<p>We first upload the PDFs into Google Drive under a specified directory. Then we read text from PDFs into a variable.</p>
+<div class="highlight"><pre><span></span><code><span class="n">all_news</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">news_for_analysis</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/FINA4350/Article&quot;</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.pdf&quot;</span><span class="p">):</span> 
+    <span class="k">with</span> <span class="n">fitz</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">pdf</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">pdf</span><span class="p">:</span>
+        <span class="n">all_news</span> <span class="o">+=</span> <span class="n">page</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Note that some articles are very lengthy, it is not possible to separate one news from another using simply page number. However, note that whenever each article ends, there is a 'Document <em>X</em>' pattern where <em>X</em> is a combination of numbers and characters. Hence, we ask Python to separate news whenever it detects such patterns.</p>
+<div class="highlight"><pre><span></span><code><span class="n">all_news_splitted</span> <span class="o">=</span> <span class="n">all_news</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;Document &#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">each_news</span> <span class="ow">in</span> <span class="n">all_news_splitted</span><span class="p">:</span>
+  <span class="n">each_news</span> <span class="o">=</span> <span class="n">each_news</span><span class="p">[</span><span class="n">each_news</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">):]</span> 
+</code></pre></div>
+
+<p>Upon closer look, we observe that Factiva search result also outputs non-news article such as interview transcript, podcast, preview of news, amendments etc. Also, last page of PDFs also contains a 'search summary' which is irrelavant. Any text with word count under 500 words are unlikely to contain any meaningful content, or are non-news articles. The following code removes these texts.</p>
+<div class="highlight"><pre><span></span><code><span class="n">all_news_cleaned_filtered</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">each_news</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">((</span><span class="s2">&quot;Search Summary&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">each_news</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;WSJ Pro Central Banking,&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">each_news</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;WSJ Podcast Minute Briefing&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">each_news</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;WSJ Blogs&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">each_news</span><span class="p">)</span> <span class="ow">and</span> \
+        <span class="p">(</span><span class="s2">&quot;WSJ Podcast What&#39;s News&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">each_news</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;Transcript:&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">each_news</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;Federal Reserve Readies More Aggressive Taper of Bond-Buying as Focus Turns to Inflation&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">each_news</span><span class="p">)</span> <span class="ow">and</span> \
+        <span class="p">(</span><span class="s2">&quot;Corrections &amp; Amplifications</span><span class="se">\n</span><span class="s2">Corrections &amp; Amplifications</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">each_news</span><span class="p">)):</span>
+      <span class="n">all_news_cleaned_filtered</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">each_news</span><span class="p">)</span>
+</code></pre></div>
+
+<p>After filtering out non-news articles, we proceed to clean up each individual articles. At the first line of some articles, it contains name of the news category (e.g. Central Banking, WSJ Pro, etc.). Language, disclaimer, word count, page number, time of publishing, contact of author, , identifiers, etc. They all need to be stripped to obtain relevant information, with the help of the 're' library.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">each_cleaned_filtered_news</span> <span class="ow">in</span> <span class="n">all_news_cleaned_filtered</span><span class="p">:</span>
+    <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">each_cleaned_filtered_news</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;License this article from Dow Jones Reprint Service&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Corrections &amp; Amplifications&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+    <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;Copyright \d+ Dow Jones &amp; Company, Inc. All Rights Reserved.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span>
+    <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;Copyright ?(.*?), Inc.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span>
+    <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;\d+ words|\d+,\d+ words&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span>
+    <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;Page?(.*?)All rights reserved.&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span>
+    <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;\d+:\d+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span>
+
+    <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;WSJ Pro</span><span class="se">\n</span><span class="s2">|The Outlook</span><span class="se">\n</span><span class="s2">|Economy</span><span class="se">\n</span><span class="s2">|Heard on the Street|Markets</span><span class="se">\n</span><span class="s2">|PERSONAL JOURNAL|Central Banks</span><span class="se">\n</span><span class="s2">\w+</span><span class="se">\n</span><span class="s2">|Central Banks</span><span class="se">\n</span><span class="s2">|The Wall Street Journal Online</span><span class="se">\n</span><span class="s2">| </span><span class="se">\</span>
+<span class="s2">                                        Today&#39;s Markets</span><span class="se">\n</span><span class="s2">Markets|Heard on the Street</span><span class="se">\n</span><span class="s2">Markets|Journal Reports|US</span><span class="se">\n</span><span class="s2">|Finance</span><span class="se">\n</span><span class="s2">|U.S. Economy</span><span class="se">\n</span><span class="s2">|Markets Main</span><span class="se">\n</span><span class="s2">|B\d+</span><span class="se">\n</span><span class="s2">|A\d+</span><span class="se">\n</span><span class="s2">|J</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span>
+
+    <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">each_cleaned_filtered_news</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;WSJ Pro Central Banking</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;CFO Journal</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;C Suite</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;The Wall Street Journal&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span> \
+                                                            <span class="n">replace</span><span class="p">(</span><span class="s2">&quot;English</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;The Wall Street Journal Online</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;WSJO</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;RSTPROCB</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;World</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span> \
+                                                            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Opinion</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Commentary (U.S.)</span><span class="se">\n</span><span class="s2">Opinion</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Commentary (U.S.)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;[Financial Analysis and Commentary]&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">each_cleaned_filtered_news</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+      <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;Write to?(.*?)com&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span> <span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">each_cleaned_filtered_news</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+      <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;Write to?(.*?)and?(.*?)com&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span> <span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">each_cleaned_filtered_news</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+      <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;Write to?(.*?),?(.*?)and?(.*?)com&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span> <span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="n">each_cleaned_filtered_news</span> <span class="o">=</span> <span class="n">each_cleaned_filtered_news</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Finally, the text now contains only information we need and nothing else. The following code extract author, date, title and main text from resulting files. Note that 'Review &amp; Outlook' series has no author because it is written by the Editorial. We simply assign 'WSJ' as author to these pieces.</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">if</span> <span class="s1">&#39;REVIEW &amp; OUTLOOK (Editorial)&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">each_cleaned_filtered_news</span><span class="p">:</span>
+      <span class="n">title</span> <span class="o">=</span> <span class="n">each_cleaned_filtered_news</span><span class="p">[:</span><span class="n">each_cleaned_filtered_news</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;By&#39;</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+      <span class="k">try</span><span class="p">:</span>
+        <span class="n">author</span> <span class="o">=</span> <span class="n">each_cleaned_filtered_news</span><span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">By &#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span><span class="o">.</span><span class="n">end</span><span class="p">():</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">\d+&quot;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+      <span class="k">except</span><span class="p">:</span>
+        <span class="n">author</span> <span class="o">=</span> <span class="s1">&#39;WSJ&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">title</span> <span class="o">=</span> <span class="n">each_cleaned_filtered_news</span><span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;(Editorial)&#39;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span><span class="o">.</span><span class="n">end</span><span class="p">()</span><span class="o">+</span><span class="mi">2</span><span class="p">:</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">\d+&quot;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+      <span class="n">author</span> <span class="o">=</span> <span class="s1">&#39;WSJ&#39;</span>
+
+    <span class="n">date</span> <span class="o">=</span> <span class="n">each_cleaned_filtered_news</span><span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">\d+&quot;</span><span class="p">,</span> <span class="n">each_cleaned_filtered_news</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">():</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;20\d+</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">each_cleaned_filtered_news</span><span class="p">)</span><span class="o">.</span><span class="n">end</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">each_cleaned_filtered_news</span><span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;20\d+</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">each_cleaned_filtered_news</span><span class="p">)</span><span class="o">.</span><span class="n">end</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="n">news_for_analysis</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">title</span><span class="p">,</span> <span class="n">author</span><span class="p">,</span> <span class="n">date</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">body</span><span class="o">.</span><span class="n">strip</span><span class="p">()])</span>
+
+<span class="n">all_news</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</code></pre></div>
+
+<p>As a sanity check, we remove any news that has missing author, title, date or main text, in case there are any articles that does not follow the example shown above.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">news_for_analysis</span><span class="p">:</span>
+  <span class="k">if</span> <span class="p">((</span><span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">element</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">element</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">element</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)):</span>
+    <span class="n">news_for_analysis</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>After Thoughts</h2>
+<p>After I found that pre-processing is such a grunt and tedious work, I have come to agree to the statement 'NLP is 95% pre-processing'. As an old saying goes, 'garbage in, garbage out'. It is of utmost importance to have quality input available for analysis. If non-body text pollutes the news articles, that would only output mediocre results.</p>
+<p>While we have yet to derive at the results, I would personally doubt whether our analysis would have any predictive power. If computing textual probabilities of Fed's rate decision using Fed's document is that easy and straightforward, many would have simply arbitraged away the trading opportunity for risk-free profits already via fed fund rate futures or interest rate swaps. This means our work would be rendered meaningless. However, this is clearly not the case. Each strategist might be using different modules, assumptions, methodologies, etc to derive textual probabilities and come up with different results. Our group is no exception. </p>
+<p>FINA4350 is a great and interesting course where I learn a lot. </p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-04-23T23:00:00+08:00">Sat 23 April 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
