@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="Hanna&#39;s Blog Post "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/hannas-blog-post.html" />
+<meta property="og:description" content="By Hanna Text Classification and Information Retrieval 1. What this Post is About: This blog post serves as some kind of personal documentation of all the problems, the solutions I came across and the learnings, that I experienced along the journey of my final project. In particular, this blog post …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-04-21T01:12:00+08:00" />
+<meta name="twitter:title" content="Hanna&#39;s Blog Post ">
+<meta name="twitter:description" content="By Hanna Text Classification and Information Retrieval 1. What this Post is About: This blog post serves as some kind of personal documentation of all the problems, the solutions I came across and the learnings, that I experienced along the journey of my final project. In particular, this blog post …">
+
+        <title>Hanna&#39;s Blog Post  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/hannas-blog-post.html">
+                Hanna's Blog Post
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Hanna</p>
+<h1>Text Classification and Information Retrieval</h1>
+<h2>1. What this Post is About:</h2>
+<p>This blog post serves as some kind of  personal documentation of all the problems, the solutions I came across and  the learnings, that I experienced along the journey of my final project. In particular, this blog post does neither cover the broader context of the project, nor does it  particularly elaborate on the findings, limitations, future work etc.<br>
+If the reader is interested in those, he or she is referred to the presentation slides and the report accompanying this project.</p>
+<h2>2. Background</h2>
+<p>In this project, my principal goal is to do text classification and information retrieval on text data using two different supervised machine learning models (naive Bayes and logistic regression).
+As a start, I refer to the Rotten Tomatoes movie dataset, which is a collection of <span class="math">\(45368\)</span>  movie reviews, initially collected by Pang and Lee  <a href="https://www.rottentomatoes.com">rottentomatoes.com</a>.</p>
+<p>Since I am new to natural language processing I find this an adequate data set to start with. I aim to implement two supervised classification models that should be able to classify a movie review as either a positive  (<span class="math">\(\rightarrow $ 1) or negative one (\)</span>\rightarrow $ 0) respectively. That is, I will fist try to do binary classification on the data before extending it to multi-class classification. Note that, while I implemented the option to do multi-classification in the file <code>evaluation-metrics.py</code>, the project ultimately remains limited to binary classification. Multi-classification  remains subject to future work since I spent the bulk of the time first, understanding the NLP-pipeline, second, learning about feature extraction methods, evaluation metrics and most importantly, classification algorithms in theory, while subsequently spending quite some time implementing them in code.</p>
+<p>Side note: 
+ I only learned later, that for instance, Bag of Word, which I use for feature extraction, and Naive Bayes and Logistic Regression actually come pre-implemented in some python packages. Since I was not aware of that, I implemented these methods from scratch.</p>
+<h2>3.  Project Architecture</h2>
+<p>In the following,  a brief overview of the project's architecture is given by listing the project's data- and code-files.</p>
+<h3>Data-files</h3>
+<ul>
+<li><code>train.csv</code> contains the sentences and their associated sentiment labels for training.</li>
+<li><code>valid.csv</code> contains the sentences and their associated sentiment labels for validation.</li>
+<li><code>test.csv</code> contains just sentences. The trained model is supposed to assign a label to each sentence. </li>
+</ul>
+<h3>Code-files</h3>
+<ul>
+<li><code>model.py</code> is the main entry of this project.</li>
+<li><code>metrics.py</code> contains classification metrics including accuracy, precision, recall, and F-Score.</li>
+<li><code>feature-extractor.py</code> contains functions to extract features from raw text.</li>
+<li><code>models.py</code> contains classification algorithms.</li>
+<li><code>sentiment-data.py</code> contains functions to process raw data.</li>
+</ul>
+<h2>4. Text Preprocessing</h2>
+<p>Machine learning models work particularly well on numbers. This is, why we first need to transform our input (Strings) into numbers. We also do some other data processing, such as:
+ -  tokenization
+  -  converting words into lowercase
+  -  removing punctuations
+  -  removing stopwords</p>
+<p>For this, we import the  python package  <code>NLTK</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+</code></pre></div>
+
+<p>Then we can define the <code>text_preprocessing</code> method:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">text_preprocessing</span><span class="p">(</span><span class="n">sentence</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Preprocess text&quot;&quot;&quot;</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># divide sentence into tokens</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+
+    <span class="c1"># convert tokens to lowercase</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+        <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+    <span class="c1"># remove punctuations</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()]</span>
+
+    <span class="c1"># remove stopwords</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">words</span>
+</code></pre></div>
+
+<h2>5. Evaluation Metrics</h2>
+<p>There are many evaluation metrics such as accuracy, precision, recall and ultimately F-Score, which is a combination of the former two. and first, I did not bother about which one to choose, until I learned, that it might be some significant, as to which metric is chosen. The most intuitive metric to me seemed to simply take the accuracy, but more on this you'll find further down the lines. 
+Later I learned the importance of using more refined evaluation metrics, but let's first have a look at the confusion matrix:
+This is because, prior to being able to evaluate anything, we  first need to summarize the predictions that our model has made by basically counting how often it classified inputs correctly or incorrectly. This is done in a confusion matrix (see Figure):</p>
+<h4>5.1 Confusion Matrix:</h4>
+<p><img alt="The number of correct and incorrect predictions are summarized in a confusion matrix, from which metrics (e.g. accuracy, recall, precision and F-Score) can be derived." src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-hanna-recommender-system.png"></p>
+<p>In the confusion matrix, <span class="math">\(TP\)</span> denotes the true positives,  <span class="math">\(TN\)</span> the true negatives, <span class="math">\(FP\)</span> the refers to the  false positives and <span class="math">\(FN\)</span> denotes the false negatives.
+ Then the evaluation metrics can be derived as follows: 
+- #### Accuracy:
+    - Accuracy is a corse metric describing the proportion of correct classifications.
+In particular, 
+two models may have the same accuracy while behaving very differently.
+    - <span class="math">\(Accuracy = \frac{TP + TN}{\text{Total}}\)</span></p>
+<ul>
+<li>Precision:<ul>
+<li>Precision(+) describes the proportion of correct positive classifications from cases that are predicted as positive. 
+More generally, it refers to the percentage of selected classes that are correct.</li>
+<li><span class="math">\(Precision(+) = \frac{TP}{TP + FP}\)</span></li>
+<li><span class="math">\(Precision(-) = \frac{FN}{FN + TN}\)</span></li>
+</ul>
+</li>
+<li>
+<h4>Recall:</h4>
+<ul>
+<li>Recall(+) describes the proportion of correct positive classifications from cases that are actually positive. </li>
+<li><span class="math">\(Recall(+) = \frac{TP}{TP + FN}\)</span></li>
+<li><span class="math">\(Recall(-) = \frac{TN}{TN + FP}\)</span> </li>
+<li>More generally, recall describes the percentage of correct items selected.</li>
+</ul>
+</li>
+</ul>
+<p>With the following command <code>python3.7 metrics.py</code></p>
+<div class="highlight"><pre><span></span><code><span class="o">----------------------------------------</span>
+<span class="n">Test</span> <span class="k">for</span> <span class="n">macro</span> <span class="n">average</span><span class="p">:</span> 
+<span class="n">Accuracy</span><span class="p">:</span> <span class="mf">0.6220</span>
+<span class="n">Precision</span><span class="p">:</span> <span class="mf">0.4375</span>
+<span class="n">recall</span><span class="p">:</span> <span class="mf">0.4351</span>
+<span class="n">F</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.4363</span>
+<span class="o">----------------------------------------</span>
+<span class="n">Test</span> <span class="k">for</span> <span class="n">micro</span> <span class="n">average</span><span class="p">:</span> 
+<span class="n">Accuracy</span><span class="p">:</span> <span class="mf">0.6220</span>
+<span class="n">Precision</span><span class="p">:</span> <span class="mf">0.6220</span>
+<span class="n">recall</span><span class="p">:</span> <span class="mf">0.6220</span>
+<span class="n">F</span> <span class="n">score</span><span class="p">:</span> <span class="mf">0.6220</span>
+</code></pre></div>
+
+<p>For reference, let's compare to the scikitlearn method <code>preisision_recall_fscore_method</code> in <code>metrics</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="mf">0.4375311399504369</span><span class="p">,</span> <span class="mf">0.435089587615496</span><span class="p">,</span> <span class="mf">0.43539092754326336</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">0.622</span><span class="p">,</span> <span class="mf">0.622</span><span class="p">,</span> <span class="mf">0.622</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Looks good! So now, that we have successfully implemented our metrics, we can run a trivial classifier to verify the implemented metrics for binary classification. </p>
+<p>With the following command <code>python3.7 main.py --model trivial</code> we obtain the following output:</p>
+<div class="highlight"><pre><span></span><code><span class="o">========</span> <span class="n">accuracy</span> <span class="o">=========</span>
+<span class="n">Accuracy</span><span class="p">:</span> <span class="mf">0.505884</span>
+<span class="n">Precision</span><span class="p">:</span> <span class="mf">0.505992</span>
+<span class="n">Recall</span><span class="p">:</span> <span class="mf">0.506048</span>
+<span class="n">F</span><span class="o">-</span><span class="n">score</span><span class="p">:</span> <span class="mf">0.506020</span>
+</code></pre></div>
+
+<p>The output makes sense, since the trivial classifier's <code>predict()</code> method is implemented, such that it predicts at random.</p>
+<h2>6. Classifier Algorithms:</h2>
+<p>In the file <code>models.py</code> I tried my best at applying the principle of "Divide and Conquer".</p>
+<h3>Abstract Sentiment Classifier <code>class</code>:</h3>
+<ul>
+<li>I implemented an abstract class <code>SentimentClassifier</code> with the two abstract methods <code>fit</code> and <code>predict</code>.
+This means, that every subsequent classifier implemented in another class, will inherit from the abstract class <code>SentimentClassifier</code>. </li>
+</ul>
+<p>I ended up implementing three classifiers, namely a trivial one, for testing purposes, the Naive Bayes Classifier and the Logistic Regression classifier. </p>
+<h4>Trivial Sentiment Classifier:</h4>
+<ul>
+<li>in the class <code>TrivialSentimentClassifier(SentimentClassifier)</code>,</li>
+</ul>
+<h4>Naive Bayes Sentiment Classifier:</h4>
+<ul>
+<li>the Naive Bayes classifier implemented in the class 
+<code>NaiveBayesClassifier(SentimentClassifier)</code> </li>
+</ul>
+<h4>Logistic Regression Sentiment Classifier:</h4>
+<ul>
+<li>the logistic regression classifier implemented in 
+the class <code>LogisticRegressionClassifier(SentimentClassifier)</code>.</li>
+</ul>
+<p>A major challenge was to implement the <code>fit</code> and <code>predict</code> methods for both, the Naive Bayes and logistic regression Classifier. 
+I only later learned that I could have simply used pre-implemented methods from scikitlear or even the NLTK package, instead of implementing these methods from scratch.</p>
+<h2>7. Training the models</h2>
+<h3>7.1 Naive Bayes</h3>
+<p>When running the following command <code>python3.7 main.py --model nb</code>  the model is trained by the  <code>fit</code> method and  tested on the test dataset via the <code>predict</code> method.
+The following output is obtained:</p>
+<div class="highlight"><pre><span></span><code><span class="o">========</span> <span class="n">accuracy</span> <span class="o">=========</span>
+<span class="n">Accuracy</span><span class="p">:</span> <span class="mf">0.828760</span>
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">hanna</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">Uni</span><span class="o">/</span><span class="n">ss2022</span><span class="o">-</span><span class="n">hku</span><span class="o">/</span><span class="n">NLP_fintech</span><span class="o">/</span><span class="n">final</span> <span class="n">project</span><span class="o">/</span><span class="n">NLP</span><span class="o">-</span><span class="n">finals</span><span class="o">-</span><span class="n">project</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">metrics</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">true_divide</span>
+  <span class="n">precision_per_pred_class</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">/</span> <span class="n">row_sum</span>
+<span class="n">Precision</span><span class="p">:</span> <span class="mf">0.414380</span>
+<span class="n">Recall</span><span class="p">:</span> <span class="mf">0.500000</span>
+<span class="n">F</span><span class="o">-</span><span class="n">score</span><span class="p">:</span> <span class="mf">0.453181</span>
+</code></pre></div>
+
+<h3>7.2 Logistic Regression</h3>
+<p>Implement the <code>fit</code> method for the logistic regression model turned out ot be especially challenging for me.</p>
+<p>When running the following command <code>python3.7 main.py --model lr</code>  the model is trained by the  <code>fit</code> method and  tested on the test dataset via the <code>predict</code> method.</p>
+<p>Here is a picture of the loss during training. We can see that the loss nicely converges.
+<img alt="Plot of the loss over epochs while training the logistic regression model." src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-hanna-lr-training-loss.png"></p>
+<p>Thanks for taking the time to read all the way to the end. </p>
+<p>Best,
+Hanna</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-04-21T01:12:00+08:00">Thu 21 April 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

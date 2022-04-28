@@ -202,7 +202,236 @@ regulations of databases such as Factiva.&lt;/p&gt;
 &lt;h2&gt;After Thoughts&lt;/h2&gt;
 &lt;p&gt;After I found that pre-processing is such a grunt and tedious work, I have come to agree to the statement 'NLP is 95% pre-processing'. As an old saying goes, 'garbage in, garbage out'. It is of utmost importance to have quality input available for analysis. If non-body text pollutes the news articles, that would only output mediocre results.&lt;/p&gt;
 &lt;p&gt;While we have yet to derive at the results, I would personally doubt whether our analysis would have any predictive power. If computing textual probabilities of Fed's rate decision using Fed's document is that easy and straightforward, many would have simply arbitraged away the trading opportunity for risk-free profits already via fed fund rate futures or interest rate swaps. This means our work would be rendered meaningless. However, this is clearly not the case. Each strategist might be using different modules, assumptions, methodologies, etc to derive textual probabilities and come up with different results. Our group is no exception. &lt;/p&gt;
-&lt;p&gt;FINA4350 is a great and interesting course where I learn a lot. &lt;/p&gt;</content><category term="Progress Report"></category></entry><entry><title>Data Pre-Processing (Group Nebula)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/data-pre-processing-group-nebula.html" rel="alternate"></link><published>2022-04-20T00:00:00+08:00</published><updated>2022-04-20T00:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-20:/FINA4350-student-blog-2022-01/data-pre-processing-group-nebula.html</id><summary type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
+&lt;p&gt;FINA4350 is a great and interesting course where I learn a lot. &lt;/p&gt;</content><category term="Progress Report"></category></entry><entry><title>Hanna's Blog Post</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/hannas-blog-post.html" rel="alternate"></link><published>2022-04-21T01:12:00+08:00</published><updated>2022-04-21T01:12:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-21:/FINA4350-student-blog-2022-01/hannas-blog-post.html</id><summary type="html">&lt;p&gt;By Hanna&lt;/p&gt;
+&lt;h1&gt;Text Classification and Information Retrieval&lt;/h1&gt;
+&lt;h2&gt;1. What this Post is About:&lt;/h2&gt;
+&lt;p&gt;This blog post serves as some kind of  personal documentation of all the problems, the solutions I came across and  the learnings, that I experienced along the journey of my final project. In particular, this blog post …&lt;/p&gt;</summary><content type="html">&lt;p&gt;By Hanna&lt;/p&gt;
+&lt;h1&gt;Text Classification and Information Retrieval&lt;/h1&gt;
+&lt;h2&gt;1. What this Post is About:&lt;/h2&gt;
+&lt;p&gt;This blog post serves as some kind of  personal documentation of all the problems, the solutions I came across and  the learnings, that I experienced along the journey of my final project. In particular, this blog post does neither cover the broader context of the project, nor does it  particularly elaborate on the findings, limitations, future work etc.&lt;br&gt;
+If the reader is interested in those, he or she is referred to the presentation slides and the report accompanying this project.&lt;/p&gt;
+&lt;h2&gt;2. Background&lt;/h2&gt;
+&lt;p&gt;In this project, my principal goal is to do text classification and information retrieval on text data using two different supervised machine learning models (naive Bayes and logistic regression).
+As a start, I refer to the Rotten Tomatoes movie dataset, which is a collection of &lt;span class="math"&gt;\(45368\)&lt;/span&gt;  movie reviews, initially collected by Pang and Lee  &lt;a href="https://www.rottentomatoes.com"&gt;rottentomatoes.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Since I am new to natural language processing I find this an adequate data set to start with. I aim to implement two supervised classification models that should be able to classify a movie review as either a positive  (&lt;span class="math"&gt;\(\rightarrow $ 1) or negative one (\)&lt;/span&gt;\rightarrow $ 0) respectively. That is, I will fist try to do binary classification on the data before extending it to multi-class classification. Note that, while I implemented the option to do multi-classification in the file &lt;code&gt;evaluation-metrics.py&lt;/code&gt;, the project ultimately remains limited to binary classification. Multi-classification  remains subject to future work since I spent the bulk of the time first, understanding the NLP-pipeline, second, learning about feature extraction methods, evaluation metrics and most importantly, classification algorithms in theory, while subsequently spending quite some time implementing them in code.&lt;/p&gt;
+&lt;p&gt;Side note: 
+ I only learned later, that for instance, Bag of Word, which I use for feature extraction, and Naive Bayes and Logistic Regression actually come pre-implemented in some python packages. Since I was not aware of that, I implemented these methods from scratch.&lt;/p&gt;
+&lt;h2&gt;3.  Project Architecture&lt;/h2&gt;
+&lt;p&gt;In the following,  a brief overview of the project's architecture is given by listing the project's data- and code-files.&lt;/p&gt;
+&lt;h3&gt;Data-files&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;train.csv&lt;/code&gt; contains the sentences and their associated sentiment labels for training.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;valid.csv&lt;/code&gt; contains the sentences and their associated sentiment labels for validation.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;test.csv&lt;/code&gt; contains just sentences. The trained model is supposed to assign a label to each sentence. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Code-files&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;model.py&lt;/code&gt; is the main entry of this project.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;metrics.py&lt;/code&gt; contains classification metrics including accuracy, precision, recall, and F-Score.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;feature-extractor.py&lt;/code&gt; contains functions to extract features from raw text.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;models.py&lt;/code&gt; contains classification algorithms.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sentiment-data.py&lt;/code&gt; contains functions to process raw data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;4. Text Preprocessing&lt;/h2&gt;
+&lt;p&gt;Machine learning models work particularly well on numbers. This is, why we first need to transform our input (Strings) into numbers. We also do some other data processing, such as:
+ -  tokenization
+  -  converting words into lowercase
+  -  removing punctuations
+  -  removing stopwords&lt;/p&gt;
+&lt;p&gt;For this, we import the  python package  &lt;code&gt;NLTK&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;nltk&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;nltk.corpus&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;stopwords&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then we can define the &lt;code&gt;text_preprocessing&lt;/code&gt; method:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;text_preprocessing&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sentence&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Preprocess text&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# divide sentence into tokens&lt;/span&gt;
+    &lt;span class="n"&gt;tokens&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nltk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;word_tokenize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sentence&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# convert tokens to lowercase&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;tokens&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;words&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+    &lt;span class="c1"&gt;# remove punctuations&lt;/span&gt;
+    &lt;span class="n"&gt;words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isalpha&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# remove stopwords&lt;/span&gt;
+    &lt;span class="n"&gt;stop_words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stopwords&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;words&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;english&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;stop_words&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;5. Evaluation Metrics&lt;/h2&gt;
+&lt;p&gt;There are many evaluation metrics such as accuracy, precision, recall and ultimately F-Score, which is a combination of the former two. and first, I did not bother about which one to choose, until I learned, that it might be some significant, as to which metric is chosen. The most intuitive metric to me seemed to simply take the accuracy, but more on this you'll find further down the lines. 
+Later I learned the importance of using more refined evaluation metrics, but let's first have a look at the confusion matrix:
+This is because, prior to being able to evaluate anything, we  first need to summarize the predictions that our model has made by basically counting how often it classified inputs correctly or incorrectly. This is done in a confusion matrix (see Figure):&lt;/p&gt;
+&lt;h4&gt;5.1 Confusion Matrix:&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="The number of correct and incorrect predictions are summarized in a confusion matrix, from which metrics (e.g. accuracy, recall, precision and F-Score) can be derived." src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-hanna-recommender-system.png"&gt;&lt;/p&gt;
+&lt;p&gt;In the confusion matrix, &lt;span class="math"&gt;\(TP\)&lt;/span&gt; denotes the true positives,  &lt;span class="math"&gt;\(TN\)&lt;/span&gt; the true negatives, &lt;span class="math"&gt;\(FP\)&lt;/span&gt; the refers to the  false positives and &lt;span class="math"&gt;\(FN\)&lt;/span&gt; denotes the false negatives.
+ Then the evaluation metrics can be derived as follows: 
+- #### Accuracy:
+    - Accuracy is a corse metric describing the proportion of correct classifications.
+In particular, 
+two models may have the same accuracy while behaving very differently.
+    - &lt;span class="math"&gt;\(Accuracy = \frac{TP + TN}{\text{Total}}\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Precision:&lt;ul&gt;
+&lt;li&gt;Precision(+) describes the proportion of correct positive classifications from cases that are predicted as positive. 
+More generally, it refers to the percentage of selected classes that are correct.&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(Precision(+) = \frac{TP}{TP + FP}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(Precision(-) = \frac{FN}{FN + TN}\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4&gt;Recall:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Recall(+) describes the proportion of correct positive classifications from cases that are actually positive. &lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(Recall(+) = \frac{TP}{TP + FN}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(Recall(-) = \frac{TN}{TN + FP}\)&lt;/span&gt; &lt;/li&gt;
+&lt;li&gt;More generally, recall describes the percentage of correct items selected.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With the following command &lt;code&gt;python3.7 metrics.py&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;----------------------------------------&lt;/span&gt;
+&lt;span class="n"&gt;Test&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;macro&lt;/span&gt; &lt;span class="n"&gt;average&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+&lt;span class="n"&gt;Accuracy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.6220&lt;/span&gt;
+&lt;span class="n"&gt;Precision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.4375&lt;/span&gt;
+&lt;span class="n"&gt;recall&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.4351&lt;/span&gt;
+&lt;span class="n"&gt;F&lt;/span&gt; &lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.4363&lt;/span&gt;
+&lt;span class="o"&gt;----------------------------------------&lt;/span&gt;
+&lt;span class="n"&gt;Test&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;micro&lt;/span&gt; &lt;span class="n"&gt;average&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; 
+&lt;span class="n"&gt;Accuracy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.6220&lt;/span&gt;
+&lt;span class="n"&gt;Precision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.6220&lt;/span&gt;
+&lt;span class="n"&gt;recall&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.6220&lt;/span&gt;
+&lt;span class="n"&gt;F&lt;/span&gt; &lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.6220&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For reference, let's compare to the scikitlearn method &lt;code&gt;preisision_recall_fscore_method&lt;/code&gt; in &lt;code&gt;metrics&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.4375311399504369&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.435089587615496&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.43539092754326336&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.622&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.622&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.622&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Looks good! So now, that we have successfully implemented our metrics, we can run a trivial classifier to verify the implemented metrics for binary classification. &lt;/p&gt;
+&lt;p&gt;With the following command &lt;code&gt;python3.7 main.py --model trivial&lt;/code&gt; we obtain the following output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;========&lt;/span&gt; &lt;span class="n"&gt;accuracy&lt;/span&gt; &lt;span class="o"&gt;=========&lt;/span&gt;
+&lt;span class="n"&gt;Accuracy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.505884&lt;/span&gt;
+&lt;span class="n"&gt;Precision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.505992&lt;/span&gt;
+&lt;span class="n"&gt;Recall&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.506048&lt;/span&gt;
+&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.506020&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The output makes sense, since the trivial classifier's &lt;code&gt;predict()&lt;/code&gt; method is implemented, such that it predicts at random.&lt;/p&gt;
+&lt;h2&gt;6. Classifier Algorithms:&lt;/h2&gt;
+&lt;p&gt;In the file &lt;code&gt;models.py&lt;/code&gt; I tried my best at applying the principle of "Divide and Conquer".&lt;/p&gt;
+&lt;h3&gt;Abstract Sentiment Classifier &lt;code&gt;class&lt;/code&gt;:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;I implemented an abstract class &lt;code&gt;SentimentClassifier&lt;/code&gt; with the two abstract methods &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;predict&lt;/code&gt;.
+This means, that every subsequent classifier implemented in another class, will inherit from the abstract class &lt;code&gt;SentimentClassifier&lt;/code&gt;. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I ended up implementing three classifiers, namely a trivial one, for testing purposes, the Naive Bayes Classifier and the Logistic Regression classifier. &lt;/p&gt;
+&lt;h4&gt;Trivial Sentiment Classifier:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;in the class &lt;code&gt;TrivialSentimentClassifier(SentimentClassifier)&lt;/code&gt;,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Naive Bayes Sentiment Classifier:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;the Naive Bayes classifier implemented in the class 
+&lt;code&gt;NaiveBayesClassifier(SentimentClassifier)&lt;/code&gt; &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Logistic Regression Sentiment Classifier:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;the logistic regression classifier implemented in 
+the class &lt;code&gt;LogisticRegressionClassifier(SentimentClassifier)&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A major challenge was to implement the &lt;code&gt;fit&lt;/code&gt; and &lt;code&gt;predict&lt;/code&gt; methods for both, the Naive Bayes and logistic regression Classifier. 
+I only later learned that I could have simply used pre-implemented methods from scikitlear or even the NLTK package, instead of implementing these methods from scratch.&lt;/p&gt;
+&lt;h2&gt;7. Training the models&lt;/h2&gt;
+&lt;h3&gt;7.1 Naive Bayes&lt;/h3&gt;
+&lt;p&gt;When running the following command &lt;code&gt;python3.7 main.py --model nb&lt;/code&gt;  the model is trained by the  &lt;code&gt;fit&lt;/code&gt; method and  tested on the test dataset via the &lt;code&gt;predict&lt;/code&gt; method.
+The following output is obtained:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;========&lt;/span&gt; &lt;span class="n"&gt;accuracy&lt;/span&gt; &lt;span class="o"&gt;=========&lt;/span&gt;
+&lt;span class="n"&gt;Accuracy&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.828760&lt;/span&gt;
+&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Users&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;hanna&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Documents&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Uni&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ss2022&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hku&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;NLP_fintech&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;final&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;NLP&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;finals&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;metrics&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;53&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ne"&gt;RuntimeWarning&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;invalid&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="n"&gt;encountered&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;true_divide&lt;/span&gt;
+  &lt;span class="n"&gt;precision_per_pred_class&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tp&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;row_sum&lt;/span&gt;
+&lt;span class="n"&gt;Precision&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.414380&lt;/span&gt;
+&lt;span class="n"&gt;Recall&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.500000&lt;/span&gt;
+&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.453181&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;7.2 Logistic Regression&lt;/h3&gt;
+&lt;p&gt;Implement the &lt;code&gt;fit&lt;/code&gt; method for the logistic regression model turned out ot be especially challenging for me.&lt;/p&gt;
+&lt;p&gt;When running the following command &lt;code&gt;python3.7 main.py --model lr&lt;/code&gt;  the model is trained by the  &lt;code&gt;fit&lt;/code&gt; method and  tested on the test dataset via the &lt;code&gt;predict&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;Here is a picture of the loss during training. We can see that the loss nicely converges.
+&lt;img alt="Plot of the loss over epochs while training the logistic regression model." src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-hanna-lr-training-loss.png"&gt;&lt;/p&gt;
+&lt;p&gt;Thanks for taking the time to read all the way to the end. &lt;/p&gt;
+&lt;p&gt;Best,
+Hanna&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Progress Report"></category></entry><entry><title>Data Pre-Processing (Group Nebula)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/data-pre-processing-group-nebula.html" rel="alternate"></link><published>2022-04-20T00:00:00+08:00</published><updated>2022-04-20T00:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-20:/FINA4350-student-blog-2022-01/data-pre-processing-group-nebula.html</id><summary type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
 &lt;h2&gt;Team Nebula | Blog 2: Data Pre-Processing&lt;/h2&gt;
 &lt;h3&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;In this blog post, we will detail our data pre-processing process for cleaning the text data and calculating the stock performance.&lt;/p&gt;
