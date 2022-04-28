@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="Data Scraping (Group Nebula) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/data-scraping-group-nebula.html" />
+<meta property="og:description" content="By Group &#34;Nebula&#34; Team Nebula | Blog 1: Data Scraping Introduction We hope to attain two goals in this project: 1) to create a model to predict the relationship between Form 10-K and the stock market performance on the release day, and 2) to compare the performance of different pre-processing techniques …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-04-15T00:00:00+08:00" />
+<meta name="twitter:title" content="Data Scraping (Group Nebula) ">
+<meta name="twitter:description" content="By Group &#34;Nebula&#34; Team Nebula | Blog 1: Data Scraping Introduction We hope to attain two goals in this project: 1) to create a model to predict the relationship between Form 10-K and the stock market performance on the release day, and 2) to compare the performance of different pre-processing techniques …">
+
+        <title>Data Scraping (Group Nebula)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/data-scraping-group-nebula.html">
+                Data Scraping (Group Nebula)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Nebula"</p>
+<h2>Team Nebula | Blog 1: Data Scraping</h2>
+<h3>Introduction</h3>
+<p>We hope to attain two goals in this project: 1) to create a model to predict the relationship between Form 10-K and the stock market performance on the release day, and 2) to compare the performance of different pre-processing techniques in NLP (Bag-of-Words and Sentiment Analysis) in a financial context.</p>
+<p>In this blog post, we will detail our data scraping process in two parts: 1) scraping the text data (ie. Item 7 in Form 10Ks of our target companies), and 2) scraping the numerical data from Yahoo Finance.</p>
+<h3>Textual Data Scraping - Christy</h3>
+<p>Scraping the textual data consists of two main tasks: finding the link to the desired Form 10-Ks, and extracting Item 7 from them.</p>
+<p>The first task is easy with the use of <code>sec_api</code>: submit a request for the most recent Form 10-Ks for a given stock ticker, and repeat the process for each of our target stocks. Although we are only looking at data from the past 20 years, I have made the request for 25 reports instead to be safe because the API also returns non-10K forms (ie. amendments to Form 10Ks) occasionally, resulting in less than the requested amount of <em>actual</em> Form 10-Ks.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sec_api</span> <span class="kn">import</span> <span class="n">QueryApi</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="c1"># replace this part with your API key, obtained from https://sec-api.io/</span>
+<span class="n">stock</span> <span class="o">=</span> <span class="s1">&#39;AAPL&#39;</span> <span class="c1"># this is declared earlier in a for loop, but added in for sake of demonstration</span>
+<span class="n">queryApi</span> <span class="o">=</span> <span class="n">QueryApi</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;query_string&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;formType:</span><span class="se">\&quot;</span><span class="s2">10-K</span><span class="se">\&quot;</span><span class="s2"> AND ticker:</span><span class="si">{</span><span class="n">stock</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="s2">&quot;25&quot;</span><span class="p">,</span>
+
+<span class="n">filings</span> <span class="o">=</span> <span class="n">queryApi</span><span class="o">.</span><span class="n">get_filings</span><span class="p">(</span><span class="n">query</span><span class="p">)[</span><span class="s1">&#39;filings&#39;</span><span class="p">]</span>
+
+<span class="n">urls_for_stock</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">filing</span> <span class="ow">in</span> <span class="n">filings</span><span class="p">:</span>
+    <span class="n">urls_for_stock</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">filing</span><span class="p">[</span><span class="s1">&#39;filedAt&#39;</span><span class="p">],</span> <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">filing</span><span class="p">[</span><span class="s1">&#39;linkToFilingDetails&#39;</span><span class="p">]})</span>
+</code></pre></div>
+
+<p>The query returns a dictionary object, and a list of relevant filings is found under the 'filings' key. I then save the <code>filedAt</code> (date) and <code>linkToFilingDetails</code> (url) attributes of each filing into a list, to be used in the second step.</p>
+<p>The second step, to extract the Item 7 text using the url to the 10-K filing, was <em>extremely</em> time-consuming. <code>sec_api</code> also had a function to extract individual sections given a url, but each pdf would take up one query, and the free tier of <code>sec_api</code> only allows for 100 queries (QueryApi used in the previous part only involved 1 query <em>per</em> stock, which totalled 20 queries only). As such, we had to do it ourselves :')</p>
+<p>Getting the <em>text</em> given a url is not complicated, because luckily for us, the Form 10-Ks are in .htm format and the text could be easily extracted with requests and beautifulsoup's <code>get_text()</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="c1"># header needed to declare usage / contact information as required by SEC EDGAR</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;user-agent&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;contact information redacted&gt; HKU student, for use in a course&#39;</span><span class="p">}</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.sec.gov/Archives/edgar/data/320193/000032019318000145/a10-k20189292018.htm&#39;</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+</code></pre></div>
+
+<p><em>Extracting Item 7</em>, however, was an entirely different matter. I originally hypothesized that it would be an easy job: all I had to do was to do a string search for "Item 7.", chop away everything before it and everything after the beginning of the next section ("Item 7A", which could easily be located with a string search). Section titles in Form 10-Ks are very standardized, so it shouldn't be a problem, <em>right</em>?</p>
+<div class="highlight"><pre><span></span><code><span class="n">searchterms</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Item 7.&#39;</span><span class="p">,</span> <span class="s1">&#39;Item 7A.&#39;</span><span class="p">,</span> <span class="s1">&#39;Item 8.&#39;</span><span class="p">)</span>
+
+<span class="c1"># get everything after &#39;Item 7.&#39; and before &#39;Item 7A.&#39;</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">searchterms</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">searchterms</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># make sure item 8 isn&#39;t attached (ie. if Item 7A doesn&#39;t exist)</span>
+<span class="k">if</span> <span class="n">searchterms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">searchterms</span><span class="p">[</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+
+<p>I was <em>(extremely) wrong</em>. After looking at a couple of Form 10-Ks, I discovered that:
+1. 'Item 7.' can appear in a lot of places, not just right before the actual MD&amp;A section. The most common example of this is 'Item 7.' appearing in the table of contents as well.
+2. there are slight variations of 'Item 7.' being used by different companies: "Item 7.", "ITEM 7.", "Item7.", "Item 07.", "Item 7--", "ITEM 7    \n:' are a couple of examples.</p>
+<p>I dealt with the first issue by adding an extra check to make sure I have not accidentally extracted the 'Item 7.' in the table of contents. There is not much text between 'Item 7.' and 'Item 7A.' in the table of contents, so I could simply check for the length of the extracted text, and search for the next occurence if its length is beneath a certain threshold:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">:</span> 
+    <span class="n">text</span> <span class="o">=</span> <span class="n">bs</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+    <span class="c1"># get everything after the second &#39;Item 7.&#39; and before &#39;Item 7A.&#39; shows up again</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">searchterms</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">searchterms</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+
+<p>I initially tried to deal with the second issue by brute force and switching the search terms based on string matches:</p>
+<div class="highlight"><pre><span></span><code><span class="n">searchterms</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Item 7.&#39;</span><span class="p">,</span> <span class="s1">&#39;Item 7A.&#39;</span><span class="p">,</span> <span class="s1">&#39;Item 8.&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;Item 7--&#39;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="n">searchterms</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Item 7--&#39;</span><span class="p">,</span> <span class="s1">&#39;Item 7A--&#39;</span><span class="p">,</span> <span class="s1">&#39;Item 8--&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;Item 7a.&#39;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="n">searchterms</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Item 7.&#39;</span><span class="p">,</span> <span class="s1">&#39;Item 7a.&#39;</span><span class="p">,</span> <span class="s1">&#39;Item 8.&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;Item7.&#39;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="n">searchterms</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Item7.&#39;</span><span class="p">,</span> <span class="s1">&#39;Item7A.&#39;</span><span class="p">,</span> <span class="s1">&#39;Item8.&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;ITEM 7.&#39;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="n">searchterms</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ITEM 7.&#39;</span><span class="p">,</span> <span class="s1">&#39;ITEM 7A.&#39;</span><span class="p">,</span> <span class="s1">&#39;ITEM 8.&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;ITEM07.&#39;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="n">searchterms</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ITEM07.&#39;</span><span class="p">,</span> <span class="s1">&#39;ITEM07A.&#39;</span><span class="p">,</span> <span class="s1">&#39;ITEM08.&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;ITEM7.&#39;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="n">searchterms</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ITEM7.&#39;</span><span class="p">,</span> <span class="s1">&#39;ITEM7A.&#39;</span><span class="p">,</span> <span class="s1">&#39;ITEM8.&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;ITEM</span><span class="se">\n</span><span class="s1">        7.&#39;</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span> <span class="n">searchterms</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ITEM</span><span class="se">\n</span><span class="s1">        7.&#39;</span><span class="p">,</span> <span class="s1">&#39;ITEM</span><span class="se">\n</span><span class="s1">      7A.&#39;</span><span class="p">,</span> <span class="s1">&#39;ITEM</span><span class="se">\n</span><span class="s1">        8.&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This approach had two major issues:
+1. I found that there are too many combinations of irregularities to list them all out after going through more Form 10-Ks.
+2. There are Form 10-Ks that would use at least two different types of searchterms (ie. use 'Item 7.' in the table of contents, but 'Item 7--' in the actual section header)</p>
+<p>To overcome this, I opted to use a regular expression search instead to determine my searchterms:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">first</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;item *</span><span class="se">\n</span><span class="s1">* *0?7\.&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;item *</span><span class="se">\n</span><span class="s1">* *0?7a\.&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+<span class="n">third</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;item *</span><span class="se">\n</span><span class="s1">* *0?8\.&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span>
+
+<span class="c1"># will explain + show remove_duplicates() below</span>
+<span class="n">first</span> <span class="o">=</span> <span class="n">remove_duplicates</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">remove_duplicates</span><span class="p">(</span><span class="n">second</span><span class="p">)</span>
+<span class="n">third</span> <span class="o">=</span> <span class="n">remove_duplicates</span><span class="p">(</span><span class="n">third</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">first</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">second</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">second</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">third</span><span class="p">):</span>
+    <span class="n">searchterms</span> <span class="o">=</span> <span class="p">[(</span><span class="n">first</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">second</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">third</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">first</span><span class="p">))]</span>
+    <span class="c1"># sample searchterms: [(&#39;Item 7.&#39;, &#39;Item 7a.&#39;, &#39;Item 8.&#39;), (&#39;Item 7--&#39;, &#39;Item 7a--&#39;, &#39;Item 8--&#39;)]</span>
+</code></pre></div>
+
+<p><code>re.findall()</code> returns all matches of the regex search (ie. <code>['Item 7.', 'Item 7--']</code>) in the case where multiple types of searchterms show up. Searchterms is also now a list that stores different sets of search terms (ie. <code>[('Item 7.', 'Item 7a.', 'Item 8.'), ('Item 7--', 'Item 7a--', 'Item 8--')]</code>, and attempts at extracting Item 7 will be made using each set of search terms. </p>
+<p>"sets" of search terms are paired based on their order of appearance (a reasonable assumption: in the aforementioned case, "Item 7/7a/8." in the table of contents would always appear earlier than "Item 7/7a/8.--"). I noticed that some formats of search terms appear more than once (ie. <code>first = ['Item 7.', 'Item 7.', 'Item 7--']</code>), which would get in the way of pairing the correct search terms. To solve this, I had to remove duplicate entries first:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># remove duplicates from first/second/third while preserving order</span>
+<span class="k">def</span> <span class="nf">remove_duplicates</span><span class="p">(</span><span class="n">keywords</span><span class="p">):</span> 
+    <span class="c1"># converting keywords into a set and then back to list *would* remove duplicates, but not preserve the order :(</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">keyword</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">keyword</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+
+<p>However, my method of pairing searchterms into sets fails when one term has more variations than others: ie. <code>re.findall()</code> returns different numbers of searchterms for Item 7 (first), Item 7a (second), and Item 8 (third):</p>
+<div class="highlight"><pre><span></span><code><span class="k">[Console]</span>
+<span class="na">first: [&#39;ITEM 7.&#39;, &#39;ITEM7.&#39;]</span>
+<span class="na">second: [&#39;ITEM 7A.&#39;, &#39;ITEM7A.&#39;]</span>
+<span class="na">third: [&#39;ITEM 8.&#39;, &#39;Item 8.&#39;, &#39;ITEM8.&#39;, &#39;Item8.&#39;]</span>
+<span class="na">&gt;&gt; searchterms</span> <span class="o">=</span> <span class="s">[(&#39;ITEM 7.&#39;, &#39;ITEM 7A.&#39;, &#39;ITEM 8.&#39;), (&#39;ITEM7.&#39;, &#39;ITEM7A.&#39;, &#39;ITEM8.&#39;)]</span>
+</code></pre></div>
+
+<p>There is very likely a more elegant / repeatable solution to this, but given the time constraint I chose to put a breakpoint if such a case is encountered and manually provide the sets of searchterms for the program, since these cases are sparse. Otherwise, I would have to make my code identify which terms belong to a single "set" of searchterms, which would likely require a lot of fine-tuning.</p>
+<p>There are also Form 10-Ks that are very weird in format (such as <a href="https://www.sec.gov/Archives/edgar/data/909832/000119312511271844/d203874d10k.htm">Costco's 2004 form</a>, where 'Item 7--' appears on top of every page in the section as a header, or <a href="https://www.sec.gov/Archives/edgar/data/902739/000116669119000005/cmcsa-12312018x10k.htm">Comcast's 2018 form</a>, where there is special formatting and titles, like 'Item 7.', do not show up at all). Due to the time constraint, I have opted to not include these documents instead.</p>
+<p>There are other minor issues that I have also tackled (ie. skipping past non form-10Ks, removing special characters that would get in the way of detecting 'Item 7', error handling etc), but not addressed here. My code has been modified / truncated to make it easier to follow.</p>
+<p>As mentioned above, my code, regrettably, will not work on <em>all</em> Form 10-Ks, and developing a truly comprehensive section extractor would likely involve a lot of work and testing. I believe the major takeaway from this is that real-world data is messy, even if you think they are already in a standardised format :')</p>
+<h3>Financial Data Data Scraping - Eva</h3>
+<p>As we would like to compare the stock performance before and after the release of the Form 10-Ks, we need to use its historical financial data to perform the calculations and conduct further analysis. </p>
+<p>Based on the CSV that contains the data of stock names and Form 10-Ks release dates, the historical data of the 20 NASDAQ stocks on the release date and the day previous were extracted by using the Python package pandas_datareader.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas_datareader</span> <span class="k">as</span> <span class="nn">pdr</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pdr</span><span class="o">.</span><span class="n">get_data_yahoo</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span> <span class="c1">#start_date and end_date both equals the release date</span>
+</code></pre></div>
+
+<p>However, the program did not run smoothly due to no matching data points. After checking the resource file, I realised some datapoints did not exist in Yahoo Finance. In light of this, I manually removed those datapoints, and amended the date of those that did not have their reports released on a business day to the next business day. </p>
+<p>I then tried to run the program again and successfully got an output. Yet, the number of rows in the output differed from the expected number. After investigation, the problem was due to the gap between the business days. If the previous business day has a gap of a day or more with the release date, the program will not be able to include both days' data in the dataframe. And I had no idea how could I fix this problem.</p>
+<p>So, I decided to change the Python package I used for extracting the data. </p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">end_date</span><span class="p">)</span> <span class="c1">#start_date = release day - n business day; end_date = release day + 1 business day</span>
+</code></pre></div>
+
+<p>This new version of code gave me an output with incorrect number of results again. So, I checked the csv generated from this program and found out that the previous business day cannot be captured simply with start_date = release day - 1 business day, as there may be a gap with one or more days between the business days. To solve this, I created a for loop to check if the length of data extracted equals to 2 (which means both days' data were captured). If it does not, a while loop starts and tries difference business day gaps until there is a length of 2. </p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stock_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">stock_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stock_data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">stock_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">stock_data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">start_date</span> <span class="o">=</span> <span class="n">end_date_obj</span><span class="o">-</span><span class="n">BDay</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">start_date</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">start_date</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_date</span><span class="p">)</span>
+            <span class="n">stock_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stock_data</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This amendment successfully gave me the expected number of output. </p>
+<p>Another thing that I had to do is to add the Ticker name into the dataframe, as this information was not included when the data were extracted. Therefore, I created a blank list in the beginning and append the ticker name into the list according to the count of data for each stock. The list was then added to the dataframe as a new column "Ticker".</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="o">-</span><span class="n">count</span><span class="p">):</span>
+        <span class="n">df_ticker</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Ticker&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_ticker</span>
+</code></pre></div>
+
+<p>After producing the dataframe, a CSV file was generated for the other group mates to work on the next step.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;historical_data_new.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>Summary</h3>
+<p>This is basically what we did in the first stage: data scraping. </p>
+<p>There were some hiccups in the progress, so we were not able to complete this stage in the time we had proposed. We reflected on our time management and hope we can meet the deadline for the second stage.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-04-15T00:00:00+08:00">Fri 15 April 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
