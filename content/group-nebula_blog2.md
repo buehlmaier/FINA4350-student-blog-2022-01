@@ -1,12 +1,12 @@
 ---
-Title: Data Pre-Processing (Group Nebula)
+Title: Data Preparation (Group Nebula)
 Date: 2022-04-20
 Category: Progress Report
 ---
 
 By Group "Nebula"
 
-## Team Nebula | Blog 2: Data Pre-Processing
+## Team Nebula | Blog 2: Data Preparation
 
 ### Introduction
 In this blog post, we will detail our data pre-processing process for cleaning the text data and calculating the stock performance.
