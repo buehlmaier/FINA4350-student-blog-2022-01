@@ -431,13 +431,13 @@ Hanna&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Progress Report"></category></entry><entry><title>Data Pre-Processing (Group Nebula)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/data-pre-processing-group-nebula.html" rel="alternate"></link><published>2022-04-20T00:00:00+08:00</published><updated>2022-04-20T00:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-20:/FINA4350-student-blog-2022-01/data-pre-processing-group-nebula.html</id><summary type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
-&lt;h2&gt;Team Nebula | Blog 2: Data Pre-Processing&lt;/h2&gt;
+&lt;/script&gt;</content><category term="Progress Report"></category></entry><entry><title>Data Preparation (Group Nebula)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/data-preparation-group-nebula.html" rel="alternate"></link><published>2022-04-20T00:00:00+08:00</published><updated>2022-04-20T00:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-20:/FINA4350-student-blog-2022-01/data-preparation-group-nebula.html</id><summary type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
+&lt;h2&gt;Team Nebula | Blog 2: Data Preparation&lt;/h2&gt;
 &lt;h3&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;In this blog post, we will detail our data pre-processing process for cleaning the text data and calculating the stock performance.&lt;/p&gt;
 &lt;h3&gt;Textual Data Cleaning&lt;/h3&gt;
 &lt;p&gt;As the data were directly collected from HTML, there were items that we do not need …&lt;/p&gt;</summary><content type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
-&lt;h2&gt;Team Nebula | Blog 2: Data Pre-Processing&lt;/h2&gt;
+&lt;h2&gt;Team Nebula | Blog 2: Data Preparation&lt;/h2&gt;
 &lt;h3&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;In this blog post, we will detail our data pre-processing process for cleaning the text data and calculating the stock performance.&lt;/p&gt;
 &lt;h3&gt;Textual Data Cleaning&lt;/h3&gt;
