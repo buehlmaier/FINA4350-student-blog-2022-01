@@ -25,6 +25,7 @@ Names of student groups (in order of sign-up):
   * Metatext
   * Hanna (name TBD)
   * Semantic Analysts
+  * Stonks
 
 The source code of this blog is available on
 [GitHub](https://github.com/buehlmaier/FINA4350-student-blog-2022-01).
