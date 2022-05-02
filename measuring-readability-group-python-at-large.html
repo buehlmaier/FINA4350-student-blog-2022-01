@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Independent Variable Construction, " />
+
+<meta property="og:title" content="Measuring Readability (Group Python at Large) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/measuring-readability-group-python-at-large.html" />
+<meta property="og:description" content="By Group &#34;Python at large&#34; This post describes how we utilize textual analysis techniques to measure the readability of the extracted pieces of MD&amp;A from 10-k files, with mainly three different approaches: the fog index, the common words ratio, and the vocabulary ratio, all of which are commonly seen …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-04-17T00:00:00+08:00" />
+<meta name="twitter:title" content="Measuring Readability (Group Python at Large) ">
+<meta name="twitter:description" content="By Group &#34;Python at large&#34; This post describes how we utilize textual analysis techniques to measure the readability of the extracted pieces of MD&amp;A from 10-k files, with mainly three different approaches: the fog index, the common words ratio, and the vocabulary ratio, all of which are commonly seen …">
+
+        <title>Measuring Readability (Group Python at Large)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/measuring-readability-group-python-at-large.html">
+                Measuring Readability (Group Python at Large)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Python at large"</p>
+<p>This post describes how we utilize textual analysis techniques to measure the readability of the extracted pieces of MD&amp;A from 10-k files, with mainly three different approaches: the fog index, the common words ratio, and the vocabulary ratio, all of which are commonly seen in relevant academic studies. We follow the definition of each approach described in <em>Measuring Readability in Financial Disclosures (Loughran and Mcdonald, 2014)</em>.</p>
+<p><strong>The Fog index</strong></p>
+<p>The Fog index is definied as a linear combination of average words per sentence and the percentage of complex words (depending on how many syllables a word has). To calculate these two components, we use <em>nltk.sent_tokenize and</em> <em>nltk.word_tokenize</em> to find the number of sentences and words, before converting them to the number of words per sentence. Then we apply <em>SyllableTokenizer()</em> on the tokenized words which would convert the word list to a list of the number of syllables, allowing us to count the number of words with certain conditions on syllables that we specify. Besides following the definition of complex words in Loughran and Mcdonald (2014) as having more than two syllables, we increase the threhold to more than three syllables, allowing for sensitivity tests in the regressions. The details can be found in the notes of the following code.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">number_of_sentence</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^\d+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span> <span class="c1"># delete digs</span>
+    <span class="n">sentence_list</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence_list</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39; The number of words after removing the punctuation and digits &#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">total_number_of_words</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^\d+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
+    <span class="n">tokenized_word</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokenized_word</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39; The number of words after removing the punctuation, digits and the stop words | For more reasonable computation of fog index &#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">total_number_of_words_netstopping</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">txt</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^\d+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
+    <span class="n">tokenized_word</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">))</span>
+    <span class="n">filtered_word</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">tokenized_word</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">:</span>
+            <span class="n">filtered_word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filtered_word</span><span class="p">))</span>
+
+<span class="sd">&#39;&#39;&#39; Complex Words - more than two syllables; More Complex Words - more than three syllables&#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">number_of_complex_words</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
+    <span class="n">SSP</span> <span class="o">=</span> <span class="n">SyllableTokenizer</span><span class="p">()</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">txt</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^\d+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
+    <span class="n">word_list</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+    <span class="n">syllable_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_list</span><span class="p">:</span>
+        <span class="n">syllable_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">SSP</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">word</span><span class="p">)))</span>
+    <span class="n">count2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">elem</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">syllable_list</span> <span class="k">if</span> <span class="n">elem</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">])</span> <span class="c1"># Based on the standard definition of fog index</span>
+    <span class="n">count3</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">elem</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">syllable_list</span> <span class="k">if</span> <span class="n">elem</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">])</span> <span class="c1"># Another threshold in case of insensitivity</span>
+    <span class="k">return</span> <span class="n">count2</span><span class="p">,</span><span class="n">count3</span>
+</code></pre></div>
+
+<p>Now that we have the functions to obtain the main components, it’s convenient to compute the fog index and store in our mda file.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">mda</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./mda.csv&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1497</span><span class="p">):</span> <span class="c1">#1497 is the no. of our sample</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda_length&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;number_of_sentence&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">number_of_sentence</span><span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;average_words_per_sentence&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_number_of_words</span><span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;number_of_sentence&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="p">(</span><span class="n">count2</span><span class="p">,</span> <span class="n">count3</span><span class="p">)</span> <span class="o">=</span> <span class="n">number_of_complex_words</span><span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;number_of_complex_words&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">count2</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;number_of_more_complex_words&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">count3</span>
+
+<span class="sd">&#39;&#39;&#39;Percentage of complex words with slightly different specifications&#39;&#39;&#39;</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;percent_of_complex_words_100&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;number_of_complex_words&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">total_number_of_words</span><span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;percent_of_more_complex_words_100&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;number_of_more_complex_words&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_number_of_words</span><span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])):</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;percent_of_complex_words_100_net&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;number_of_complex_words&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span><span class="n">total_number_of_words_netstopping</span><span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;percent_of_more_complex_words_100_net&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;number_of_more_complex_words&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_number_of_words_netstopping</span><span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+
+<span class="sd">&#39;&#39;&#39;Fog index with four slightly different specifications&#39;&#39;&#39;</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;fog_index_a&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;percent_of_complex_words_100&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;average_words_per_sentence&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;fog_index_ma&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;percent_of_more_complex_words_100&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;average_words_per_sentence&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;fog_index_s&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;percent_of_complex_words_100_net&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;average_words_per_sentence&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;fog_index_ms&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="p">(</span><span class="n">mda</span><span class="p">[</span><span class="s2">&quot;percent_of_more_complex_words_100_net&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;average_words_per_sentence&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">mda</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;./fogindex_mda.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img alt="Sample of fog index computed" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Python-at-Large_fog-index.png"></p>
+<p><em>Note</em>: Although the Fog index is one of the widely used measurements for readability, it is faced with as wide criticism when applied in finance-related documents. One of the most serious concerns is that its definition of complex words by syllables appears to be unsensitive in business documenet(Loughran and Mcdonald, 2014). Polysyllabic words like “company”, “financial”, “department”, and “generate”, to name a few, are heavily used in financial files and make perfect sense to people in business. However, they are all classified as complex words by the standard definition of fog index since they have more than two syllables. We try to ease this issue in our project by increasing the threshold. But the intrinsic problem may still persists. </p>
+<p><strong>Common words ratio</strong></p>
+<p>This method (also the <em>Vocabulary index</em> ) takes a whole new approach of measuring readability - not by the absolute complexity of sentences and words but by the relative rareness of the vocabulary in a piece of text.
+In Loughran and Mcdonald(2014)'s research, the authors use an external master dictionary to check if words are matched with a valid meaning. However, such external dictionary is not avaliable to us. We Instead begin with building our own dictionary as a vocabulary list of all the MD&amp;A files considered together(after the removal of the punctuation and digits, and lemmatization using function <em>WordNetLemmatizer</em>). Then for each word in the vocabulary list, we compute its ratio of appearance in all the files as a measurement of its rareness. The ratio could take a value from 0 to 1. For instance, ratio = 1 indicates that the word is can be found in all the files, such as “financial” and “revenue”. And ratio = 0.1 indicates the word can be found in 10% of the files. Lastly, we iterate every (lematized) words in one file and measure the file's readability as the average ratio. </p>
+<div class="highlight"><pre><span></span><code><span class="sd">&#39;&#39;&#39;Function for building a dictionary of all the text files&#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">txt_to_wordlist</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">txt</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; \d+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
+    <span class="n">tokenized_word</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+    <span class="n">tokenized_word</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">tokenized_word</span><span class="p">)</span>
+    <span class="n">tokenized_word</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tokenized_word</span><span class="p">)</span>
+
+    <span class="n">lem</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+    <span class="n">lem_words</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">tokenized_word</span><span class="p">:</span>
+        <span class="n">lem_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lem</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">lem_words</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">split_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">4000</span><span class="p">):</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">num_chunks</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">/</span> <span class="n">chunk_size</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_chunks</span><span class="p">):</span>
+        <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">chunk_size</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">chunk_size</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">chunks</span>
+
+
+<span class="k">def</span> <span class="nf">txt_to_wordlist_duplicate</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">txt</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; \d+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
+    <span class="n">tokenized_word</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+
+    <span class="n">lem</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+    <span class="n">lem_words</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">tokenized_word</span><span class="p">:</span>
+        <span class="n">lem_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lem</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">lem_words</span><span class="p">))</span>
+
+<span class="sd">&#39;&#39;&#39; Iteration for dictionary begins&#39;&#39;&#39;</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">fog</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;./Extraction.csv&quot;</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">fog</span><span class="p">[</span><span class="s2">&quot;Unnamed: 0&quot;</span><span class="p">]</span>
+    <span class="n">fog</span> <span class="o">=</span> <span class="n">fog</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="c1">#make a word relative frequency</span>
+    <span class="c1">#get a string with all item_7</span>
+    <span class="n">all_mda</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fog</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">])</span>
+
+    <span class="c1">#get a word list with all words in it</span>
+    <span class="n">all_word_list</span> <span class="o">=</span> <span class="n">txt_to_wordlist</span><span class="p">(</span><span class="n">all_mda</span><span class="p">)</span>
+
+    <span class="c1"># build a 2-dimension list[[wordlist1],[wl2],[wl3],...]</span>
+    <span class="n">item_7</span> <span class="o">=</span> <span class="n">fog</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">two_d_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">item_7</span><span class="p">:</span>
+        <span class="n">two_d_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">txt_to_wordlist</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">words_common_show_time</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">all_word_list</span><span class="p">:</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">word_list</span> <span class="ow">in</span> <span class="n">two_d_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_list</span><span class="p">:</span>
+                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="n">words_common_show_time</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="n">count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_word_list</span><span class="p">))</span>
+
+
+    <span class="n">words_common_ratio</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">words_common_show_time</span><span class="p">:</span>
+        <span class="n">words_common_ratio</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">two_d_list</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Complete!&quot;</span><span class="p">)</span>
+
+    <span class="c1">#get word_ratio_dictionary</span>
+    <span class="n">word_ratio_dictionary</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">all_word_list</span><span class="p">,</span> <span class="n">words_common_ratio</span><span class="p">))</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">word_ratio_dictionary</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Words&#39;</span><span class="p">,</span> <span class="s1">&#39;common_ratio&#39;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Commonwords_Dictionary.csv&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dictionary saved!&quot;</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;Compute the rareness score of each text file&#39;&#39;&#39;</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1">#Create another 2d list with wordlist in which the words will duplicate</span>
+    <span class="n">two_d_list_dup</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">item_7</span><span class="p">:</span>
+        <span class="n">two_d_list_dup</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">txt_to_wordlist_duplicate</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+
+    <span class="n">common_words_ratio_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">wordlist</span> <span class="ow">in</span> <span class="n">two_d_list_dup</span><span class="p">:</span>
+        <span class="n">common_words_ratio</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">wordlist</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">common_words_ratio</span> <span class="o">=</span> <span class="n">common_words_ratio</span> <span class="o">+</span> <span class="n">word_ratio_dictionary</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">common_words_ratio</span> <span class="o">=</span> <span class="n">common_words_ratio</span> <span class="o">+</span> <span class="mi">0</span>
+        <span class="n">common_words_ratio_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">common_words_ratio</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">wordlist</span><span class="p">))</span>
+
+    <span class="n">fog</span><span class="p">[</span><span class="s2">&quot;common_words_ratio_list&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">common_words_ratio_list</span>
+    <span class="n">fog</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;independent_variable(lem_with_frequency).csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img alt="Sample of rareness score computed" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Python-at-Large_rareness-score.png"></p>
+<p><em>Note</em>: One of the our biggest concerns of this method is its dominance by the large portion of overlapping words across documents as all MD&amp;A files follow a general and standard format. One could already observe from the sample ratio we provided above that the results are generally above 0.8 and the differences are sometimes as small as 1-2%. We are thus quite worried about its sensitivity to rare words as the small differences in rare words could be absorbed by the variation across companies. </p>
+<p><strong>Vocabulary approach</strong></p>
+<p>This approach shares the spirit with the common words approach we described above, measuring the readability of a piece of text by the rareness of its vocabulary. Similar to the last method, we begin by creating a volcabulary list of all the unique words among the sample files. Then, we calculate the volcabulary that a piece of text use as a portion of all the volcabulary in the dictionary to be the indicator of complexity. A higher ratio indicates that the files consist of more vocabulary and are perceived to be less readable.</p>
+<p>This method could be easily attained using the union and intersection function of the set. As always, we clean the punctuation and digits before tokenizing the words. We then update the vocabulary set with the union function. To compute the vocabulary used in every piece of text, we use the intersect function and compute the length of the intersection.</p>
+<div class="highlight"><pre><span></span><code><span class="n">vol</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="sd">&#39;&#39;&#39;Build a grand dictionary&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1497</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; \d+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="c1"># Clear all the numbers</span>
+    <span class="n">text_word</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">lem_words</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">text_word</span><span class="p">:</span>
+        <span class="n">lem_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">wnl</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">))</span>
+    <span class="n">text_vol</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">lem_words</span><span class="p">)</span>
+    <span class="n">vol</span> <span class="o">=</span> <span class="n">vol</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">text_vol</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;Compute the volcabulary used in each file&#39;&#39;&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1497</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;mda&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; \d+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text_word</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">lem_words</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">text_word</span><span class="p">:</span>
+        <span class="n">lem_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">wnl</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">))</span>
+        <span class="n">text_vol</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">lem_words</span><span class="p">)</span>
+
+    <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;vocabulary&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text_vol</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">vol</span><span class="p">))</span>
+    <span class="n">mda</span><span class="p">[</span><span class="s2">&quot;ratio_in_vol&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text_vol</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">vol</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">vol</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img alt="Sample of volcabulary ratio computed" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Python-at-Large_vocabulary-ratio.png"></p>
+<p><em>Note</em>: The original vocabulary method used in the literature <em>(Loughran and Mcdonald, 2014)</em> is to match every word in the text file with an external financial dictionary. However, such a dictionary is patent-protected and not available to our project. We thus make a compromise by building our small dictionary with the samples at hand. Surely our method is not as favorable as matching an external financial dictionary since the latter could filter the financial terminologies in the files, allowing the measurement to be less sensitive to the use of common words. In addition, it’s not very obvious why more vocabulary will lead to less readability.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-04-17T00:00:00+08:00">Sun 17 April 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#independent-variable-construction-ref">Independent Variable Construction</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
