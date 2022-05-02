@@ -4,7 +4,7 @@ Date: 2022-05-02 11:42
 Category: Progress Report
 ---
 
-By Group "NLPQuartet", written by Chiu Chun Ho Horace
+By Group "NLPQuartet," written by Chiu Chun Ho Horace
 
 
 This blog covers our sentiment analysis process. The main goal of sentiment analysis is to automatically determine whether a text leaves a positive, negative, or neutral impression. At first, we wanted to train a sentiment analysis model by ourselves. However, we had only limited numbers of data, especially for news, so, it was not very feasible to train a model. Therefore, we finally decided to use the following pretrained models: TextBlob, NLTK Vader, Afinn, Flair and FinBERT. 

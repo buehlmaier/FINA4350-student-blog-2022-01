@@ -4,7 +4,7 @@ Date: 2022-05-02 10:35
 Category: Progress Report
 ---
 
-By Group "NLPQuartet", written by Kwan Wing Ching and Kwok Tsun Hei
+By Group "NLPQuartet," written by Kwan Wing Ching and Kwok Tsun Hei
 
 
 Following our previous post on data collection, this blog covers the processing stage in which we clean, reshape and preprocess the collected data for sentiment analysis later. This post is useful if you are analyzing text from financial newspapers and social media, as we will dive into all our considerations and issues to be aware of. 

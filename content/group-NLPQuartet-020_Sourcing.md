@@ -4,7 +4,7 @@ Date: 2022-04-14 10:45
 Category: Progress Report
 ---
 
-By Group "NLPQuartet", written by Kwan Wing Ching and Kwok Tsun Hei
+By Group "NLPQuartet," written by Kwan Wing Ching and Kwok Tsun Hei
 
 Our project aims to investigate whether stock features react more towards news sentiment or social media sentiment, thus determine the predictability of these media channels on stock performance to improve data-driven decision making for investors. 
 

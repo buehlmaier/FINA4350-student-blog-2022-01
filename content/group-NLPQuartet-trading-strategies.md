@@ -4,7 +4,7 @@ Date: 2022-05-02 16:21
 Category: Progress Report
 ---
 
-By Group "NLPQuartet", written by Kwok Tsun Hei and Tse Chun Hei
+By Group "NLPQuartet," written by Kwok Tsun Hei and Tse Chun Hei
 
 
 After obtaining the sentiment score from four different sentiment analysis models, we started thinking about what we could do with the correlation between sentiment score and the stock price. We finally decided to build a trading strategy to somehow implement what we have and to test the robustness of our findings.
