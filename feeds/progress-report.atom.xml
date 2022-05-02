@@ -108,7 +108,7 @@
 &lt;li&gt;Jaroslav Bukovina &amp;amp; Matus Marticek, 2016. Sentiment and Bitcoin Volatility, MENDELU Working Papers in Business and Economics 2016-58&lt;/li&gt;
 &lt;li&gt;Akbiyik et al.(2021) Ask Who, Not What: Bitcoin Volatility Forecasting with Twitter Data&lt;/li&gt;
 &lt;li&gt;Lopez-Cabarcos et al. (2019) Bitcoin volatility, stock market and investor sentiment. Are they connected?, Finance Research Letters, Volume 38-2021&lt;/li&gt;
-&lt;/ol&gt;</content><category term="Progress Report"></category></entry><entry><title>Blog 6 - Machine Learning Model Training (Group Nebula)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/blog-6-machine-learning-model-training-group-nebula.html" rel="alternate"></link><published>2022-05-02T00:00:00+08:00</published><updated>2022-05-02T00:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-05-02:/FINA4350-student-blog-2022-01/blog-6-machine-learning-model-training-group-nebula.html</id><summary type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
+&lt;/ol&gt;</content><category term="Progress Report"></category></entry><entry><title>Machine Learning Model Training 2 (Group Nebula)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/machine-learning-model-training-2-group-nebula.html" rel="alternate"></link><published>2022-05-02T00:00:00+08:00</published><updated>2022-05-02T00:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-05-02:/FINA4350-student-blog-2022-01/machine-learning-model-training-2-group-nebula.html</id><summary type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
 &lt;h2&gt;Blog 6: Machine Learning Model Training&lt;/h2&gt;
 &lt;h3&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;After extracting non-neutral sentences using FinBERT, we prepare the dataset for model training. These dataset are used to train different models. At last, we compare the performance of the models trained by different dataset.&lt;/p&gt;
@@ -259,7 +259,7 @@
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Test&lt;/td&gt;
-&lt;td&gt;&lt;img alt="group-nebula-blog-RNN10_Test.png" src="./images/RecurrentNeuralNetwork_10_Test.png"&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img alt="group-nebula-blog-RNN10_Test.png" src="./images/group-nebula-blog-RNN10_Test.png"&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
