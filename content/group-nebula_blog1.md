@@ -6,7 +6,7 @@ Category: Progress Report
 
 By Group "Nebula"
 
-## Team Nebula | Blog 1: Data Scraping
+## Blog 1: Data Scraping
 
 ### Introduction
 We hope to attain two goals in this project: 1) to create a model to predict the relationship between Form 10-K and the stock market performance on the release day, and 2) to compare the performance of different pre-processing techniques in NLP (Bag-of-Words and Sentiment Analysis) in a financial context.

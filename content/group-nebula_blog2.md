@@ -6,7 +6,7 @@ Category: Progress Report
 
 By Group "Nebula"
 
-## Team Nebula | Blog 2: Data Preparation
+## Blog 2: Data Preparation
 
 ### Introduction
 In this blog post, we will detail our data pre-processing process for cleaning the text data and calculating the stock performance.
