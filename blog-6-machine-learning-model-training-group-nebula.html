@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="Blog 6 - Machine Learning Model Training (Group Nebula) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/blog-6-machine-learning-model-training-group-nebula.html" />
+<meta property="og:description" content="By Group &#34;Nebula&#34; Blog 6: Machine Learning Model Training Introduction After extracting non-neutral sentences using FinBERT, we prepare the dataset for model training. These dataset are used to train different models. At last, we compare the performance of the models trained by different dataset. Data for Model Training Dataset 1 …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-05-02T00:00:00+08:00" />
+<meta name="twitter:title" content="Blog 6 - Machine Learning Model Training (Group Nebula) ">
+<meta name="twitter:description" content="By Group &#34;Nebula&#34; Blog 6: Machine Learning Model Training Introduction After extracting non-neutral sentences using FinBERT, we prepare the dataset for model training. These dataset are used to train different models. At last, we compare the performance of the models trained by different dataset. Data for Model Training Dataset 1 …">
+
+        <title>Blog 6 - Machine Learning Model Training (Group Nebula)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/blog-6-machine-learning-model-training-group-nebula.html">
+                Blog 6 - Machine Learning Model Training (Group Nebula)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Nebula"</p>
+<h2>Blog 6: Machine Learning Model Training</h2>
+<h3>Introduction</h3>
+<p>After extracting non-neutral sentences using FinBERT, we prepare the dataset for model training. These dataset are used to train different models. At last, we compare the performance of the models trained by different dataset.</p>
+<h3>Data for Model Training</h3>
+<ul>
+<li>Dataset 1: One-hot Encoding (10000 features)</li>
+<li>The text is prepared using the approach described in Section 3.2.1. This dataset consists of binary vectors that represent the occurrence of tokens in the text as described in Section 4.2. The mapping dictionary only consists of 10000 unique tokens that appear the most in the text.</li>
+<li>Dataset 2: One-hot Encoding (10000 features) (BERT Cleaned)</li>
+<li>The text is prepared using the approach described in Section 3.2.2. This dataset consists of binary vectors that represent the occurrence of tokens in the text as described in Section 4.2. The mapping dictionary only consists of 10000 unique tokens that appear the most in the text.</li>
+<li>Dataset 3: Bag-of-words (10000 features)</li>
+<li>The text is prepared using the approach described in Section 3.2.1. This dataset consists of bag-of-words that represent the frequency of tokens in the text as described in Section 4.3. The mapping dictionary only consists of 10000 unique tokens that appear the most in the text.</li>
+<li>Dataset 4: Bag-of-words (10000 features) (BERT Cleaned)</li>
+<li>The text is prepared using the approach described in Section 3.2.2. This dataset consists of bag-of-words that represent the frequency of tokens in the text as described in Section 4.3. The mapping dictionary only consists of 10000 unique tokens that appear the most in the text.</li>
+<li>Dataset 5: Sentiment Scores (Positive, Neutral, Negative)</li>
+<li>The text is prepared using the approach described in Section 3.2.1. This dataset consists of sentiment scores (i.e. positive, neutral and negative score) that represent the text as described in Section 4.4.</li>
+<li>Dataset 6: Sentiment Scores (Positive, Neutral, Negative) (BERT Cleaned)</li>
+<li>The text is prepared using the approach described in Section 3.2.2. This dataset consists of sentiment scores (i.e. positive, neutral and negative score) that represent the text as described in Section 4.4.</li>
+<li>Dataset 7: Sentiment Scores (Compound)</li>
+<li>The text is prepared using the approach described in Section 3.2.1. This dataset consists of sentiment scores (i.e. compound score) that represent the text as described in Section 4.4.</li>
+<li>Dataset 8: Sentiment Scores (Compound) (BERT Cleaned)</li>
+<li>The text is prepared using the approach described in Section 3.2.2. This dataset consists of sentiment scores (i.e. compound score) that represent the text as described in Section 4.4.</li>
+<li>Dataset 9: Tokenized (10000 features) (All words)</li>
+<li>The text is prepared using the approach described in Section 3.2.1. This dataset consists of tokens that represent the text as described in Section 4.1. The mapping dictionary only consists of 10000 unique tokens that appear the most in the text.</li>
+<li>Dataset 10: Tokenized (10000 features) (BERT Cleaned) (All words)</li>
+<li>The text is prepared using the approach described in Section 3.2.2. This dataset consists of tokens that represent the text as described in Section 4.1. The mapping dictionary only consists of 10000 unique tokens that appear the most in the text.</li>
+<li>Dataset 11: Tokenized (10000 features) (10000 words)</li>
+<li>The text is prepared using the approach described in Section 3.2.1. This dataset consists of tokens that represent the text as described in Section 4.1. The mapping dictionary only consists of 10000 unique tokens that appear the most in the text. The length of the text is shortened to 10000 words.</li>
+<li>Dataset 12: Tokenized (10000 features) (5949 words)</li>
+<li>The text is prepared using the approach described in Section 3.2.1. This dataset consists of tokens that represent the text as described in Section 4.1. The mapping dictionary only consists of 10000 unique tokens that appear the most in the text. The length of the text is shortened to 5949 words.</li>
+</ul>
+<h3>Machine Learning model</h3>
+<ul>
+<li>Logistic Regression (LR)</li>
+<li>Multi-layer Perceptron (MLP)</li>
+<li>Recurrent Neural Network (RNN)</li>
+</ul>
+<h3>Experiment Results</h3>
+<h4>Logistic Regression</h4>
+<table>
+<thead>
+<tr>
+<th>Logistic Regression<br />(Dataset 1)</th>
+<th>Logistic Regression<br />(Dataset 2)</th>
+<th>Logistic Regression<br />(Dataset 3)</th>
+<th>Logistic Regression<br />(Dataset 4)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="group-nebula-blog-LR1.png" src="./images/group-nebula-blog-LR1.png"></td>
+<td><img alt="group-nebula-blog-LR2.png" src="./images/group-nebula-blog-LR2.png"></td>
+<td><img alt="group-nebula-blog-LR3.png" src="./images/group-nebula-blog-LR3.png"></td>
+<td><img alt="group-nebula-blog-LR4.png" src="./images/group-nebula-blog-LR4.png"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Logistic Regression<br />(Dataset 5)</th>
+<th>Logistic Regression<br />(Dataset 6)</th>
+<th>Logistic Regression<br />(Dataset 7)</th>
+<th>Logistic Regression<br />(Dataset 8)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="group-nebula-blog-LR5.png" src="./images/group-nebula-blog-LR5.png"></td>
+<td><img alt="group-nebula-blog-LR6.png" src="./images/group-nebula-blog-LR6.png"></td>
+<td><img alt="group-nebula-blog-LR7.png" src="./images/group-nebula-blog-LR7.png"></td>
+<td><img alt="group-nebula-blog-LR8.png" src="./images/group-nebula-blog-LR8.png"></td>
+</tr>
+</tbody>
+</table>
+<h4>Multi-layer Perceptron</h4>
+<table>
+<thead>
+<tr>
+<th>Multi-layer Perceptron<br />(Dataset 1)</th>
+<th>Multi-layer Perceptron<br />(Dataset 2)</th>
+<th>Multi-layer Perceptron<br />(Dataset 3)</th>
+<th>Multi-layer Perceptron<br />(Dataset 4)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="group-nebula-blog-MLP1.png" src="./images/group-nebula-blog-MLP1.png"></td>
+<td><img alt="group-nebula-blog-MLP2.png" src="./images/group-nebula-blog-MLP2.png"></td>
+<td><img alt="group-nebula-blog-MLP3.png" src="./images/group-nebula-blog-MLP3.png"></td>
+<td><img alt="group-nebula-blog-MLP4.png" src="./images/group-nebula-blog-MLP4.png"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Multi-layer Perceptron<br />(Dataset 5)</th>
+<th>Multi-layer Perceptron<br />(Dataset 6)</th>
+<th>Multi-layer Perceptron<br />(Dataset 7)</th>
+<th>Multi-layer Perceptron<br />(Dataset 8)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="group-nebula-blog-MLP5.png" src="./images/group-nebula-blog-MLP5.png"></td>
+<td><img alt="group-nebula-blog-MLP6.png" src="./images/group-nebula-blog-MLP6.png"></td>
+<td><img alt="group-nebula-blog-MLP7.png" src="./images/group-nebula-blog-MLP7.png"></td>
+<td><img alt="group-nebula-blog-MLP8.png" src="./images/group-nebula-blog-MLP8.png"></td>
+</tr>
+</tbody>
+</table>
+<h4>Recurrent Neural Network</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Recurrent Neural Network (Dataset 9)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Train</td>
+<td><img alt="group-nebula-blog-RNN9_Train.png" src="./images/group-nebula-blog-RNN9_Train.png"></td>
+</tr>
+<tr>
+<td>Test</td>
+<td><img alt="group-nebula-blog-RNN9_Test.png" src="./images/group-nebula-blog-RNN9_Test.png"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Recurrent Neural Network (Dataset 10)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Train</td>
+<td><img alt="group-nebula-blog-RNN10_Train.png" src="./images/group-nebula-blog-RNN10_Train.png"></td>
+</tr>
+<tr>
+<td>Test</td>
+<td><img alt="group-nebula-blog-RNN10_Test.png" src="./images/RecurrentNeuralNetwork_10_Test.png"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Recurrent Neural Network (Dataset 11)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Train</td>
+<td><img alt="group-nebula-blog-RNN11_Train.png" src="./images/group-nebula-blog-RNN11_Train.png"></td>
+</tr>
+<tr>
+<td>Test</td>
+<td><img alt="group-nebula-blog-RNN11_Test.png" src="./images/group-nebula-blog-RNN11_Test.png"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Recurrent Neural Network (Dataset 12)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Train</td>
+<td><img alt="group-nebula-blog-RNN12_Train.png" src="./images/group-nebula-blog-RNN12_Train.png"></td>
+</tr>
+<tr>
+<td>Test</td>
+<td><img alt="group-nebula-blog-RNN12_Test.png" src="./images/group-nebula-blog-RNN12_Test.png"></td>
+</tr>
+</tbody>
+</table>
+<h3>Summary</h3>
+<p><img alt="group-nebula-blog-experiment_chart.png" src="./images/group-nebula-blog-experiment_chart.png"></p>
+<h3>Experiment Findings</h3>
+<ul>
+<li>Sentiment scores from NLTK Vader Package do not work well</li>
+<li>Too long text</li>
+<li>Inconsistent context: NLTK Vader is for movie analysis, but we are using it to do financial sentiment analysis</li>
+<li>Insufficient data cleaning</li>
+<li>Limited training data</li>
+<li>FinBERT data cleaning help boost performance</li>
+<li>Bag-of-words is better than binary vectorization (one-hot encoding)</li>
+<li>Recurrent Neural Network is better</li>
+</ul>
+<h3>Future work</h3>
+<ul>
+<li>Explore more on Recurrent Neural Network</li>
+<li>Explore more on data cleaning</li>
+<li>Prepare more data</li>
+<li>Use financial-context sentiment analysis package</li>
+</ul>
+<h3>Difficulties encountered</h3>
+<p>The biggest challenge in this step is sentiment analysis runtime. As the text data is very long, sentiment analysis using NLTL Package takes some time.</p>
+<p>Another challenge is RNN training. RNN is more complicated compare to other machine learning model. Despite Tensorflow 2 provide a very high level application for RNN, it is still more complicated that sklearn. Hence, some time is needed to explore Tensorflow 2. Moreover, the training time for RNN is very long. When we train an RNN for Dataset 9, it takes around an hour. Hence, it is hard to experiment on neural networks on normal computer without using GPU farms.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-05-02T00:00:00+08:00">Mon 02 May 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

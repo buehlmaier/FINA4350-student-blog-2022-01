@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="Data Re-Cleaning (Group Nebula) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/data-re-cleaning-group-nebula.html" />
+<meta property="og:description" content="By Group &#34;Nebula&#34; Blog 5: Data Re-Cleaning Introduction In this blog post, we will discuss improvements we made to our process from issues we noticed during the process of building the model. FinBERT text cleaning We were concerned that the entire Item 7 section would contain too much information for …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-04-27T00:00:00+08:00" />
+<meta name="twitter:title" content="Data Re-Cleaning (Group Nebula) ">
+<meta name="twitter:description" content="By Group &#34;Nebula&#34; Blog 5: Data Re-Cleaning Introduction In this blog post, we will discuss improvements we made to our process from issues we noticed during the process of building the model. FinBERT text cleaning We were concerned that the entire Item 7 section would contain too much information for …">
+
+        <title>Data Re-Cleaning (Group Nebula)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/data-re-cleaning-group-nebula.html">
+                Data Re-Cleaning (Group Nebula)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Nebula"</p>
+<h2>Blog 5: Data Re-Cleaning</h2>
+<h3>Introduction</h3>
+<p>In this blog post, we will discuss improvements we made to our process from issues we noticed during the process of building the model.</p>
+<h3>FinBERT text cleaning</h3>
+<p>We were concerned that the <em>entire</em> Item 7 section would contain too much information for the model to be able to generalize a relationship from with just ~250 data points. Upon further inspecting several Item 7s, we noticed that there were a lot of "junk" sentences that likely would not contribute to the stock's performance, such as disclaimer sentences (see below for example). These sentences will generally be of neutral sentiment.</p>
+<blockquote>
+<p>This section and other parts of this Form 10-K contain forward-looking statements that involve risks and uncertainties. The Company's actual results may differ significantly from the results discussed in the forward-looking statements.</p>
+</blockquote>
+<p>On the other hand, sentences that likely contribute to whether a company performs well will generally be of non-neutral sentiment (ie. <em>increase</em> in sales, <em>decrease</em> in debt). As a result, we decided to explore if pruning neutral sentiment sentences from Form 10-Ks would help the model learn better (since it now only has to "look at" more relevant sentences).</p>
+<p>We have opted to use FinBERT, a sentiment analysis model trained specifically on financial reports. Since our text data are of a financial context as well, FinBERT should give relatively accurate sentiment labels.</p>
+<p>This is confirmed to be true after some preliminary testing:</p>
+<ul>
+<li><code>"In addition to historical information, the following discussion contains forward-looking statements that are subject to risks and uncertainties."</code> shows as neutral</li>
+<li><code>"Revenues were 23.5 billion, a decrease of compared to revenues of 24.3 billion in fiscal with net income of 5.2 billion."</code> shows as negative</li>
+</ul>
+<p>Since FinBERT takes in individual sentences as input, I also used spacy's sentence recgoniser (senter) to split the text file into sentences before feeding them into FinBERT. I first imported the relevant packages and the FinBERT model:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertTokenizer</span><span class="p">,</span> <span class="n">BertForSequenceClassification</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="c1"># load stuff needed for FinBERT sentiment &amp; spacy&#39;s sentence recognizer!</span>
+<span class="n">finbert</span> <span class="o">=</span> <span class="n">BertForSequenceClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;yiyanghkust/finbert-tone&#39;</span><span class="p">,</span><span class="n">num_labels</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;yiyanghkust/finbert-tone&#39;</span><span class="p">)</span>
+<span class="n">BERTnlp</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;sentiment-analysis&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">finbert</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
+<span class="n">spacynlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tok2vec&quot;</span><span class="p">,</span> <span class="s2">&quot;tagger&quot;</span><span class="p">,</span> <span class="s2">&quot;parser&quot;</span><span class="p">,</span> <span class="s2">&quot;attribute_ruler&quot;</span><span class="p">,</span> <span class="s2">&quot;lemmatizer&quot;</span><span class="p">,</span> <span class="s2">&quot;ner&quot;</span><span class="p">])</span>
+<span class="n">spacynlp</span><span class="o">.</span><span class="n">enable_pipe</span><span class="p">(</span><span class="s2">&quot;senter&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Since I am only using spacy for sentence recognition, I have disabled all other processes to speed up the process.</p>
+<p>I then put the text file into spacy's nlp pipeline for sentence recognition, and then iterated through each sentence to generate a sentiment label through FinBERT. I then ignored all sentences with a neutral label and wrote non-neutral sentences into the cleaned file.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># get text from document</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;TXN_2022-02-04.txt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">doc</span> <span class="o">=</span> <span class="n">spacynlp</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="c1"># feed text into spacynlp for sentence recognition</span>
+
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">:</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">BERTnlp</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># obtain label (positive / negative / neutral) from FinBERT</span>
+    <span class="k">if</span> <span class="n">label</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;neutral&#39;</span><span class="p">:</span> <span class="k">continue</span> <span class="c1"># ignore sentences with neutral sentiment</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">text</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>One major drawback of this method was it was <em>very</em> slow (doing this on ~250 documents took over 4 hours to do), which meant it might not be scalable for datasets with even more documents, even after disabling the unnecessary components of spacy's nlp pipeline.</p>
+<p>I have tried to optimise the program further by feeding in a list of all sentences in the document to BERTnlp (ie. <code>BERTnlp([sentence.text for sentence in doc.sents]</code>) since BERTnlp() also accepts a list of strings, but this was very memory-intensive and caused problems for my computer.</p>
+<p>Another limitation of this approach is that there are potentially sentences of neutral sentiment (ie. those that describe a new product being developed by the company) that would also contribute to the performance of the stock, but would be discarded using the FinBERT approach. As a result, the model would be missing out on information that would actually determine a company's next-day performance.</p>
+<p>With more time, a "smarter", less time-consuming approach that also keeps all relevant sentences could be developed and used to trim the textual data instead.</p>
+<h3>Re-scraping of text data</h3>
+<p>We found that our original text extraction step in our text data scraping left a lot of table data that could not be easily identified and removed from the raw text. As a result, we proceed to perform cleaning on the HTML files first as they preserve more information that can be used to recognize contents that are not within the main paragraphs. To achieve this, we used beautiful soup for parsing the whole HTML file, and then we pick out elements with their corresponding tags, for example, <code>soup.findall("p", {"align":"center"})</code> to find out all the elements that are centered. Since the only time that these document center their text is when it is either a) a page number or b) a subtitle, they can be safely screened out as they would contain no information that is beneficial to the analysis. With this being done on the HTML level instead of working with the plain text, we scrap out the data with a lot more ease.</p>
+<p>Although it is not without its fair share of issue as well, occasionally, we would run into problems of HTML encoding and/or parser issue that require us to change the parser used. For example, there were one instance where "lxml" just wouldn't read the HTML properly (possibly because of missing end tags), and we have to change to "html.parser" instead. Not to mention that since sometime the encoding are unique and python's file io are not able to automatically detect the encoding of the file, we have to terminate the program to change the setting for the encoding used. Eventually, we were able to produce higher quality results in terms of removing fragments, but trial-and-error and manual effort were required to adjust settings.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-04-27T00:00:00+08:00">Wed 27 April 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
