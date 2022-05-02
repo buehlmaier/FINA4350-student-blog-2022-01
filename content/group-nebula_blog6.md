@@ -1,5 +1,5 @@
 ---
-Title: Machine Learning Model Training (Group Nebula)
+Title: Machine Learning Model Training 2 (Group Nebula)
 Date: 2022-05-02
 Category: Progress Report
 ---
