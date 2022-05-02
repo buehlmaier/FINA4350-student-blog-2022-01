@@ -1,5 +1,5 @@
 ---
-Title: WSJ Scrapping and Pre-processing (Group Metatext)
+Title: WSJ Scraping and Pre-processing (Group Metatext)
 Date: 2022-04-23 23:00
 Category: Progress Report
 ---
@@ -17,13 +17,13 @@ Our project analyzes whether Federal Reserves' FOMC documents and news articles 
 
 ## Why News Article?
 
-Naturally, when one is to predict Fed's decision, he delve into Fed's document, namely press conference, minutes, etc. (Stay tuned for my other group-mate detailing how to scrap and preprocess them). Fed's document inclines to plain fact reporting. News articles however, offer more subjective commentary on the cause and the impact of Fed's decision, which might offer more valuable information regarding how Wall Street perceive Fed's action. At the end of the day, Fed only manipulate the the policy rate, it is up to the Wall Street to move the market and propagate the effect of Fed's move to every corner of the financial market.
+Naturally, when one is to predict Fed's decision, he delve into Fed's document, namely press conference, minutes, etc. (Stay tuned for my other group-mate detailing how to scrape and preprocess them). Fed's document inclines to plain fact reporting. News articles however, offer more subjective commentary on the cause and the impact of Fed's decision, which might offer more valuable information regarding how Wall Street perceive Fed's action. At the end of the day, Fed only manipulate the the policy rate, it is up to the Wall Street to move the market and propagate the effect of Fed's move to every corner of the financial market.
 
 From a project perspective, news article can been seen as a benchmark where one could compare Fed's official document against news article. 
 
 We decided to opt for articles on Wall Street Journal. Reports from WSJ offers a delicate balance between depth and breath versus, say Bloomberg which focuses on speed and breath of reports. 
 
-## How To Scrap News Articles?
+## How To Scrape News Articles?
 
 ***Libraries and Modules Used:***
 
@@ -40,7 +40,7 @@ import math
 
 'selenium webdriver' is a package that enable the code to control the web browser (such as Google Chrome and Firefox) as if we are manually browsing on the browser. Whenever we are working with dynamic websites that are heavily java-scriptted, we can use 'webdriver' to monitor how javascript changes HTML. 
 
-We will be using Dow Jones Factiva to scrap news. Factiva is a paid-service with API access to for institutions. However, we can access Factiva via the link available at HKU Library using HKU credentials without API access. Therefore, we create a 'synthetic API' using the webdriver module to access Factiva shown as follows: 
+We will be using Dow Jones Factiva to scrape news. Factiva is a paid-service with API access to for institutions. However, we can access Factiva via the link available at HKU Library using HKU credentials without API access. Therefore, we create a 'synthetic API' using the webdriver module to access Factiva shown as follows: 
 
 ```python
 webdriver_dir = '/Users/chanmingho/Downloads/chromedriver' #supply local directory of 'webdriver'
@@ -142,9 +142,9 @@ for page in range (3, page_count+1):
 
 ## How To Preprocess News Articles?
 
-A typical news article scrapped from Factiva is shown as follows:
+A typical news article scraped from Factiva is shown as follows:
 
-![A sample of WSJ news scrapped from Factiva]({static}/images/group-Metatext-020_sample_of_news.jpeg)
+![A sample of WSJ news scraped from Factiva]({static}/images/group-Metatext-020_sample_of_news.jpeg)
 
 All we need from news articles is author, date, title and the main text.
 
