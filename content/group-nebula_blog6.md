@@ -1,5 +1,5 @@
 ---
-Title: Blog 6 - Machine Learning Model Training (Group Nebula)
+Title: Machine Learning Model Training (Group Nebula)
 Date: 2022-05-02
 Category: Progress Report
 ---
@@ -71,7 +71,7 @@ After extracting non-neutral sentences using FinBERT, we prepare the dataset for
 | | Recurrent Neural Network (Dataset 10) |
 |-|--------------------------------------|
 | Train | ![group-nebula-blog-RNN10_Train.png](./images/group-nebula-blog-RNN10_Train.png) |
-| Test | ![group-nebula-blog-RNN10_Test.png](./images/RecurrentNeuralNetwork_10_Test.png) |
+| Test | ![group-nebula-blog-RNN10_Test.png](./images/group-nebula-blog-RNN10_Test.png) |
 
 | | Recurrent Neural Network (Dataset 11) |
 |-|--------------------------------------|
