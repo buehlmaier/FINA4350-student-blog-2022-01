@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="Sentiment Analysis and Metric Incorporation (Group Simplicity) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/sentiment-analysis-and-metric-incorporation-group-simplicity.html" />
+<meta property="og:description" content="By Group &#34;Simplicity,&#34; written by Puri Dev Lalit (Dev) Author Introduction I am Dev, a Year 2 student majoring in Quantitative Finance at HKU, and I am in charge of two parts, namely (1) Analyzing post sentiment and (2) Updating it according to the overall popularity of the post. Initial …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-04-30T12:00:00+08:00" />
+<meta name="twitter:title" content="Sentiment Analysis and Metric Incorporation (Group Simplicity) ">
+<meta name="twitter:description" content="By Group &#34;Simplicity,&#34; written by Puri Dev Lalit (Dev) Author Introduction I am Dev, a Year 2 student majoring in Quantitative Finance at HKU, and I am in charge of two parts, namely (1) Analyzing post sentiment and (2) Updating it according to the overall popularity of the post. Initial …">
+
+        <title>Sentiment Analysis and Metric Incorporation (Group Simplicity)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/sentiment-analysis-and-metric-incorporation-group-simplicity.html">
+                Sentiment Analysis and Metric Incorporation (Group Simplicity)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Simplicity," written by Puri Dev Lalit (Dev)</p>
+<h2>Author Introduction</h2>
+<p>I am Dev, a Year 2 student majoring in Quantitative Finance at HKU, and I am in charge of two parts, namely (1) Analyzing post sentiment and (2) Updating it according to the overall popularity of the post.</p>
+<h2>Initial Thoughts</h2>
+<p>I was aware of the fact that there are several Python libraries for Sentiment Analysis, such as pre-built ones like TextBlob and VADER, or trainable ones like keras. I took a look at my dataset and thought a bit about the nature of the text I was trying to analyze - Reddit posts. They would most likely be full of colloquialisms, acronyms and even emojis. It would be out of my area of competence, and take an enormous amount of time if I were to train my own text analyzer, so I was down to two options: TextBlob or VADER. After <a href="https://comp.social.gatech.edu/papers/icwsm14.vader.hutto.pdf">some research</a> on the pros and cons of both, I found out that TextBlob was more suitable for formal writing, while VADER works better on social media content, so I chose VADER.</p>
+<h2>Part I: Sentiment Analysis</h2>
+<h3>Updating the VADER Dictionary</h3>
+<p>After a quick look through the <a href="https://github.com/cjhutto/vaderSentiment#python-demo-and-code-examples">VADER documentation</a>, I realized that I could update the VADER sentiment dictionary to fit my needs. Since r/wallstreetbets is the birthplace of many new and original phrases, I would have to not only find an exhaustive list of these terms, but also assign a non-arbitrary sentiment score to them. Though after a couple of minutes of web surfing, my work was cut short for me. Apparently, there had been others who were also interested in analyzing this subreddit's sentiment, and had already created the dictionary with a long list of terms (<a href="https://github.com/mdominguez2010/wsb-sentiment-analysis/blob/main/stocks_to_trade.py">1</a>, <a href="https://infinityinvesting.com/wallstreetbets-slang-meaning/">2</a>, <a href="https://scholarworks.rit.edu/cgi/viewcontent.cgi?article=12195&amp;context=theses">3</a>). I took inspiration from the three sources and created my own dictionary which is shown below.</p>
+<div class="highlight"><pre><span></span><code><span class="n">wsb_lingo</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;citron&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;hidenburg&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;moon&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;highs&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+             <span class="s1">&#39;mooning&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;short&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;call&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;calls&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>
+             <span class="s1">&#39;put&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;puts&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;break&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;tendie&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;tendies&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+             <span class="s1">&#39;town&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;overvalued&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;undervalued&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;buy&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;hold&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+             <span class="s1">&#39;sell&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;gone&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;gtfo&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.7</span><span class="p">,</span> <span class="s1">&#39;paper&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.7</span><span class="p">,</span> <span class="s1">&#39;bullish&#39;</span><span class="p">:</span> <span class="mf">3.7</span><span class="p">,</span>
+             <span class="s1">&#39;bearish&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">3.7</span><span class="p">,</span> <span class="s1">&#39;bagholder&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.7</span><span class="p">,</span> <span class="s1">&#39;stonk&#39;</span><span class="p">:</span> <span class="mf">1.9</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">:</span> <span class="mf">1.9</span><span class="p">,</span> <span class="s1">&#39;money&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span>
+             <span class="s1">&#39;print&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">,</span> <span class="s1">&#39;bull&#39;</span><span class="p">:</span> <span class="mf">2.9</span><span class="p">,</span> <span class="s1">&#39;bear&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.9</span><span class="p">,</span> <span class="s1">&#39;pumping&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;sus&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">,</span>
+             <span class="s1">&#39;offering&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.3</span><span class="p">,</span> <span class="s1">&#39;rip&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;downgrade&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;upgrade&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+             <span class="s1">&#39;maintain&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;pump&#39;</span><span class="p">:</span> <span class="mf">1.9</span><span class="p">,</span> <span class="s1">&#39;hot&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;drop&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="s1">&#39;rebound&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span>
+             <span class="s1">&#39;crack&#39;</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="s2">&quot;BTFD&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;FD&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;diamond hands&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;paper hands&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+             <span class="s2">&quot;DD&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;GUH&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;pump&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;dump&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;gem stone&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;rocket&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>
+             <span class="s2">&quot;andromeda&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;to the moon&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">}</span>
+</code></pre></div>
+
+<p>It is worth noting that sentiment scores are given on a scale from -4 (most negative) to 4 (most positive). Also, another interesting thing about VADER is that in-text emojis are automatically converted into text before analysis. To this end, it was only necessary for me to give a description of the emojis for VADER to be able to pick up on its sentiment. This can be seen above with "rocket" and "gem stone".</p>
+<h3>Running the Sentiment Analyzer</h3>
+<p>The code to initialize the VADER Sentiment Analyzer and Dictionary Updating is relatively straightforward and can be found in the VADER documentation. Since 4 outputs will be given for each post, namely the "Negative Signal", "Neutral Signal", "Positive Signal" and "Compound Signal", all of which are normalized scores between -1 and 1, I simply had to append all 4 outputs onto the initial DataFrame. The code is given below.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Import the necessary libraries</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">from</span> <span class="nn">nltk.sentiment.vader</span> <span class="kn">import</span> <span class="n">SentimentIntensityAnalyzer</span>
+
+<span class="c1"># Update the VADER Sentiment Analyzer with the above terms</span>
+<span class="n">sia</span> <span class="o">=</span> <span class="n">SentimentIntensityAnalyzer</span><span class="p">()</span>
+<span class="n">sia</span><span class="o">.</span><span class="n">lexicon</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">wsb_lingo</span><span class="p">)</span>
+
+<span class="c1"># Import the cleaned dataframe from the previous step</span>
+<span class="n">cleaned_dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;reddit_with_ticker.csv&quot;</span><span class="p">,</span> <span class="n">lineterminator</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span> 
+
+<span class="c1"># Run the post content through VADER and store the output</span>
+<span class="n">sentiment_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">cleaned_dataframe</span><span class="p">[</span><span class="s2">&quot;all_content&quot;</span><span class="p">]:</span>
+    <span class="n">sentiment_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">sia</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="n">content</span><span class="p">)[</span><span class="s2">&quot;neg&quot;</span><span class="p">],</span> <span class="n">sia</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="n">content</span><span class="p">)[</span><span class="s2">&quot;neu&quot;</span><span class="p">],</span> 
+                      <span class="n">sia</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="n">content</span><span class="p">)[</span><span class="s2">&quot;pos&quot;</span><span class="p">],</span> <span class="n">sia</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="n">content</span><span class="p">)[</span><span class="s2">&quot;compound&quot;</span><span class="p">]])</span>
+<span class="n">sentiment</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sentiment_list</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Sell Signal&quot;</span><span class="p">,</span> <span class="s2">&quot;Hold Signal&quot;</span><span class="p">,</span> <span class="s2">&quot;Buy Signal&quot;</span><span class="p">,</span> <span class="s2">&quot;Compound Signal&quot;</span><span class="p">])</span>
+
+
+<span class="c1"># Combine the results with the original dataframe</span>
+<span class="n">df_concat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">cleaned_dataframe</span><span class="p">,</span> <span class="n">sentiment</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Save the new dataframe as a csv file</span>
+<span class="n">df_concat</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;reddit_with_ticker_with_sentiment.csv&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2>Part II: Metric Incorporation</h2>
+<h3>Taking a look at the Post Metrics</h3>
+<p>My next step was to incorporate the various metrics I had on post popularity into the overall sentiment score. I took a look at the metrics shown below and found a certain distinction to categorize them - homogeneous and heterogeneous. </p>
+<p><img alt="Metric Visualization" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Simplicity-080_Metric_Visualization.png"></p>
+<p>An example of a homogeneous metric would be the upvote ratio, which is evenly spread out between 0 and 1. While heterogeneous metrics include number of comments and number of upvotes, with the majority of posts having only single-digit counts, but a few having extremely high counts. </p>
+<h3>Homogeneous Data</h3>
+<p>For homogeneous data, I split them based on percentiles, namely the 20th, 40th, 60th, and 80th, forming five categories altogether. Data that fell into the highest category had their scores multiplied by 1.5. Each following category had decreasing increments of 0.25 in their multipliers, with the scores in the lowest category only being multiplied by 0.5. This means that posts which most agreed with (high upvote ratio) would have their sentiment scores magnified; while highly unpopular posts would have theirs diminished. The functions that are used to achieve this are defined below.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Obtains the percentiles for homogeneous data</span>
+<span class="k">def</span> <span class="nf">find_percentiles</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">p_20</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanpercentile</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">p_40</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanpercentile</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+    <span class="n">p_60</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanpercentile</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="n">p_80</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanpercentile</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">p_20</span><span class="p">,</span> <span class="n">p_40</span><span class="p">,</span> <span class="n">p_60</span><span class="p">,</span> <span class="n">p_80</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">updatep</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+
+    <span class="c1"># Store the percentiles in a list</span>
+    <span class="n">percentile</span> <span class="o">=</span> <span class="n">find_percentiles</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">])</span>
+
+    <span class="c1"># Split the data into 5 different categories based on percentile</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">percentile</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">percentile</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">percentile</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">percentile</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">percentile</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">percentile</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">percentile</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">percentile</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Update the Sentiment score based on the category</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">1.25</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">data</span>
+</code></pre></div>
+
+<h3>Heterogeneous Data</h3>
+<p>I thought of using percentiles too for heterogeneous data. However, this led to an error. Given the disproportionately large number of 0s among heterogeneous data, all 4 percentiles used to categorize came out to be 0. This meant that the categorization would fail. Hence, another categorization method had to be used. From my knowledge of statistics, I came up with the method of using mean and standard deviation, though I did not know an explicit formula for categorization. I experimented with varying multiples of standard deviation and found out that increments of 0.5 seemed to fit the data the best. The functions that are used to achieve this are defined below.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">updates</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+
+    <span class="c1"># Find the mean and standard deviations of the data</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">])</span>
+    <span class="n">sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">])</span>
+
+    <span class="c1"># Split the data into 5 categories according to mean plus varying mutiples of sd</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">mean</span><span class="p">),</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">mean</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">mean</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">sd</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">mean</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">sd</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">mean</span><span class="o">+</span><span class="n">sd</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">mean</span><span class="o">+</span><span class="n">sd</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">mean</span><span class="o">+</span><span class="mf">1.5</span><span class="o">*</span><span class="n">sd</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">mean</span><span class="o">+</span><span class="mf">1.5</span><span class="o">*</span><span class="n">sd</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Update the sentiment scores based on the category</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">column</span> <span class="o">+</span> <span class="s2">&quot;_category&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">1.8</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">data</span>
+</code></pre></div>
+
+<h3>Running the above functions</h3>
+<p>For clarity, I created 6 new variables, 5 to store the result of the categorization, and the remaining 1 to store the updated sentiment score. We run the above functions to obtain the updated sentiment score and append all new columns to the previous DataFrame. The final DataFrame can then be used in correlation analysis. </p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Import the necessary modules</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Import the dataframe from the previous step</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;reddit_with_ticker_with_sentiment.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create new columns for categorization</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;upvotes_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_crossposts_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_comments_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;comment_upvote_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;upvote_ratio_category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Updated Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;Compound Signal&#39;</span><span class="p">]</span>
+
+<span class="c1"># Run the above functions on the actual metrics</span>
+<span class="n">updatep</span><span class="p">(</span><span class="s2">&quot;upvote_ratio&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="n">updates</span><span class="p">(</span><span class="s2">&quot;upvotes&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="n">updates</span><span class="p">(</span><span class="s2">&quot;num_crossposts&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="n">updates</span><span class="p">(</span><span class="s2">&quot;num_comments&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="n">updates</span><span class="p">(</span><span class="s2">&quot;comment_upvote&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+
+<span class="c1"># Save the updated dataframe as a csv file</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Updated_Data.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>An illustration of the sentiment updating is given below.</p>
+<p><img alt="Result Illustration" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Simplicity-080_Result_Illustration.png"></p>
+<h2>Final Thoughts</h2>
+<p>All in all, I believe I was successful in completing the tasks I set out to do. This was the first time I experienced what it means to be a "Data Scientist" - someone that needs to familiarize themselves with the dataset, and then come up with methods to achieve their goals.  I had always thought of Data Science as making use of fancy, complicated models, yet I now know that this cannot be further away from the truth. In reality, it is a mix of experimenting with your data and making deductions about it, quite a messy process to be honest. I hope that my elaborate attempt at explaining my thought process brings some substance to this blog plot.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-04-30T12:00:00+08:00">Sat 30 April 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
