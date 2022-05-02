@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="Correlation Analysis (Group Simplicity) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/correlation-analysis-group-simplicity.html" />
+<meta property="og:description" content="By Group &#34;Simplicity,&#34; written by Sean Uttsant RAI Author Introduction Hello, this is Sean. I&#39;m a final year student studying Accounting and Finance at HKU, in charge of the correlation analysis portion of this project. Overall Objective and Workflow Using the processed data from the sentiment analysis portion, we need …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-04-24T00:00:00+08:00" />
+<meta name="twitter:title" content="Correlation Analysis (Group Simplicity) ">
+<meta name="twitter:description" content="By Group &#34;Simplicity,&#34; written by Sean Uttsant RAI Author Introduction Hello, this is Sean. I&#39;m a final year student studying Accounting and Finance at HKU, in charge of the correlation analysis portion of this project. Overall Objective and Workflow Using the processed data from the sentiment analysis portion, we need …">
+
+        <title>Correlation Analysis (Group Simplicity)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/correlation-analysis-group-simplicity.html">
+                Correlation Analysis (Group Simplicity)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Simplicity," written by Sean Uttsant RAI</p>
+<h2>Author Introduction</h2>
+<p>Hello, this is Sean. I'm a final year student studying Accounting and Finance at HKU, in charge of the correlation analysis portion of this project.</p>
+<h2>Overall Objective and Workflow</h2>
+<p>Using the processed data from the sentiment analysis portion, we need to compute the correlation between the sentiment values of the stocks discussed on the WallStreetBets subreddit and their respective stock returns. We have selected three different market shocks i.e. Crypto, COVID and GME and two random dates to use as anchors for our analysis. Then, we need to visualise and output the results across different timeframes i.e. 1 day, 1 week, 1 month, 3 month, 6 month, 1 year, for the chosen anchors to see whether the correlation values would change over time. The steps are shown below:</p>
+<ol>
+<li>Read the sentiment values CSV file as a DataFrame and convert the 'date' column to a yyyy-mm-dd format</li>
+<li>Create a list of lists of relevant stock tickers for the anchors i.e. 3 market shocks and 2 random dates</li>
+<li>Create main function that accepts input for timeframe i.e. number and interval e.g. 1 day/ 3 months, etc.</li>
+<li>Calculate the inputted timeframe's returns for stocks within the list of lists</li>
+<li>Calculate sentiment value average for relevant stocks depending on the timeframe inputed, and compute correlation</li>
+<li>Create a scatter plot for each anchor, where the x-axis: sentiment value average and y-axis: stock returns, and also add fitted line</li>
+<li>After repeating the above steps for all the timeframes, use list comprehension to plot the changes in correlation and p-value over time for all the anchors</li>
+</ol>
+<p><strong><em>Libraries and Modules Used:</em></strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">yfinance</span> <span class="k">as</span> <span class="nn">yf</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">dateutil.relativedelta</span> <span class="kn">import</span> <span class="n">relativedelta</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.polynomial.polynomial</span> <span class="kn">import</span> <span class="n">polyfit</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</code></pre></div>
+
+<h3>1. Read the sentiment values CSV file as a DataFrame and convert the 'date' column to a yyyy-mm-dd format</h3>
+<div class="highlight"><pre><span></span><code><span class="n">save_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/Users/uttsant/Desktop&#39;</span>
+<span class="c1"># CRYPTO, COVID, GME + 2 random dates</span>
+<span class="n">market_shocks</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2018-09-20&#39;</span><span class="p">,</span> <span class="s1">&#39;2020-02-20&#39;</span><span class="p">,</span><span class="s1">&#39;2021-01-11&#39;</span><span class="p">,</span> <span class="s1">&#39;2018-09-05&#39;</span><span class="p">,</span> <span class="s1">&#39;2021-03-10&#39;</span><span class="p">]</span>
+<span class="c1"># create dataframe for CSV with sentiment values</span>
+<span class="n">sentiment_csv_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/Users/uttsant/Desktop/Updated_Data.csv&#39;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">sentiment_csv_path</span><span class="p">)</span>
+<span class="c1"># convert date to yyyy-mm-dd format</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div>
+
+<p>The values in the date column of the sentiment value CSV was in this format <code>2018-09-01 04:00:19+00:00</code>. However the parameters for the yfinance function would require this format <code>2018-09-01</code>. At first, I was think of using the <code>datetime.strptime</code> function to parse the string into the desired datetime format, and then use <code>datetime.strftime</code> function to convert it back to a string. However, I decided that using <code>str.split</code> and getting the first slice would be a lot more simpler and readable paired with the <code>apply</code> function for the <code>df['date']</code> pandas series.</p>
+<h3>2. Create a list of lists of relevant stock tickers for the anchors i.e. 3 market shocks and 2 random dates</h3>
+<div class="highlight"><pre><span></span><code><span class="n">tickers_on_market_shocks</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># create a list of tickers where the dates match the dates for the market shocks</span>
+<span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">market_shocks</span><span class="p">:</span>
+    <span class="n">tickers_on_market_shocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">date</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;ticker&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+</code></pre></div>
+
+<p>At first, I was struggling to retrieve the ticker values, because this code <code>df[df['date'] == date].groupby('ticker').mean()</code> would return a series for the mean, whereas I was interested in obtaining the ticker value. After looking up my issue online, I learnt that using the index attribute would return the ticker values that were the index in the series. I then converted it into a list, which was then appended to the <code>tickers_on_market_shocks</code> list, which formed a nested list.</p>
+<h3>3. Create main function that accepts input for timeframe i.e. number and interval e.g. 1 day/ 3 months, etc.</h3>
+<p>The first code block below is an excerpt of what I used as my old approach. All you need to know is that for every timeframe, in this case 1 day and 1 week, I would create a new block of basically the same code with a few variable names and values changed. Although the code could do its job and get the results I wanted, I realised that this approach would be very cumbersome to maintain, as a new block would have to be created every time a new timeframe was added and it could increase the risk of human error when updating the code, so it was definitely not a good practice.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#1 day return</span>
+<span class="n">full_one_day_return_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">labelled_one_day_return</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">one_day_return_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">market_shock</span><span class="p">:</span>
+    <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">stock</span> <span class="ow">in</span> <span class="n">ticker</span><span class="p">:</span>
+        <span class="n">temp_df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">stock</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s1">&#39;1d&#39;</span><span class="p">)</span>
+        <span class="c1">#calculate stock return and appending it to a list</span>
+        <span class="n">one_day_return_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span> <span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">full_one_day_return_df</span> <span class="o">=</span> <span class="n">full_one_day_return_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_df</span><span class="p">)</span>
+<span class="n">labelled_one_day_return</span><span class="p">[</span><span class="s1">&#39;Date and Tickers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+<span class="n">labelled_one_day_return</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">one_day_return_list</span>
+
+<span class="c1">#1 week return</span>
+<span class="n">full_one_week_return_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">labelled_one_week_return</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">one_week_return_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">market_shock</span><span class="p">:</span>
+    <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">weeks</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">stock</span> <span class="ow">in</span> <span class="n">ticker</span><span class="p">:</span>
+        <span class="n">temp_df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">stock</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s1">&#39;1d&#39;</span><span class="p">)</span>
+        <span class="n">one_week_return_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span> <span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">full_one_week_return_df</span> <span class="o">=</span> <span class="n">full_one_week_return_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_df</span><span class="p">)</span>
+<span class="n">labelled_one_week_return</span><span class="p">[</span><span class="s1">&#39;Date and Tickers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+<span class="n">labelled_one_week_return</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">one_week_return_list</span>
+</code></pre></div>
+
+<p>So after racking my brain, I decided that using a self-defined function where the user can input the <code>number</code> and <code>period</code> to customise the timeframe, would be the way to go. I'll be referring to parts of this large block of code for the later steps as well. So do keep reading!</p>
+<div class="highlight"><pre><span></span><code><span class="n">list_of_final_cs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">list_of_returns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">list_of_corr_p</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">def</span> <span class="nf">based_on_timeframe</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">period</span><span class="p">):</span> <span class="c1">#add &#39;s&#39; e.g. days, weeks, months, years</span>
+    <span class="c1">#returns part</span>
+    <span class="n">zip_</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">market_shocks</span><span class="p">,</span> <span class="n">tickers_on_market_shocks</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">ticker_group</span> <span class="ow">in</span> <span class="n">zip_</span><span class="p">:</span>
+        <span class="n">return_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">ticker_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span>
+            <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;weeks&#39;</span><span class="p">:</span>
+            <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">weeks</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;months&#39;</span><span class="p">:</span>
+            <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;years&#39;</span><span class="p">:</span>
+            <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">years</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ticker</span> <span class="ow">in</span> <span class="n">ticker_group</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">temp_df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s1">&#39;1d&#39;</span><span class="p">)</span>
+                <span class="n">return_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span> <span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">ticker_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ticker</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">date</span><span class="p">)</span>
+
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="n">list_of_returns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">return_list</span><span class="p">)</span>
+
+        <span class="c1">#sentiment value part</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span>
+            <span class="n">range_</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;weeks&#39;</span><span class="p">:</span>
+            <span class="n">range_</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">weeks</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;months&#39;</span><span class="p">:</span>
+            <span class="n">range_</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;years&#39;</span><span class="p">:</span>
+            <span class="n">range_</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">years</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+
+        <span class="n">final_range</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">range_</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">cs_average_series</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">date</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">final_range</span><span class="p">)]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;ticker&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;Updated Score&#39;</span><span class="p">]</span>
+
+        <span class="n">relevant_tickers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ticker_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">date</span><span class="p">:</span>
+                <span class="n">relevant_tickers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">final_cs</span> <span class="o">=</span> <span class="n">cs_average_series</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">relevant_tickers</span><span class="p">]</span>
+        <span class="n">list_of_final_cs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">final_cs</span><span class="p">))</span>
+
+
+        <span class="n">list_of_corr_p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">final_cs</span><span class="p">),</span><span class="n">return_list</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">final_cs</span><span class="p">),</span><span class="n">return_list</span><span class="p">))</span>
+
+    <span class="c1">#scatterplot for each market shock</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_final_cs</span><span class="p">)):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">list_of_final_cs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">list_of_returns</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span> <span class="o">+</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;WSB Sentiment Values&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Stock Returns&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1">#print correlation values and p-values for all the market shocks for this timeframe</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">list_of_corr_p</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The first thing I did was create three empty lists. The lists are to store the sentiment values, returns, and correlation values &amp; p-values for all the <code>market_shocks</code> inside the for-loop.</p>
+<div class="highlight"><pre><span></span><code><span class="n">list_of_final_cs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">list_of_returns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">list_of_corr_p</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div>
+
+<h3>4. Calculate the inputted timeframe's returns for stocks within the list of lists</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">based_on_timeframe</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">period</span><span class="p">):</span> <span class="c1">#add &#39;s&#39; e.g. days, weeks, months, years</span>
+    <span class="c1">#returns part</span>
+    <span class="n">zip_</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">market_shocks</span><span class="p">,</span> <span class="n">tickers_on_market_shocks</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">date</span><span class="p">,</span> <span class="n">ticker_group</span> <span class="ow">in</span> <span class="n">zip_</span><span class="p">:</span>
+        <span class="n">return_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">ticker_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span>
+            <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;weeks&#39;</span><span class="p">:</span>
+            <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">weeks</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;months&#39;</span><span class="p">:</span>
+            <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;years&#39;</span><span class="p">:</span>
+            <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">years</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ticker</span> <span class="ow">in</span> <span class="n">ticker_group</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">temp_df</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">end_date</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s1">&#39;1d&#39;</span><span class="p">)</span>
+                <span class="n">return_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span> <span class="n">temp_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">ticker_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ticker</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">date</span><span class="p">)</span>
+                <span class="c1"># full_return_df = full_return_df.append(temp_df)</span>
+
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="n">list_of_returns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">return_list</span><span class="p">)</span>
+</code></pre></div>
+
+<p>When the for-loop for this part of the code is run, it is responsible for appending the returns for the stocks specified in the <code>tickers_on_market_shocks</code> list for all the <code>market_shocks</code> to the <code>list_of_returns</code>. Based on the number and period parameters that the user passes in the <code>def based_on_timeframe(number,period):</code> function, the <code>end_date</code> is assigned. For example, if <code>based_on_timeframe(1, 'years')</code> is inputted, the <code>end_date</code> will be exactly 1 year after the <code>start_date</code>. The <code>start_date</code> is automatically assigned depending on the <code>market_shocks</code> list's iterations. Also besides appending the returns, it also appends the <code>ticker</code> names <code>+</code> the <code>date</code> of the corresponding market shock to the <code>ticker_list</code> for later use.</p>
+<h3>5. Calculate sentiment value average for relevant stocks depending on the timeframe inputed, and compute correlation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">#sentiment value part</span>
+<span class="k">if</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span>
+    <span class="n">range_</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">days</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;weeks&#39;</span><span class="p">:</span>
+    <span class="n">range_</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">weeks</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;months&#39;</span><span class="p">:</span>
+    <span class="n">range_</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">months</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">period</span> <span class="o">==</span> <span class="s1">&#39;years&#39;</span><span class="p">:</span>
+    <span class="n">range_</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">relativedelta</span><span class="p">(</span><span class="n">years</span> <span class="o">=</span> <span class="n">number</span><span class="p">)</span>
+
+<span class="n">final_range</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">range_</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This part of the code is for obtaining the date range for computing the sentiment value means. As stocks may be mentioned more than once within the selected timeframe. So for our analysis, we would need to compute the mean of the sentiment values for all the times they appeared on the subreddit within that timeframe. That's why we need to set a date range, which is decided based on the <code>period</code> parameter inputted.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sv_average_series</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">date</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">final_range</span><span class="p">)]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;ticker&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;Updated Score&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>This line of code finds the mean of the sentiment values for all the stocks that are included within the date range, and stores it as a pandas series for the <code>Updated Score</code> column.</p>
+<div class="highlight"><pre><span></span><code><span class="n">relevant_tickers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ticker_list</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">date</span><span class="p">:</span>
+        <span class="n">relevant_tickers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">final_sv</span> <span class="o">=</span> <span class="n">sv_average_series</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">relevant_tickers</span><span class="p">]</span>
+<span class="n">list_of_final_sv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">final_sv</span><span class="p">))</span>
+</code></pre></div>
+
+<p>However, not all these stocks were mentioned on the subreddit during the actual market shocks. So we need to exclude the stocks that were not on the subreddit during the market shocks. In order to do that, we appended the ticker names that had dates that matched the market shock <code>date</code>, and appended to the <code>relevant_tickers</code> list. We then used the <code>.loc</code> function with the <code>relevant_tickers</code> list as an argument for the <code>sv_average_series</code> to obtain the sentiment value means for the relevant tickers.</p>
+<div class="highlight"><pre><span></span><code><span class="n">list_of_corr_p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">final_sv</span><span class="p">),</span><span class="n">return_list</span><span class="p">))</span>
+<span class="c1"># print(st.pearsonr(list(final_sv),return_list))</span>
+</code></pre></div>
+
+<p>This part of the code is responsible for computing the correlation values using the <code>st.pearsonr</code> function from the <code>scipy.stats</code> module, the <code>final_sv</code> series is converted to a list before being passed to the function, along with the <code>return_list</code>. The function returns both the correlation value and p-value inside a tuple. The tuples are appended to the <code>list_of_corr_p</code> list for plotting purposes in the final step.</p>
+<h3>6. Create a scatter plot for each anchor, where the x-axis: sentiment value average and y-axis: stock returns, and also add fitted line</h3>
+<p>As much as I wanted to integrate this part with the main for-loop instead of creating another for-loop, all the data points from the market shocks clump up together with the former approach, instead of being displayed separately, which was really frustrating. So, I had to resort to a separate for-loop which would run after the main for-loop ended.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_final_sv</span><span class="p">)):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">list_of_final_sv</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">list_of_returns</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span> <span class="o">+</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;WSB Sentiment Values&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Stock Returns&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p>Here's an example of what the scatterplots would look like. This one is for the Crypto shock. It illustrates the relationship between the relevant stocks’ 1 day returns and their sentiment values over that 1 day after the crypto market shock.</p>
+<p><img alt="crypto_scatter" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Simplicity-crypto_scatter.png"></p>
+<h3>7. Use list comprehension to plot the changes in correlation and p-value over time for all the anchors.</h3>
+<p><code>all_</code> is a three dimensional array, which contains all the correlation values and p-values that were computed in Step 5. The code below is for outputting the overall correlation trend across all timeframes for the Crypto shock. Initially, I planned on using a for-loop for this section, but I realised that it would look unnecessarily clunky. Then, I remembered about the list comprehension techniques we covered in a lecture. So, I used that to pass the values from <code>all_</code> to <code>crypto_corr</code> and <code>crypto_p</code> for the line plots. The same was done for the rest of the shocks.</p>
+<div class="highlight"><pre><span></span><code><span class="n">crypto_corr</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">all_</span><span class="p">]</span>
+<span class="n">crypto_p</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">all_</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1 day&#39;</span><span class="p">,</span> <span class="s1">&#39;1 week&#39;</span><span class="p">,</span> <span class="s1">&#39;1 month&#39;</span><span class="p">,</span> <span class="s1">&#39;3 months&#39;</span><span class="p">,</span> <span class="s1">&#39;6 months&#39;</span><span class="p">,</span> <span class="s1">&#39;1 year&#39;</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">crypto_corr</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;correlation value&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Overall Correlation Trend for the Crypto Shock&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">crypto_p</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;p-value&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Here is an overview of the overall correlation trend across all market shocks.</p>
+<p><img alt="Overview" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Simplicity-overview.png"></p>
+<h2>Final Thoughts</h2>
+<p>Generally speaking, the strength of the relationship between stock returns and sentiment values has remained weak throughout the 1 year period since the tested shocks. However, the consistently high p-values indicate that very little confidence should be placed in these relationships, since the probability of such a weak relationship due to random states is extremely high. Honestly speaking, the results were quite disappointing. I wasn't biased towards which side I wanted the correlation to lean towards, but I had at least hoped there would be reasonably low p-values, since it would have allowed us to make a more conclusive stance towards the subreddit's sentiments. But all in all, we still believe that our analysis can somewhat show that investing based on what WallStreetBets has to say would be a pretty huge gamble.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-04-24T00:00:00+08:00">Sun 24 April 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
