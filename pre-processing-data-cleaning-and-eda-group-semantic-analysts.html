@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="Pre-Processing, Data Cleaning and EDA! (Group Semantic Analysts) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/pre-processing-data-cleaning-and-eda-group-semantic-analysts.html" />
+<meta property="og:description" content="By Group &#34;Semantic Analysts,&#34; written by Prateek Kher Introduction In our initial stages, we were confused as to where to start when it came to data cleaning and further analysis on the cleaned data. This is when we made a formal plan of action, as to what action requires approximately …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-04-03T08:00:00+08:00" />
+<meta name="twitter:title" content="Pre-Processing, Data Cleaning and EDA! (Group Semantic Analysts) ">
+<meta name="twitter:description" content="By Group &#34;Semantic Analysts,&#34; written by Prateek Kher Introduction In our initial stages, we were confused as to where to start when it came to data cleaning and further analysis on the cleaned data. This is when we made a formal plan of action, as to what action requires approximately …">
+
+        <title>Pre-Processing, Data Cleaning and EDA! (Group Semantic Analysts)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/pre-processing-data-cleaning-and-eda-group-semantic-analysts.html">
+                Pre-Processing, Data Cleaning and EDA! (Group Semantic Analysts)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Semantic Analysts," written by Prateek Kher</p>
+<h2>Introduction</h2>
+<p>In our initial stages, we were confused as to where to start when it came to data cleaning and further analysis on the cleaned data. This is when we made a formal plan of action, as to what action requires approximately how much amount of time, and created a timeline. After we were done creating a timeline, we delegated the work amongst each other. We knew that before we actually put in the MD&amp;A section data inside our models and conduct feature engineering, we had to make sure the pre-processing was conducted properly and accurately. Before we begin data cleaning, the following graph shows the distribution of our training data, i.e., the distribution between fraudulent and non-fraudulent companies. </p>
+<p><img alt="Distribution" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-SemanticAnalysts-dist.jpeg"></p>
+<h2>Cleaning and Pre-Processing</h2>
+<p>As our previous blog showed, we have a dataframe which consists of CIK of the report, coupled with the year it was published, whether it is fraudulent or not, and the MD&amp;A section. The data cleaning broadly incorporates the following steps:
+1) Expanding Contractions
+2) Lowercase Updating
+3) Removing Punctuations and RegEx
+4) Removing Digits
+5) Removing Stopwords
+6) Removing Symbols and Markdown</p>
+<p>The pre-processed data contains a considerable amount of contractions, which are eliminated using a custom-made dictionary that stores contractions in the form of “Contraction”: “Full Form” as the “Key”: “Value” pair. Figure 2.2 below shows the dictionary representation of the contractions as explained. The contractions need to be expanded as it becomes easier for the compiler to understand the cleaned data without apostrophes and give more accurate results. </p>
+<p>We created a dictionary of contractions, which will be used to expand on the specific contractions as mentioned, a sample of which is shown below: </p>
+<div class="highlight"><pre><span></span><code><span class="c1">#creating a dictionary of contractions </span>
+
+<span class="n">contractions</span> <span class="o">=</span> <span class="p">{</span>
+<span class="s2">&quot;ain&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;is not&quot;</span><span class="p">,</span>
+<span class="s2">&quot;aren&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;are not&quot;</span><span class="p">,</span>
+<span class="s2">&quot;can&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;cannot&quot;</span><span class="p">,</span>
+<span class="s2">&quot;can&#39;t&#39;ve&quot;</span><span class="p">:</span> <span class="s2">&quot;cannot have&quot;</span><span class="p">,</span>
+<span class="s2">&quot;&#39;cause&quot;</span><span class="p">:</span> <span class="s2">&quot;because&quot;</span><span class="p">,</span>
+<span class="s2">&quot;could&#39;ve&quot;</span><span class="p">:</span> <span class="s2">&quot;could have&quot;</span><span class="p">,</span>
+<span class="s2">&quot;couldn&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;could not&quot;</span><span class="p">,</span>
+<span class="s2">&quot;couldn&#39;t&#39;ve&quot;</span><span class="p">:</span> <span class="s2">&quot;could not have&quot;</span><span class="p">,</span>
+<span class="s2">&quot;didn&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;did not&quot;</span><span class="p">,</span>
+<span class="s2">&quot;doesn&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;does not&quot;</span><span class="p">,</span>
+<span class="s2">&quot;don&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;do not&quot;</span><span class="p">,</span>
+<span class="s2">&quot;hadn&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;had not&quot;</span><span class="p">,</span>
+<span class="s2">&quot;hadn&#39;t&#39;ve&quot;</span><span class="p">:</span> <span class="s2">&quot;had not have&quot;</span><span class="p">,</span>
+<span class="s2">&quot;hasn&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;has not&quot;</span><span class="p">,</span>
+<span class="s2">&quot;haven&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;have not&quot;</span><span class="p">,</span>
+<span class="s2">&quot;he&#39;d&quot;</span><span class="p">:</span> <span class="s2">&quot;he would&quot;</span><span class="p">,</span>
+<span class="s2">&quot;he&#39;d&#39;ve&quot;</span><span class="p">:</span> <span class="s2">&quot;he would have&quot;</span><span class="p">,</span>
+<span class="s2">&quot;he&#39;ll&quot;</span><span class="p">:</span> <span class="s2">&quot;he will&quot;</span><span class="p">,</span>
+<span class="s2">&quot;he&#39;ll&#39;ve&quot;</span><span class="p">:</span> <span class="s2">&quot;he he will have&quot;</span><span class="p">,</span>
+<span class="s2">&quot;he&#39;s&quot;</span><span class="p">:</span> <span class="s2">&quot;he is&quot;</span><span class="p">,</span>
+<span class="s2">&quot;how&#39;d&quot;</span><span class="p">:</span> <span class="s2">&quot;how did&quot;</span><span class="p">,</span>
+<span class="s2">&quot;how&#39;d&#39;y&quot;</span><span class="p">:</span> <span class="s2">&quot;how do you&quot;</span><span class="p">,</span>
+<span class="s2">&quot;how&#39;ll&quot;</span><span class="p">:</span> <span class="s2">&quot;how will&quot;</span><span class="p">,</span>
+<span class="s2">&quot;how&#39;s&quot;</span><span class="p">:</span> <span class="s2">&quot;how is&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>The python code below shows the procedure by which we conducted the above procedures by creating cleaning functions, and parsing the MD&amp;A section data through these functions.  </p>
+<div class="highlight"><pre><span></span><code><span class="c1">#function for defining contraction&#39;s:</span>
+
+<span class="k">def</span> <span class="nf">expand_contractions</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">contractions</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">contractions</span><span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()])</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="c1">#function for removing unicode data :</span>
+
+<span class="k">def</span> <span class="nf">remove_accented_chars</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="n">REPLACE_BY_SPACE_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[/()</span><span class="si">{}</span><span class="s1">\[\]\|@%$,;-_]&#39;</span><span class="p">)</span>
+<span class="n">BAD_SYMBOLS_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[^0-9a-z #+_]&#39;</span><span class="p">)</span>
+<span class="n">STOPWORDS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+
+<span class="c1">#function for removing all the scrub words</span>
+<span class="k">def</span> <span class="nf">scrub_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1">#Replace \xao characters in text</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\xa0</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#Replace non ascii / not words and digits</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;(</span><span class="se">\\</span><span class="s2">W|</span><span class="se">\\</span><span class="s2">d)&quot;</span><span class="p">,</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#Replace new line characters and following text until space</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">(\w*?)[\s]&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#Remove html markup</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&lt;.*?&gt;&quot;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="k">def</span> <span class="nf">clean_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        text: a string</span>
+
+<span class="sd">        return: modified initial string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">REPLACE_BY_SPACE_RE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="c1"># replace REPLACE_BY_SPACE_RE symbols by space in text</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">BAD_SYMBOLS_RE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="c1"># delete symbols which are in BAD_SYMBOLS_RE from text</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STOPWORDS</span><span class="p">)</span> <span class="c1"># delete stopwords from text</span>
+    <span class="k">return</span> <span class="n">text</span>
+</code></pre></div>
+
+<p>Now that we conducted the cleaning, I thought it would be nice to show what our data looked like before cleaning vs after cleaning, and the result is satisfying to see! </p>
+<p>Pre Cleaning: </p>
+<p><img alt="precleaning" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-SemanticAnalysts-preclean.jpeg"></p>
+<p>Post Cleaning: </p>
+<p><img alt="postcleaning" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-SemanticAnalysts-postclean.jpeg"></p>
+<h2>Loughran-McDonald Master Dictionary</h2>
+<p>The following thought came about in our group discussion when me and my group-mate were sitting together and having dinner. We thought it would be nice to analyse the tone of our MD&amp;A sections, as in many cases, establishing a lexicon is the first step in determining the tone of an annual report, earnings press release, or IPO prospectus. Positive, negative, and neutral words are classified in the dictionary (e.g., uncertainty, litigious, or weak modal). Positive terms make up a large portion of optimistic documents, while negative terms make up a large portion of pessimistic writings. 
+Diction (www.dictionsoftware.com), a tool that parses articles into words before tabulating the words into functional categories, is a popular platform for analyzing tone in the accounting and finance literature. Despite their widespread use in the literature, Diction's optimistic and pessimistic word lists were not designed specifically for financial publications. Readers of 10-Ks are unlikely to think of managers who describe existing and future operations using words like respect, necessity, security, power, trust, authority, or discretion as hopeful. When terms like "not," "none," "death," "suffering," "vice," and "lynch" appear in corporate messaging, they are not considered negative. With corporate communication in mind, LM prepared positive and negative word lists for use in the financial sector. We extracted the opinion information type using the LM dictionary, with the purpose of extracting important features using SFL. LM is used to compute the number of positive and negative word ratios in our document.</p>
+<p>Therefore, while completing this project, we thought something was missing, and we were unable to identify what. We brainstormed for hours, and then came up with the answer to our question. The issue we were having was, that the project was not "human" enough. We therefore decided to conduct some sentiment analysis, and get some human emotions involved (specially using the dictionary above).</p>
+<p>We tried to give our code life, using the functiosn given below, which gave them score based on their features and emotion:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">positive_score</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">numPosWords</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rawToken</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">rawToken</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">positiveWordList</span><span class="p">:</span>
+            <span class="n">numPosWords</span>  <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sumPos</span> <span class="o">=</span> <span class="n">numPosWords</span>
+    <span class="k">return</span> <span class="n">sumPos</span>
+
+<span class="k">def</span> <span class="nf">negative_score</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">numPosWords</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rawToken</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">rawToken</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">negativeWordList</span><span class="p">:</span>
+            <span class="n">numPosWords</span>  <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sumPos</span> <span class="o">=</span> <span class="n">numPosWords</span>
+    <span class="k">return</span> <span class="n">sumPos</span>
+
+<span class="k">def</span> <span class="nf">uncertain_score</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">numPosWords</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rawToken</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">rawToken</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">uncertainWordList</span><span class="p">:</span>
+            <span class="n">numPosWords</span>  <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sumPos</span> <span class="o">=</span> <span class="n">numPosWords</span>
+    <span class="k">return</span> <span class="n">sumPos</span>
+
+<span class="k">def</span> <span class="nf">litigious_score</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">numPosWords</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rawToken</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">rawToken</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">litigiousWordList</span><span class="p">:</span>
+            <span class="n">numPosWords</span>  <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sumPos</span> <span class="o">=</span> <span class="n">numPosWords</span>
+    <span class="k">return</span> <span class="n">sumPos</span>
+
+<span class="k">def</span> <span class="nf">strong_modal_score</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">numPosWords</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rawToken</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">rawToken</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">strongModalList</span><span class="p">:</span>
+            <span class="n">numPosWords</span>  <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sumPos</span> <span class="o">=</span> <span class="n">numPosWords</span>
+    <span class="k">return</span> <span class="n">sumPos</span>
+
+<span class="k">def</span> <span class="nf">weak_modal_score</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">numPosWords</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rawToken</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">rawToken</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">weakModalList</span><span class="p">:</span>
+            <span class="n">numPosWords</span>  <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sumPos</span> <span class="o">=</span> <span class="n">numPosWords</span>
+    <span class="k">return</span> <span class="n">sumPos</span>
+
+<span class="k">def</span> <span class="nf">constraining_score</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">numPosWords</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rawToken</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">rawToken</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">constrainingList</span><span class="p">:</span>
+            <span class="n">numPosWords</span>  <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sumPos</span> <span class="o">=</span> <span class="n">numPosWords</span>
+    <span class="k">return</span> <span class="n">sumPos</span>
+
+<span class="k">def</span> <span class="nf">complexity_score</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">numPosWords</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">rawToken</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">rawToken</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">complexityList</span><span class="p">:</span>
+            <span class="n">numPosWords</span>  <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sumPos</span> <span class="o">=</span> <span class="n">numPosWords</span>
+    <span class="k">return</span> <span class="n">sumPos</span>
+</code></pre></div>
+
+<h2>Exploratory Data Analysis and Visualization</h2>
+<p>It is always useful to visualise the data in the form of graphs and charts, and we tried to do the same as there is no better way than visualisation for a lay-man to understand what we are dealing with. We conducted this work using libraries such as matplotlib, sns, plotly, etc.</p>
+<p><strong><em>EDA</em></strong></p>
+<p>Here are some basic features of our data shown in the picture below:</p>
+<p><img alt="EDA" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-SemanticAnalysts-eda.jpeg"></p>
+<p>These features are key to understanding our data, and they go on to represent that we have used extensive data for our training set! </p>
+<p><strong><em> Visualisation </em></strong></p>
+<p>We have seen visualization helps understand the code better. Before starting the project, we wanted to make sure that our data is diverse in various terms, and to signify that (give one example) we have the graph below which shows the average length of MD&amp;A sections of the reports over the span of various years. </p>
+<p><img alt="Length of MD&amp;A" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-SemanticAnalysts-length.jpeg"></p>
+<p>The wordcloud below shows the different words used in the fraudulent companies MD&amp;A sections. We got to create this wordcloud primarily due to curiosity! We were curious to see which pictures occur more than others! </p>
+<p><img alt="Wordcloud" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-SemanticAnalysts-cloud.jpeg"></p>
+<h2>Final Remarks for This Blog Post</h2>
+<p>To conclude and give final remarks, I would say that this part of the project involves considerable amout of labor, but is yet diversifiable. What I mean by that is, EDA and visualisation is heavily customisable, and depends on person-to-person to know to what extent to work with EDA and visualisation. I believe this process can be extremely rewarding, like it was for me, as I learnt a lot through this process, but also can bring about considerable difficulties, and test your tenacity and patience. Still, keep going data scientists, and you will inevitably learn something new along the way!</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-04-03T08:00:00+08:00">Sun 03 April 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
