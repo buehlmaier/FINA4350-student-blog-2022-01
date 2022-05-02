@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+        <meta name="author" content="FINA4350 Students" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Progress Report, " />
+
+<meta property="og:title" content="Fed Watching - 2-year Treasuries Yield prediction utilizing FOMC &amp; WSJ scraped data (Group Metatext) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/fed-watching-2-year-treasuries-yield-prediction-utilizing-fomc-wsj-scraped-data-group-metatext.html" />
+<meta property="og:description" content="By Group &#34;Metatext&#34; Intro &amp; Objective The objective of our project is to predict the 2 years Treasury Yield at the intersection of The Federal Open Markets Committee (FOMC) documents and Wall Street news Articles scraped data. Treasury Yield is a rate at which the US government borrows. It’s one …" />
+<meta property="og:site_name" content="FINA4350 Student Blog" />
+<meta property="og:article:author" content="FINA4350 Students" />
+<meta property="og:article:published_time" content="2022-05-01T15:01:00+08:00" />
+<meta name="twitter:title" content="Fed Watching - 2-year Treasuries Yield prediction utilizing FOMC &amp; WSJ scraped data (Group Metatext) ">
+<meta name="twitter:description" content="By Group &#34;Metatext&#34; Intro &amp; Objective The objective of our project is to predict the 2 years Treasury Yield at the intersection of The Federal Open Markets Committee (FOMC) documents and Wall Street news Articles scraped data. Treasury Yield is a rate at which the US government borrows. It’s one …">
+
+        <title>Fed Watching - 2-year Treasuries Yield prediction utilizing FOMC &amp; WSJ scraped data (Group Metatext)  · FINA4350 Student Blog
+</title>
+        <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/"><span class=site-name>FINA4350 Student Blog</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://buehlmaier.github.io/FINA4350-student-blog-2022-01
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html">Categories</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/tags.html">Tags</a></li>
+                                <li ><a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/fed-watching-2-year-treasuries-yield-prediction-utilizing-fomc-wsj-scraped-data-group-metatext.html">
+                Fed Watching - 2-year Treasuries Yield prediction utilizing FOMC & WSJ scraped data (Group Metatext)
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>By Group "Metatext"</p>
+<h2>Intro &amp; Objective</h2>
+<p>The objective of our project is to predict the 2 years Treasury Yield at the intersection of The Federal Open Markets Committee (FOMC) documents and Wall Street news Articles scraped data. Treasury Yield is a rate at which the US government borrows. It’s one of the most important rates in the context of the US economy as it impacts the monetary and financial condition including the broader economy such as employment, growth, and inflation. It has an indirect impact on the other interest rate measures. For example, it determines the rate for home, auto loans and credit loans. Also, investors are particularly curious about it because the stock market is strongly reactive to this rate. </p>
+<h2>Our thought processes</h2>
+<p>We decided to conduct our analysis using two different data sources: FOMC documents including statements, meeting minutes, press conferences and testimonials, and Wall Street News Articles in hopes of reaching relatively accurate prediction results. Here is why; news articles serve as a benchmark of comparison as it provides more detailed and subjective interpretations of feds documents which opens room for more comprehension. Secondly, two datasets are advantageous in terms of providing more useful information that can potentially increase the probability of accurate prediction.</p>
+<p>We have already posted our workflow for scrapping News Articles. This blog post contains our workflow for FOMC documents. We have scraped all four documents from the FOMC website.</p>
+<h2>Data Collection</h2>
+<p>How to scrape FOMC data?</p>
+<p>*Important libraries &amp; Modules  </p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span>  <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+</code></pre></div>
+
+<h1>Our Approach</h1>
+<p>First, we create two base files. The first file is FOMCBase.py, which receives the scraped data and converts it into a text file. The second file is FOMCGetData.py, which specifies the period of data and dump the scraped data into a pickle file. Next, we created a folder named fomc_get_data, which contains all the code files to scrape the specific type of data from the FOMC website such as FomcMinutes.py, FomcPresConfScript.py, FomcTestimony.py, FomcStatement.py. The final output will be a folder named FOMC which contains the pickle and csv files of all the data scraped. </p>
+<p><img alt=" This is an example of the statement" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Metatext-sdatafram1.png"></p>
+<h2>Data Cleaning, Reshaping, Preprocessing</h2>
+<p>After scraping the data from the FOMC website. We noticed there are many unnecessary words which will affect our analysis. Thus, we preprocessed the scraped data in three ways:</p>
+<p>1)  Remove the text sections that has less than 50 words as it is unlikely to have insightful information 
+2)  Split the text sections that has more than 200 words 
+3)  Remove the text sections that does not contain at least 2 keywords ('rate', 'rates', 'federal fund', 'outlook', 'forecast', 'employ', 'economy')</p>
+<p>Before we proceed with the data preprocessing, we cleaned and reshaped the data by adding additional columns to the current data frame such as word count and next meeting date. We also added a “text_section” column which splits the text according to [SECTION] and “org_text” which is a copy of the original raw data scraped. The “org_text” column acts as a “back up” and comparison with our changes to the data. </p>
+<p>Data preprocessing is performed for all 4 types of data separately. We then aggregated the data according to the preprocessing technique. </p>
+<p>The final output will be three files namely, text_no_split.pickle, text_split_200.pickle and text_keyword.pickle. </p>
+<p><img alt="This is an example of the statement" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Metatext-sdataframe.png"></p>
+<h2>Analysis and conclusion</h2>
+<p>To analyze, we run a thorough sentiment analysis on both scraped datasets. We found their respective polarity and subjectivity plots. Our interpretation of the plots reveals that FOMC documents are better indicators of upcoming rate changes compared to Wallstreet News Articles. Thus, we suggest interested stakeholders refer to FOMC documents for better analysis and prediction of rates.  </p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2022-05-01T15:01:00+08:00">Sun 01 May 2022</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/categories.html#progress-report-ref">Progress Report</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="https://github.com/buehlmaier/FINA4350-student-blog-2022-01" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
