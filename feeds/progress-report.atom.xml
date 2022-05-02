@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>FINA4350 Student Blog - Progress Report</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/" rel="alternate"></link><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/progress-report.atom.xml" rel="self"></link><id>https://buehlmaier.github.io/FINA4350-student-blog-2022-01/</id><updated>2022-04-23T23:00:00+08:00</updated><entry><title>WSJ Scrapping and Pre-processing (Group Metatext)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/wsj-scrapping-and-pre-processing-group-metatext.html" rel="alternate"></link><published>2022-04-23T23:00:00+08:00</published><updated>2022-04-23T23:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-23:/FINA4350-student-blog-2022-01/wsj-scrapping-and-pre-processing-group-metatext.html</id><summary type="html">&lt;p&gt;By Group "Metatext," written by Rex Chan&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>FINA4350 Student Blog - Progress Report</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/" rel="alternate"></link><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/progress-report.atom.xml" rel="self"></link><id>https://buehlmaier.github.io/FINA4350-student-blog-2022-01/</id><updated>2022-04-23T23:00:00+08:00</updated><entry><title>WSJ Scraping and Pre-processing (Group Metatext)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/wsj-scraping-and-pre-processing-group-metatext.html" rel="alternate"></link><published>2022-04-23T23:00:00+08:00</published><updated>2022-04-23T23:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-23:/FINA4350-student-blog-2022-01/wsj-scraping-and-pre-processing-group-metatext.html</id><summary type="html">&lt;p&gt;By Group "Metatext," written by Rex Chan&lt;/p&gt;
 &lt;p&gt;Important: This blog post is of academic nature and for educational
 purpose only. Group Metatext pledges to follow the download
 regulations of databases such as Factiva.&lt;/p&gt;
@@ -11,10 +11,10 @@ regulations of databases such as Factiva.&lt;/p&gt;
 &lt;h2&gt;Intro &amp;amp; Objective&lt;/h2&gt;
 &lt;p&gt;Our project analyzes whether Federal Reserves' FOMC documents and news articles could possibly predict where interest rates are heading. This is a critical question, especially given that Fed has suddenly turned hawkish to curb inflation. Everyone wants to know where interest rates might be in the near future. &lt;/p&gt;
 &lt;h2&gt;Why News Article?&lt;/h2&gt;
-&lt;p&gt;Naturally, when one is to predict Fed's decision, he delve into Fed's document, namely press conference, minutes, etc. (Stay tuned for my other group-mate detailing how to scrap and preprocess them). Fed's document inclines to plain fact reporting. News articles however, offer more subjective commentary on the cause and the impact of Fed's decision, which might offer more valuable information regarding how Wall Street perceive Fed's action. At the end of the day, Fed only manipulate the the policy rate, it is up to the Wall Street to move the market and propagate the effect of Fed's move to every corner of the financial market.&lt;/p&gt;
+&lt;p&gt;Naturally, when one is to predict Fed's decision, he delve into Fed's document, namely press conference, minutes, etc. (Stay tuned for my other group-mate detailing how to scrape and preprocess them). Fed's document inclines to plain fact reporting. News articles however, offer more subjective commentary on the cause and the impact of Fed's decision, which might offer more valuable information regarding how Wall Street perceive Fed's action. At the end of the day, Fed only manipulate the the policy rate, it is up to the Wall Street to move the market and propagate the effect of Fed's move to every corner of the financial market.&lt;/p&gt;
 &lt;p&gt;From a project perspective, news article can been seen as a benchmark where one could compare Fed's official document against news article. &lt;/p&gt;
 &lt;p&gt;We decided to opt for articles on Wall Street Journal. Reports from WSJ offers a delicate balance between depth and breath versus, say Bloomberg which focuses on speed and breath of reports. &lt;/p&gt;
-&lt;h2&gt;How To Scrap News Articles?&lt;/h2&gt;
+&lt;h2&gt;How To Scrape News Articles?&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Libraries and Modules Used:&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;We first import the following libraries.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;selenium&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;webdriver&lt;/span&gt;
@@ -25,7 +25,7 @@ regulations of databases such as Factiva.&lt;/p&gt;
 
 &lt;p&gt;'re' (regular expressions) is a package that specialize in manipulating and interact with strings/text objects.&lt;/p&gt;
 &lt;p&gt;'selenium webdriver' is a package that enable the code to control the web browser (such as Google Chrome and Firefox) as if we are manually browsing on the browser. Whenever we are working with dynamic websites that are heavily java-scriptted, we can use 'webdriver' to monitor how javascript changes HTML. &lt;/p&gt;
-&lt;p&gt;We will be using Dow Jones Factiva to scrap news. Factiva is a paid-service with API access to for institutions. However, we can access Factiva via the link available at HKU Library using HKU credentials without API access. Therefore, we create a 'synthetic API' using the webdriver module to access Factiva shown as follows: &lt;/p&gt;
+&lt;p&gt;We will be using Dow Jones Factiva to scrape news. Factiva is a paid-service with API access to for institutions. However, we can access Factiva via the link available at HKU Library using HKU credentials without API access. Therefore, we create a 'synthetic API' using the webdriver module to access Factiva shown as follows: &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;webdriver_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/Users/chanmingho/Downloads/chromedriver&amp;#39;&lt;/span&gt; &lt;span class="c1"&gt;#supply local directory of &amp;#39;webdriver&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;download_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/Users/chanmingho/Downloads/FINA4350_GroupProject&amp;#39;&lt;/span&gt;
 &lt;span class="c1"&gt;#supply local directory of where output files should be downloaded&lt;/span&gt;
@@ -116,8 +116,8 @@ regulations of databases such as Factiva.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2&gt;How To Preprocess News Articles?&lt;/h2&gt;
-&lt;p&gt;A typical news article scrapped from Factiva is shown as follows:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="A sample of WSJ news scrapped from Factiva" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Metatext-020_sample_of_news.jpeg"&gt;&lt;/p&gt;
+&lt;p&gt;A typical news article scraped from Factiva is shown as follows:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="A sample of WSJ news scraped from Factiva" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Metatext-020_sample_of_news.jpeg"&gt;&lt;/p&gt;
 &lt;p&gt;All we need from news articles is author, date, title and the main text.&lt;/p&gt;
 &lt;p&gt;We first upload the PDFs into Google Drive under a specified directory. Then we read text from PDFs into a variable.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;all_news&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
@@ -202,7 +202,223 @@ regulations of databases such as Factiva.&lt;/p&gt;
 &lt;h2&gt;After Thoughts&lt;/h2&gt;
 &lt;p&gt;After I found that pre-processing is such a grunt and tedious work, I have come to agree to the statement 'NLP is 95% pre-processing'. As an old saying goes, 'garbage in, garbage out'. It is of utmost importance to have quality input available for analysis. If non-body text pollutes the news articles, that would only output mediocre results.&lt;/p&gt;
 &lt;p&gt;While we have yet to derive at the results, I would personally doubt whether our analysis would have any predictive power. If computing textual probabilities of Fed's rate decision using Fed's document is that easy and straightforward, many would have simply arbitraged away the trading opportunity for risk-free profits already via fed fund rate futures or interest rate swaps. This means our work would be rendered meaningless. However, this is clearly not the case. Each strategist might be using different modules, assumptions, methodologies, etc to derive textual probabilities and come up with different results. Our group is no exception. &lt;/p&gt;
-&lt;p&gt;FINA4350 is a great and interesting course where I learn a lot. &lt;/p&gt;</content><category term="Progress Report"></category></entry><entry><title>Hanna's Blog Post</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/hannas-blog-post.html" rel="alternate"></link><published>2022-04-21T01:12:00+08:00</published><updated>2022-04-21T01:12:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-21:/FINA4350-student-blog-2022-01/hannas-blog-post.html</id><summary type="html">&lt;p&gt;By Hanna&lt;/p&gt;
+&lt;p&gt;FINA4350 is a great and interesting course where I learn a lot. &lt;/p&gt;</content><category term="Progress Report"></category></entry><entry><title>Machine Learning Model Training (Group Nebula)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/machine-learning-model-training-group-nebula.html" rel="alternate"></link><published>2022-04-23T00:00:00+08:00</published><updated>2022-04-23T00:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-23:/FINA4350-student-blog-2022-01/machine-learning-model-training-group-nebula.html</id><summary type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
+&lt;h2&gt;Blog 4: Machine Learning Model Training&lt;/h2&gt;
+&lt;h3&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;The datasets that we prepared in the previous steps are used to train different machine leaning model. We then evaluate the model base on the experiment results, suggest some issues identified and potential ways to solve them.&lt;/p&gt;
+&lt;h3&gt;Machine Learning Model …&lt;/h3&gt;</summary><content type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
+&lt;h2&gt;Blog 4: Machine Learning Model Training&lt;/h2&gt;
+&lt;h3&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;The datasets that we prepared in the previous steps are used to train different machine leaning model. We then evaluate the model base on the experiment results, suggest some issues identified and potential ways to solve them.&lt;/p&gt;
+&lt;h3&gt;Machine Learning Model&lt;/h3&gt;
+&lt;p&gt;The following machine learning models are used in model training:
+- Logistic Regression (LR)
+- Multi-layer Perceptron (MLP)
+- Recurrent Neural Network (RNN)&lt;/p&gt;
+&lt;h4&gt;Confusion Matrix&lt;/h4&gt;
+&lt;p&gt;A confusion matrix with test accuracy is plotted to visualize the results.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ConfusionMatrixDisplay&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;display_confusion_matrices&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;disp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ConfusionMatrixDisplay&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;from_estimator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;display_labels&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unique&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+        &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Blues&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;disp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ax_&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Normalized&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;disp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ConfusionMatrixDisplay&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;from_estimator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;display_labels&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unique&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+        &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Blues&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;disp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ax_&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Unnormalized&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;Logistic Regression (LR)&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.linear_model&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LogisticRegression&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.model_selection&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;GridSearchCV&lt;/span&gt;
+
+&lt;span class="n"&gt;lr1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;LogisticRegression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;100.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;liblinear&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;multi_class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ovr&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;random_state&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4350&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;param_grid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mf"&gt;0.001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.01&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;10.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;100.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1000.0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+              &lt;span class="s1"&gt;&amp;#39;penalty&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;l1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;l2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;
+
+&lt;span class="n"&gt;gs1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;GridSearchCV&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;estimator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lr1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;param_grid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;param_grid&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scoring&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;accuracy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cv&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_jobs&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;gs1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X1_train_oh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1_train&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;best_lr1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;gs1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;best_estimator_&lt;/span&gt;
+&lt;span class="n"&gt;best_lr1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X1_train_oh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1_train&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;y_pred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;best_lr1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;predict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X1_test_oh&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Test Accuracy: &lt;/span&gt;&lt;span class="si"&gt;%.3f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;best_lr1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X1_test_oh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1_test&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="n"&gt;display_confusion_matrices&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;best_lr1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X1_test_oh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;Multi-layer Perceptron (MLP)&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.neural_network&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MLPClassifier&lt;/span&gt;
+
+&lt;span class="n"&gt;mlp1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MLPClassifier&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;solver&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;adam&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1e-5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;adaptive&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;activation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;relu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hidden_layer_sizes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="p"&gt;,),&lt;/span&gt; &lt;span class="n"&gt;random_state&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3362&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;mlp1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X1_train_oh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1_train&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Test Accuracy on train dist: &lt;/span&gt;&lt;span class="si"&gt;%.3f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;mlp1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X1_test_oh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1_test&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="n"&gt;display_confusion_matrices&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mlp1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X1_test_oh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;Recurrent Neural Network (RNN)&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;layers&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;regularizers&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;tensorflow&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;tf&lt;/span&gt;
+
+&lt;span class="n"&gt;model_rnn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keras&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Sequential&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;
+    &lt;span class="n"&gt;tf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keras&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;layers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Embedding&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;tf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keras&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;layers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Bidirectional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keras&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;layers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LSTM&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+    &lt;span class="n"&gt;tf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keras&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;layers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;activation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;relu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;tf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keras&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;layers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;activation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sigmoid&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Compile model&lt;/span&gt;
+&lt;span class="n"&gt;model_rnn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;binary_crossentropy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;tf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keras&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;optimizers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Adam&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e-4&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                  &lt;span class="n"&gt;metrics&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;accuracy&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Train model&lt;/span&gt;
+&lt;span class="n"&gt;history&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;model_rnn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X1_train_oh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;epochs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                        &lt;span class="n"&gt;validation_data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X1_test_oh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y1_test&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; 
+                        &lt;span class="n"&gt;validation_steps&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Experiment Results&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="group-nebula-blog4-experiment_chart.png" src="./images/group-nebula-blog4-experiment_chart.png"&gt;&lt;/p&gt;
+&lt;h3&gt;Experiment Findings&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Underfitting is observed&lt;/li&gt;
+&lt;li&gt;Too complicated text&lt;/li&gt;
+&lt;li&gt;Too simple model&lt;/li&gt;
+&lt;li&gt;Insufficient text cleaning&lt;/li&gt;
+&lt;li&gt;Sentiment Analysis Package does not work well&lt;/li&gt;
+&lt;li&gt;All text has similar sentiment scores as it is too long&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SentimentIntensityAnalyzer from nltk.sentiment.vader&lt;/code&gt; is designed for movie review&lt;/li&gt;
+&lt;li&gt;Bag-of-words perform worse than One-hot encoding&lt;/li&gt;
+&lt;li&gt;No. of features used in tokenization, one-hot encoding and bag-of-words does not affect model performance much&lt;/li&gt;
+&lt;li&gt;Recurrent Neural Network (RNN) trained using tokenized words (Dataset 9) perform the best (Test Accuracy: 0.64) &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Potential Issues&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;No ordering in one-hot encoding and bag-of-words&lt;/li&gt;
+&lt;li&gt;No short-term memory&lt;/li&gt;
+&lt;li&gt;Too few data points (only around 250) for training and testing&lt;/li&gt;
+&lt;li&gt;Too much unrelated information in the text&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Future Improvement&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Only extract sentences of non-neutral sentiment for model training&lt;/li&gt;
+&lt;li&gt;Explore more on Recurrent Neural Network (RNN)&lt;/li&gt;
+&lt;li&gt;Use sentiment analysis package that are specifically trained on financial documents (ie. FinBERT)&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Progress Report"></category></entry><entry><title>Dataset for model training (Group Nebula)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/dataset-for-model-training-group-nebula.html" rel="alternate"></link><published>2022-04-22T00:00:00+08:00</published><updated>2022-04-22T00:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-22:/FINA4350-student-blog-2022-01/dataset-for-model-training-group-nebula.html</id><summary type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
+&lt;h2&gt;Blog 3: Dataset for model training&lt;/h2&gt;
+&lt;h3&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;In this blog post, we will detail our dataset preparation for model training. We want to prepare different datasets using different preprocessing techniques in NLP and compare their performance in machine learning model.&lt;/p&gt;
+&lt;h3&gt;Data Cleaning&lt;/h3&gt;
+&lt;p&gt;We first clean the text …&lt;/p&gt;</summary><content type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
+&lt;h2&gt;Blog 3: Dataset for model training&lt;/h2&gt;
+&lt;h3&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;In this blog post, we will detail our dataset preparation for model training. We want to prepare different datasets using different preprocessing techniques in NLP and compare their performance in machine learning model.&lt;/p&gt;
+&lt;h3&gt;Data Cleaning&lt;/h3&gt;
+&lt;p&gt;We first clean the text data by removing English stopwords from the NTLK pachage.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;nltk.corpus&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;stopwords&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;remove_stopwords&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;input_text&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;stopwords_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;stopwords&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;words&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;english&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="c1"&gt;# Some words which might indicate a certain sentiment are kept via a whitelist&lt;/span&gt;
+        &lt;span class="n"&gt;whitelist&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;n&amp;#39;t&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;not&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;no&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;input_text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;clean_words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;stopwords_list&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;whitelist&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; 
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;clean_words&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Exploratory Data Analysis (EDA)&lt;/h3&gt;
+&lt;p&gt;We then perform exploratory data analysis (EDA) to get a glimpse of the text data we are working on. We plot the class count, word count and word cloud.&lt;/p&gt;
+&lt;h3&gt;Tokenization&lt;/h3&gt;
+&lt;p&gt;We tokenize the text data we get from previous steps using the the Keras Package.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.preprocessing.text&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Tokenizer&lt;/span&gt;
+
+&lt;span class="n"&gt;tk&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Tokenizer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num_words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="n"&gt;filters&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;!&amp;quot;#$%&amp;amp;()*+,-./:;&amp;lt;=&amp;gt;?@[&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;]^_`{|}~&lt;/span&gt;&lt;span class="se"&gt;\t\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="n"&gt;lower&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+               &lt;span class="n"&gt;split&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;tk&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_on_texts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X1_train&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;One-hot encoding&lt;/h3&gt;
+&lt;p&gt;After tokenization, we encode the tokenized words using one-hot encoding.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;one_hot_seq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seqs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nb_features&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;ohs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seqs&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;nb_features&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seqs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;ohs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;ohs&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Bag-of-words (Bow)&lt;/h3&gt;
+&lt;p&gt;We also explore Bag-of-Words as an alternative to one-hot encoding. The cleaned text is encoded using Bag-of-words in which the frequency of individual word is recorded.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.feature_extraction.text&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;CountVectorizer&lt;/span&gt;
+
+&lt;span class="n"&gt;vec&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CountVectorizer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stop_words&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;english&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_features&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;X4_train_bow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vec&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X4_train&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;X4_test_bow&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;vec&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X4_test&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Sentiment Analysis&lt;/h3&gt;
+&lt;p&gt;We perform sentiment analysis on the cleaned text to obtain sentiment scores.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;nltk.sentiment.vader&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SentimentIntensityAnalyzer&lt;/span&gt;
+
+&lt;span class="n"&gt;sid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SentimentIntensityAnalyzer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_sentiment&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;sentiment_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sid&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;polarity_scores&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;positive_meter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sentiment_score&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;pos&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;negative_meter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sentiment_score&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;neg&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;neutral_meter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sentiment_score&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;neu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;compound_meter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sentiment_score&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;compound&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;positive&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;positive_meter&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;neutral&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;neutral_meter&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;negative&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;negative_meter&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;compound&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;compound_meter&lt;/span&gt;
+    &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;ValueError&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Datasets for Model Training&lt;/h3&gt;
+&lt;p&gt;The above approaches (i.e. tokenization, one-hot encoding, bad-of-words and sentiment analysis) in data-preprocessing are used to prepare different dataset for model training. The following are the datasets:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Dataset 1: One-hot Encoding (10000 features)&lt;/li&gt;
+&lt;li&gt;Dataset 2: One-hot Encoding (20000 features)&lt;/li&gt;
+&lt;li&gt;Dataset 3: One-hot Encoding (50000 features)&lt;/li&gt;
+&lt;li&gt;Dataset 4: Bag-of-words (10000 features)&lt;/li&gt;
+&lt;li&gt;Dataset 5: Bag-of-words (20000 features)&lt;/li&gt;
+&lt;li&gt;Dataset 6: Bag-of-words (50000 features)&lt;/li&gt;
+&lt;li&gt;Dataset 7: Sentiment Scores (Positive, Neutral, Negative)&lt;/li&gt;
+&lt;li&gt;Dataset 8: Sentiment Scores (Compound)&lt;/li&gt;
+&lt;li&gt;Dataset 9: Tokenized (10000 features)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We will test the performance of these datasets in different machine leaning model.&lt;/p&gt;</content><category term="Progress Report"></category></entry><entry><title>Hanna's Blog Post</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/hannas-blog-post.html" rel="alternate"></link><published>2022-04-21T01:12:00+08:00</published><updated>2022-04-21T01:12:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-21:/FINA4350-student-blog-2022-01/hannas-blog-post.html</id><summary type="html">&lt;p&gt;By Hanna&lt;/p&gt;
 &lt;h1&gt;Text Classification and Information Retrieval&lt;/h1&gt;
 &lt;h2&gt;1. What this Post is About:&lt;/h2&gt;
 &lt;p&gt;This blog post serves as some kind of  personal documentation of all the problems, the solutions I came across and  the learnings, that I experienced along the journey of my final project. In particular, this blog post …&lt;/p&gt;</summary><content type="html">&lt;p&gt;By Hanna&lt;/p&gt;
@@ -432,12 +648,12 @@ Hanna&lt;/p&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;</content><category term="Progress Report"></category></entry><entry><title>Data Preparation (Group Nebula)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/data-preparation-group-nebula.html" rel="alternate"></link><published>2022-04-20T00:00:00+08:00</published><updated>2022-04-20T00:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-20:/FINA4350-student-blog-2022-01/data-preparation-group-nebula.html</id><summary type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
-&lt;h2&gt;Team Nebula | Blog 2: Data Preparation&lt;/h2&gt;
+&lt;h2&gt;Blog 2: Data Preparation&lt;/h2&gt;
 &lt;h3&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;In this blog post, we will detail our data pre-processing process for cleaning the text data and calculating the stock performance.&lt;/p&gt;
 &lt;h3&gt;Textual Data Cleaning&lt;/h3&gt;
-&lt;p&gt;As the data were directly collected from HTML, there were items that we do not need …&lt;/p&gt;</summary><content type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
-&lt;h2&gt;Team Nebula | Blog 2: Data Preparation&lt;/h2&gt;
+&lt;p&gt;As the data were directly collected from HTML, there were items that we do not need for the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
+&lt;h2&gt;Blog 2: Data Preparation&lt;/h2&gt;
 &lt;h3&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;In this blog post, we will detail our data pre-processing process for cleaning the text data and calculating the stock performance.&lt;/p&gt;
 &lt;h3&gt;Textual Data Cleaning&lt;/h3&gt;
@@ -749,10 +965,10 @@ However, later on I found out that this function was not optimal.&lt;/p&gt;
 &lt;h2&gt;Additional benefit of solving this problem&lt;/h2&gt;
 &lt;p&gt;By selecting the tweets per hour instead of per day, we were multiplied the number of observations by a factor of 24. This is beneficial for our data analysis.&lt;/p&gt;
 &lt;p&gt;Thanks for reading. In case we indicate new problems, we will post a new blog post.&lt;/p&gt;</content><category term="Progress Report"></category></entry><entry><title>Data Scraping (Group Nebula)</title><link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/data-scraping-group-nebula.html" rel="alternate"></link><published>2022-04-15T00:00:00+08:00</published><updated>2022-04-15T00:00:00+08:00</updated><author><name>FINA4350 Students</name></author><id>tag:buehlmaier.github.io,2022-04-15:/FINA4350-student-blog-2022-01/data-scraping-group-nebula.html</id><summary type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
-&lt;h2&gt;Team Nebula | Blog 1: Data Scraping&lt;/h2&gt;
+&lt;h2&gt;Blog 1: Data Scraping&lt;/h2&gt;
 &lt;h3&gt;Introduction&lt;/h3&gt;
-&lt;p&gt;We hope to attain two goals in this project: 1) to create a model to predict the relationship between Form 10-K and the stock market performance on the release day, and 2) to compare the performance of different pre-processing techniques …&lt;/p&gt;</summary><content type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
-&lt;h2&gt;Team Nebula | Blog 1: Data Scraping&lt;/h2&gt;
+&lt;p&gt;We hope to attain two goals in this project: 1) to create a model to predict the relationship between Form 10-K and the stock market performance on the release day, and 2) to compare the performance of different pre-processing techniques in NLP …&lt;/p&gt;</summary><content type="html">&lt;p&gt;By Group "Nebula"&lt;/p&gt;
+&lt;h2&gt;Blog 1: Data Scraping&lt;/h2&gt;
 &lt;h3&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;We hope to attain two goals in this project: 1) to create a model to predict the relationship between Form 10-K and the stock market performance on the release day, and 2) to compare the performance of different pre-processing techniques in NLP (Bag-of-Words and Sentiment Analysis) in a financial context.&lt;/p&gt;
 &lt;p&gt;In this blog post, we will detail our data scraping process in two parts: 1) scraping the text data (ie. Item 7 in Form 10Ks of our target companies), and 2) scraping the numerical data from Yahoo Finance.&lt;/p&gt;

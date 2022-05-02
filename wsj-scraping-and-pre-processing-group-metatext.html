@@ -17,16 +17,16 @@
 
 <meta name="keywords" content=", Progress Report, " />
 
-<meta property="og:title" content="WSJ Scrapping and Pre-processing (Group Metatext) "/>
-<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/wsj-scrapping-and-pre-processing-group-metatext.html" />
+<meta property="og:title" content="WSJ Scraping and Pre-processing (Group Metatext) "/>
+<meta property="og:url" content="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/wsj-scraping-and-pre-processing-group-metatext.html" />
 <meta property="og:description" content="By Group &#34;Metatext,&#34; written by Rex Chan Important: This blog post is of academic nature and for educational purpose only. Group Metatext pledges to follow the download regulations of databases such as Factiva. Intro &amp; Objective Our project analyzes whether Federal Reserves&#39; FOMC documents and news articles could possibly predict where …" />
 <meta property="og:site_name" content="FINA4350 Student Blog" />
 <meta property="og:article:author" content="FINA4350 Students" />
 <meta property="og:article:published_time" content="2022-04-23T23:00:00+08:00" />
-<meta name="twitter:title" content="WSJ Scrapping and Pre-processing (Group Metatext) ">
+<meta name="twitter:title" content="WSJ Scraping and Pre-processing (Group Metatext) ">
 <meta name="twitter:description" content="By Group &#34;Metatext,&#34; written by Rex Chan Important: This blog post is of academic nature and for educational purpose only. Group Metatext pledges to follow the download regulations of databases such as Factiva. Intro &amp; Objective Our project analyzes whether Federal Reserves&#39; FOMC documents and news articles could possibly predict where …">
 
-        <title>WSJ Scrapping and Pre-processing (Group Metatext)  · FINA4350 Student Blog
+        <title>WSJ Scraping and Pre-processing (Group Metatext)  · FINA4350 Student Blog
 </title>
         <link href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="FINA4350 Student Blog - Full Atom Feed" />
 
@@ -68,8 +68,8 @@
 <div class="row-fluid">
     <header class="page-header span10 offset2">
         <h1>
-            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/wsj-scrapping-and-pre-processing-group-metatext.html">
-                WSJ Scrapping and Pre-processing (Group Metatext)
+            <a href="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/wsj-scraping-and-pre-processing-group-metatext.html">
+                WSJ Scraping and Pre-processing (Group Metatext)
             </a>
         </h1>
     </header>
@@ -85,10 +85,10 @@ regulations of databases such as Factiva.</p>
 <h2>Intro &amp; Objective</h2>
 <p>Our project analyzes whether Federal Reserves' FOMC documents and news articles could possibly predict where interest rates are heading. This is a critical question, especially given that Fed has suddenly turned hawkish to curb inflation. Everyone wants to know where interest rates might be in the near future. </p>
 <h2>Why News Article?</h2>
-<p>Naturally, when one is to predict Fed's decision, he delve into Fed's document, namely press conference, minutes, etc. (Stay tuned for my other group-mate detailing how to scrap and preprocess them). Fed's document inclines to plain fact reporting. News articles however, offer more subjective commentary on the cause and the impact of Fed's decision, which might offer more valuable information regarding how Wall Street perceive Fed's action. At the end of the day, Fed only manipulate the the policy rate, it is up to the Wall Street to move the market and propagate the effect of Fed's move to every corner of the financial market.</p>
+<p>Naturally, when one is to predict Fed's decision, he delve into Fed's document, namely press conference, minutes, etc. (Stay tuned for my other group-mate detailing how to scrape and preprocess them). Fed's document inclines to plain fact reporting. News articles however, offer more subjective commentary on the cause and the impact of Fed's decision, which might offer more valuable information regarding how Wall Street perceive Fed's action. At the end of the day, Fed only manipulate the the policy rate, it is up to the Wall Street to move the market and propagate the effect of Fed's move to every corner of the financial market.</p>
 <p>From a project perspective, news article can been seen as a benchmark where one could compare Fed's official document against news article. </p>
 <p>We decided to opt for articles on Wall Street Journal. Reports from WSJ offers a delicate balance between depth and breath versus, say Bloomberg which focuses on speed and breath of reports. </p>
-<h2>How To Scrap News Articles?</h2>
+<h2>How To Scrape News Articles?</h2>
 <p><strong><em>Libraries and Modules Used:</em></strong></p>
 <p>We first import the following libraries.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
@@ -99,7 +99,7 @@ regulations of databases such as Factiva.</p>
 
 <p>'re' (regular expressions) is a package that specialize in manipulating and interact with strings/text objects.</p>
 <p>'selenium webdriver' is a package that enable the code to control the web browser (such as Google Chrome and Firefox) as if we are manually browsing on the browser. Whenever we are working with dynamic websites that are heavily java-scriptted, we can use 'webdriver' to monitor how javascript changes HTML. </p>
-<p>We will be using Dow Jones Factiva to scrap news. Factiva is a paid-service with API access to for institutions. However, we can access Factiva via the link available at HKU Library using HKU credentials without API access. Therefore, we create a 'synthetic API' using the webdriver module to access Factiva shown as follows: </p>
+<p>We will be using Dow Jones Factiva to scrape news. Factiva is a paid-service with API access to for institutions. However, we can access Factiva via the link available at HKU Library using HKU credentials without API access. Therefore, we create a 'synthetic API' using the webdriver module to access Factiva shown as follows: </p>
 <div class="highlight"><pre><span></span><code><span class="n">webdriver_dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/chanmingho/Downloads/chromedriver&#39;</span> <span class="c1">#supply local directory of &#39;webdriver&#39;</span>
 <span class="n">download_dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/chanmingho/Downloads/FINA4350_GroupProject&#39;</span>
 <span class="c1">#supply local directory of where output files should be downloaded</span>
@@ -190,8 +190,8 @@ regulations of databases such as Factiva.</p>
 </code></pre></div>
 
 <h2>How To Preprocess News Articles?</h2>
-<p>A typical news article scrapped from Factiva is shown as follows:</p>
-<p><img alt="A sample of WSJ news scrapped from Factiva" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Metatext-020_sample_of_news.jpeg"></p>
+<p>A typical news article scraped from Factiva is shown as follows:</p>
+<p><img alt="A sample of WSJ news scraped from Factiva" src="https://buehlmaier.github.io/FINA4350-student-blog-2022-01/images/group-Metatext-020_sample_of_news.jpeg"></p>
 <p>All we need from news articles is author, date, title and the main text.</p>
 <p>We first upload the PDFs into Google Drive under a specified directory. Then we read text from PDFs into a variable.</p>
 <div class="highlight"><pre><span></span><code><span class="n">all_news</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
